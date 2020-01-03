@@ -11,6 +11,9 @@
  - The Master Branch is a copy of the latest working code. Do not push changes here. 
  - The "next" branch is current development branch for the next release. Create your branches based off this one. 
  - Create a uniquely named branch off the next branch named something like what your working on.(i.e. make-elevator-go-up). 
+ - Once you are done working on that part of the code create a pull request to merge it back into the next branch.
+ - Someone will check the code to make sure there are no conflicts and it works as needed. They will then accept or deny it.
+ - Once all the sub brances are merged into the next branch and tested to be working, the next branch will be merged into the master and a new release will be made. 
 
 Read the docs at: https://docs.wpilib.org/en/latest/
 
