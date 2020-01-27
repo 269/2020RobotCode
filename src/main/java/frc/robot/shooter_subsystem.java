@@ -21,10 +21,17 @@ public class shooter_subsystem extends Subsystem {
   WPI_TalonSRX topMotor = null;
   WPI_TalonSRX bottomMotor = null;
 
-
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    // setDefaultCommand(new shooter_command());
+  }
+  public shooter_subsystem(){
+    topMotor = new WPI_TalonSRX(RobotMap.SMOTOR_TOP);
+    bottomMotor = new WPI_TalonSRX(RobotMap.SMOTOR_BOTTOM);
+  }
+  public void shoot(double topSpeed, double botSpeed){
+    topMotor.set(topSpeed);
+    bottomMotor.set(botSpeed);
   }
 }

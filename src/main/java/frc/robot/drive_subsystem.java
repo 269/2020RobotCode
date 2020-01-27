@@ -43,6 +43,5 @@ public class drive_subsystem extends Subsystem {
   }
   public void drive(double leftSpeed, double rightSpeed){
     difDrive.tankDrive(leftSpeed, rightSpeed);
-
   }
 }
