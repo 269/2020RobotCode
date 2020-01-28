@@ -11,37 +11,35 @@ package frc.robot;
  The_Whole_Robot_Code_Trust_Me_I_Am_Always_Right_269_2020_Squire_Grace_Forever
  */
 public class RobotMap {
-    // Drive Motors
+    //Drive Motors
     public static final int MOTOR_LEFT_1 = 1;
     public static final int MOTOR_LEFT_2 = 2;
     public static final int MOTOR_RIGHT_1 = 3;
     public static final int MOTOR_RIGHT_2 = 4;
-    // Shooter motors
-    public static final int SMOTOR_TOP = 4; //FIX
-    public static final int SMOTOR_BOTTOM = 2; //FIX
-    // Controllers
+    //Controllers
     public static final int DRIVER_CONTROLLER = 0;
     public static final int INTAKE_CONTROLLER = 1;
-    // Joysticks
+    //Joysticks
     public static final int LEFT_JOYSTICK_X = 5;
     public static final int LEFT_JOYSTICK_Y = 6;
     public static final int RIGHT_JOYSTICK_X = 7;
     public static final int RIGHT_JOYSTICK_Y = 8;
-    // Buttons
-    public static final int BUTTON_X = 2;
-    public static final int BUTTON_Y = 3;
-    public static final int BUTTON_A = 0;
-    public static final int BUTTON_B = 1;
+    //Buttons
+    public static final int BUTTON_X = 1;
+    public static final int BUTTON_Y = 2;
+    public static final int BUTTON_A = 3;
+    public static final int BUTTON_B = 4;
     public static final int D_PAD_LEFT = 5;
     public static final int D_PAD_UP = 6;
     public static final int D_PAD_DOWN = 7;
     public static final int D_PAD_RIGHT = 8;
     public static final int START_BUTTON = 9;
     public static final int SELECT_BUTTON = 10;
-    // Triggers
+
+    //Triggers
     public static final int LT = 0;
     public static final int RT = 1;
-    // Bumpers
+    //Bumpers
     public static final int LB = 0;
     public static final int RB = 1;
 }
