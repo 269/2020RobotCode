@@ -5,13 +5,17 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot;
+package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import frc.robot.RobotMap;
+import frc.robot.commands.drive_command;
+import frc.robot.commands.gyro_command;
+import frc.robot.Robot;
 
 /**
  * Add your docs here.
@@ -25,6 +29,7 @@ public class drive_subsystem extends Subsystem {
   WPI_TalonSRX backRightMotor = null;
   WPI_TalonSRX frontRightMotor = null;
   DifferentialDrive difDrive = null;
+  public double currentYaw;
 
   @Override
   public void initDefaultCommand() {
