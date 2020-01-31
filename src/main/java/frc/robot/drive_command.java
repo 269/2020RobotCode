@@ -26,7 +26,7 @@ public class drive_command extends Command {
   @Override
   protected void execute() {
     double leftSpeed = Robot.m_oi.driverController.getRawAxis(RobotMap.LEFT_JOYSTICK_Y);
-    double rightSpeed = Robot.m_oi.driverController.getRawAxis(RobotMap.LEFT_JOYSTICK_X);
+    double rightSpeed = Robot.m_oi.driverController.getRawAxis(RobotMap.RIGHT_JOYSTICK_Y);
     //double tolerance = 0.1;
 
     Robot.drive_subsystem.drive(leftSpeed, rightSpeed);

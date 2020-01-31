@@ -20,10 +20,10 @@ public class RobotMap {
     public static final int DRIVER_CONTROLLER = 0;
     public static final int INTAKE_CONTROLLER = 1;
     //Joysticks
-    public static final int LEFT_JOYSTICK_X = 5;
-    public static final int LEFT_JOYSTICK_Y = 6;
-    public static final int RIGHT_JOYSTICK_X = 7;
-    public static final int RIGHT_JOYSTICK_Y = 8;
+    public static final int LEFT_JOYSTICK_X = 0;
+    public static final int LEFT_JOYSTICK_Y = 1;
+    public static final int RIGHT_JOYSTICK_X = 4;
+    public static final int RIGHT_JOYSTICK_Y = 5;
     //Buttons
     public static final int BUTTON_X = 1;
     public static final int BUTTON_Y = 2;

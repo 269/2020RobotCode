@@ -33,10 +33,10 @@ public class drive_subsystem extends Subsystem {
     setDefaultCommand(new drive_command());
   }
   public drive_subsystem(){
-    frontRightMotor = new WPI_TalonSRX(RobotMap.MOTOR_LEFT_1);
-    frontLeftMotor = new WPI_TalonSRX(RobotMap.MOTOR_LEFT_2);
-    backRightMotor = new WPI_TalonSRX(RobotMap.MOTOR_RIGHT_1);
-    backLeftMotor = new WPI_TalonSRX(RobotMap.MOTOR_RIGHT_2);
+    frontRightMotor = new WPI_TalonSRX(RobotMap.MOTOR_RIGHT_1);
+    frontLeftMotor = new WPI_TalonSRX(RobotMap.MOTOR_LEFT_1);
+    backRightMotor = new WPI_TalonSRX(RobotMap.MOTOR_RIGHT_2);
+    backLeftMotor = new WPI_TalonSRX(RobotMap.MOTOR_LEFT_2);
     SpeedControllerGroup leftMotors = new SpeedControllerGroup(frontLeftMotor, backLeftMotor);
     SpeedControllerGroup rightMotors = new SpeedControllerGroup(frontRightMotor, backRightMotor);
     difDrive = new DifferentialDrive(leftMotors, rightMotors);
