@@ -12,6 +12,9 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class drive_command extends Command {
+  int gear = 0;
+  final int MAXGEAR = 3;
+  final int MINGEAR = 0;
   public drive_command() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
