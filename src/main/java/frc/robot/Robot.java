@@ -6,13 +6,11 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
-import com.kauailabs.navx.frc.AHRS;
-
-import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import frc.robot.subsystems.drive_subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.drive_subsystem;
+import frc.robot.shooter_subsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,13 +22,12 @@ import frc.robot.subsystems.drive_subsystem;
 public class Robot extends TimedRobot {
   public static OI m_oi;
   public static drive_subsystem drive_subsystem = null;
-  public static AHRS navx;
+  public static shooter_subsystem shooter_subsystem = null;
+  private static final String kDefaultAuto = "Default";
+  private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
-  public Robot(){
-    navx = new AHRS(SPI.Port.kMXP);
-  }
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -38,10 +35,11 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     drive_subsystem = new drive_subsystem();
+    shooter_subsystem = new shooter_subsystem();
     m_oi = new OI();
-  //  m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
-  //  m_chooser.addOption("My Auto", kCustomAuto);
-   // SmartDashboard.putData("Auto choices", m_chooser);
+    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
+    m_chooser.addOption("My Auto", kCustomAuto);
+    SmartDashboard.putData("Auto choices", m_chooser);
   }
 
   /**
@@ -54,18 +52,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-  }
-
-  public static double getFullYaw() {
-    // gyro maybe?
-    double currentYaw = Robot.navx.getFusedHeading();
-    if (Robot.navx.getYaw() <= 0) {
-      currentYaw = -Robot.navx.getYaw();
-    } else {
-      currentYaw = 360 - Robot.navx.getYaw();
-    }
-    System.out.println("yaw: "+ currentYaw);
-    return currentYaw;
   }
 
   /**
@@ -91,8 +77,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-   /* switch (m_autoSelected) {
-      //case kCustomAuto:
+    switch (m_autoSelected) {
+      case kCustomAuto:
         // Put custom auto code here
         break;
       case kDefaultAuto:
@@ -100,7 +86,6 @@ public class Robot extends TimedRobot {
         // Put default auto code here
         break;
     }
-    */
   }
 
   /**
@@ -108,8 +93,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    Scheduler.getInstance().run();
-    getFullYaw();
   }
 
   /**
@@ -117,6 +100,5 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
-    
   }
 }

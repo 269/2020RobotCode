@@ -5,32 +5,31 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class gyro_command extends Command {
-  public double startingYaw;
-  public double currentYaw;
-
-   // Use requires() here to declare subsystem dependencies
-   // eg. requires(chassis);
-  public gyro_command() {
-    requires(Robot.drive_subsystem);
+public class shooter_command extends Command {
+  public shooter_command() {
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
+    requires(Robot.shooter_subsystem);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    startingYaw=Robot.navx.getFusedHeading();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    currentYaw=Robot.navx.getFusedHeading();
-    System.out.println("yaw: "+ currentYaw);
+    if (Robot.m_oi.driverController.getRawButtonPressed(RobotMap.RT)) {
+      Robot.shooter_subsystem.shoot(0.8, 1);
+    } else {
+      Robot.shooter_subsystem.shoot(0, 0);
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -42,11 +41,13 @@ public class gyro_command extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.shooter_subsystem.shoot(0, 0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

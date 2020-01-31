@@ -19,7 +19,6 @@ Read the docs at: https://docs.wpilib.org/en/latest/
 
  - To Insteall the IDE follow these instructions for Java: https://docs.wpilib.org/en/latest/docs/getting-started/getting-started-frc-control-system/wpilib-setup.html
 - To build and run the code on the robot install this software: https://docs.wpilib.org/en/latest/docs/getting-started/getting-started-frc-control-system/wpilib-setup.html
-    - the activation code is: B04P88239
 
 #### Installing Git for GitHub
  1. Download gitBash From Here: https://gitforwindows.org/
