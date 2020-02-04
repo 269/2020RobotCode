@@ -16,6 +16,7 @@ public class RobotMap {
     public static final int MOTOR_LEFT_2 = 2;
     public static final int MOTOR_RIGHT_1 = 3;
     public static final int MOTOR_RIGHT_2 = 4;
+    public static final int MOTOR_COLOR_WHEEL = 5; //FIX
     //Controllers
     public static final int DRIVER_CONTROLLER = 0;
     public static final int INTAKE_CONTROLLER = 1;

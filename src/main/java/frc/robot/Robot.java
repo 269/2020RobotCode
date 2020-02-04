@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import frc.robot.subsystems.colorWheel_subsystem;
 import frc.robot.subsystems.drive_subsystem;
 
 /**
@@ -24,6 +25,7 @@ import frc.robot.subsystems.drive_subsystem;
 public class Robot extends TimedRobot {
   public static OI m_oi;
   public static drive_subsystem drive_subsystem = null;
+  public static colorWheel_subsystem colorWheel_subsystem = null;
   public static AHRS navx;
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
@@ -38,6 +40,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     drive_subsystem = new drive_subsystem();
+    colorWheel_subsystem = new colorWheel_subsystem();
     m_oi = new OI();
   //  m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
   //  m_chooser.addOption("My Auto", kCustomAuto);
@@ -64,7 +67,7 @@ public class Robot extends TimedRobot {
     } else {
       currentYaw = 360 - Robot.navx.getYaw();
     }
-    System.out.println("yaw: "+ currentYaw);
+    //System.out.println("yaw: "+ currentYaw);
     return currentYaw;
   }
 
@@ -83,7 +86,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     m_autoSelected = m_chooser.getSelected();
     // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
-    System.out.println("Auto selected: " + m_autoSelected);
+    //System.out.println("Auto selected: " + m_autoSelected);
   }
 
   /**
