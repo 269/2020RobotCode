@@ -77,9 +77,7 @@ public class drive_command extends Command {
     
     System.out.println("Gear #: " + gear);
 
-
-    
-    Robot.drive_subsystem.drive(leftSpeed, rightSpeed);
+  Robot.drive_subsystem.drive(leftSpeed, rightSpeed);
   }
 
   // Make this return true when this Command no longer needs to run execute()
