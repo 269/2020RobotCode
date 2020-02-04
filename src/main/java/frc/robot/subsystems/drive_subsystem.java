@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
 import frc.robot.commands.drive_command;
-import frc.robot.commands.gyro_command;
 import frc.robot.Robot;
 
 /**
