@@ -40,6 +40,12 @@ public class RobotMap {
     public static final int LT = 0;
     public static final int RT = 1;
     //Bumpers
-    public static final int LB = 0;
-    public static final int RB = 1;
+    public static final int LB = 6;
+    public static final int RB = 5;
+    
+    //Encoders
+    public static final int leftEncoderPort1 = 1000;
+	public static final int leftEncoderPort2 = 1000;
+	public static final int rightEncoderPort1 = 1000;
+	public static final int rightEncoderPort2 = 1000;
 }
