@@ -9,21 +9,28 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import edu.wpi.first.wpilibj.Timer;
 
-public class gyro_command extends Command {
-  public double startingYaw;
+public class driveStraight_command extends Command {
+  public double startingYaw = 0;
   public double currentYaw;
+  public double tol = 5;
+  public double speed;
+  public double leftSpeed;
+  public double rightSpeed;
+  public double inches;
+  public double slowestSpeed = 0.25;
+  Timer stopwatch = new Timer();
 
    // Use requires() here to declare subsystem dependencies
    // eg. requires(chassis);
-  public gyro_command() {
+  public driveStraight_command() {
     requires(Robot.drive_subsystem);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    startingYaw=Robot.navx.getFusedHeading();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -31,6 +38,19 @@ public class gyro_command extends Command {
   protected void execute() {
     currentYaw=Robot.navx.getFusedHeading();
     System.out.println("yaw: "+ currentYaw);
+    if(360-tol > currentYaw && currentYaw > 180){
+      leftSpeed = speed; // make speed mod. to make greater
+      rightSpeed = speed;
+    }
+      
+    else if(180 > currentYaw && currentYaw > tol){
+      leftSpeed = speed;
+      rightSpeed = speed; //Make speed mod. to make greater
+    }
+    else{
+      leftSpeed = speed;
+      rightSpeed = speed;
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()

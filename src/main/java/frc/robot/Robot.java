@@ -56,18 +56,6 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
   }
 
-  public static double getFullYaw() {
-    // gyro maybe?
-    double currentYaw = Robot.navx.getFusedHeading();
-    if (Robot.navx.getYaw() <= 0) {
-      currentYaw = -Robot.navx.getYaw();
-    } else {
-      currentYaw = 360 - Robot.navx.getYaw();
-    }
-    System.out.println("yaw: "+ currentYaw);
-    return currentYaw;
-  }
-
   /**
    * This autonomous (along with the chooser code above) shows how to select
    * between different autonomous modes using the dashboard. The sendable
@@ -109,7 +97,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    getFullYaw();
+    System.out.println("yaw: "+ Robot.navx.getFusedHeading());
   }
 
   /**
