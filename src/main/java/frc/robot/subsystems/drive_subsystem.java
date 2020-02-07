@@ -16,6 +16,9 @@ import frc.robot.RobotMap;
 import frc.robot.commands.drive_command;
 import frc.robot.commands.driveStraight_command;
 import frc.robot.Robot;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
+
 /**
  * Add your docs here.
  */
@@ -29,6 +32,8 @@ public class drive_subsystem extends Subsystem {
   WPI_TalonSRX frontRightMotor = null;
   DifferentialDrive difDrive = null;
   public double currentYaw;
+  public Encoder leftEncoder = new Encoder(RobotMap.leftEncoderPort1, RobotMap.leftEncoderPort2, true, EncodingType.k4X);
+	public Encoder rightEncoder = new Encoder(RobotMap.rightEncoderPort1, RobotMap.rightEncoderPort2, false, EncodingType.k4X);
 
   @Override
   public void initDefaultCommand() {
@@ -47,6 +52,8 @@ public class drive_subsystem extends Subsystem {
   }
   public void drive(double leftSpeed, double rightSpeed){
     difDrive.tankDrive(leftSpeed, rightSpeed);
-
+  }
+  public void drive(double stopSpeed){
+    difDrive.tankDrive(stopSpeed, stopSpeed);
   }
 }
