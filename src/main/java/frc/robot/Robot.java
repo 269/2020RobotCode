@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.robot.subsystems.drive_subsystem;
+import frc.robot.subsystems.shooter_subsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -22,6 +23,7 @@ import frc.robot.subsystems.drive_subsystem;
  * project.
  */
 public class Robot extends TimedRobot {
+  public static shooter_subsystem shooter_subsystem = null;
   public static OI m_oi;
   public static drive_subsystem drive_subsystem = null;
   public static AHRS navx;
@@ -37,6 +39,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    shooter_subsystem = new shooter_subsystem();
     drive_subsystem = new drive_subsystem();
     m_oi = new OI();
   //  m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
@@ -64,7 +67,7 @@ public class Robot extends TimedRobot {
     } else {
       currentYaw = 360 - Robot.navx.getYaw();
     }
-    System.out.println("yaw: "+ currentYaw);
+    //System.out.println("yaw: "+ currentYaw);
     return currentYaw;
   }
 

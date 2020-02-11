@@ -24,6 +24,7 @@ public class OI {
     public double rightJoystickY(Joystick controller){
         return controller.getRawAxis(RobotMap.RIGHT_JOYSTICK_Y);
     }
+    //Driver Controller
     public Joystick driverController = new Joystick(RobotMap.DRIVER_CONTROLLER);
     public Joystick intakeController = new Joystick(RobotMap.INTAKE_CONTROLLER);
     public JoystickButton buttonX = new JoystickButton(driverController,RobotMap.BUTTON_X);
@@ -38,4 +39,6 @@ public class OI {
     public JoystickButton dPadDown = new JoystickButton(driverController,RobotMap.D_PAD_DOWN);    
     public JoystickButton LB = new JoystickButton(driverController,RobotMap.LB);    
     public JoystickButton RB = new JoystickButton(driverController,RobotMap.RB);   
+    //Intake Controller
+    public JoystickButton RB1 = new JoystickButton(intakeController,RobotMap.RB);   
 }
