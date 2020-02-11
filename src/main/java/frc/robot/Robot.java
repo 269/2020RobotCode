@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.robot.subsystems.drive_subsystem;
+import frc.robot.subsystems.intake_subsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,6 +25,7 @@ import frc.robot.subsystems.drive_subsystem;
 public class Robot extends TimedRobot {
   public static OI m_oi;
   public static drive_subsystem drive_subsystem = null;
+  public static intake_subsystem intake_subsystem = null;
   public static AHRS navx;
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
@@ -38,6 +40,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     drive_subsystem = new drive_subsystem();
+    intake_subsystem = new intake_subsystem();
     m_oi = new OI();
   //  m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
   //  m_chooser.addOption("My Auto", kCustomAuto);
@@ -56,17 +59,6 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
   }
 
-  public static double getFullYaw() {
-    // gyro maybe?
-    double currentYaw = Robot.navx.getFusedHeading();
-    if (Robot.navx.getYaw() <= 0) {
-      currentYaw = -Robot.navx.getYaw();
-    } else {
-      currentYaw = 360 - Robot.navx.getYaw();
-    }
-    System.out.println("yaw: "+ currentYaw);
-    return currentYaw;
-  }
 
   /**
    * This autonomous (along with the chooser code above) shows how to select
@@ -109,7 +101,6 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    getFullYaw();
   }
 
   /**
