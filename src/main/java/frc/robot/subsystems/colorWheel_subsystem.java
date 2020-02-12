@@ -52,12 +52,14 @@ public class colorWheel_subsystem extends Subsystem {
   /**
    * Note: Any example colors should be calibrated as the user needs, these
    * are here as a basic example.
+   * Once either ALLIANCE reaches Stage 3 CAPACITY, FMS relays a
+specified color (randomly selected by FMS and one (1) of the three (3) colors not currently read
+by the ALLIANCE’S TRENCH color sensor) to all OPERATOR CONSOLES simultaneously.
    */
-  private final Color kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
-  private final Color kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
-  private final Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
-  private final Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
-
+  private final Color kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429); //real bue
+  private final Color kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240); //real green
+  private final Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114); //real red
+  private final Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113); //real yellow
 
   @Override
   public void initDefaultCommand() {
@@ -70,10 +72,15 @@ public class colorWheel_subsystem extends Subsystem {
     m_colorMatcher.addColorMatch(kGreenTarget);
     m_colorMatcher.addColorMatch(kRedTarget);
     m_colorMatcher.addColorMatch(kYellowTarget);
+    m_colorMatcher.setConfidenceThreshold(0.8);
 
     colorWheelWheel = new WPI_TalonSRX(RobotMap.MOTOR_COLOR_WHEEL);
   }
   // method called by command to get color from sensor
+  /**
+   * Get the current color (as defined) that the color sensor sees
+   * @return
+   */
   public String getColor() {
     String result;
     /**
