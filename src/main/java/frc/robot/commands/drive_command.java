@@ -34,8 +34,8 @@ public class drive_command extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double leftSpeed = Robot.m_oi.driverController.getRawAxis(RobotMap.LEFT_JOYSTICK_Y);
-    double rightSpeed = Robot.m_oi.driverController.getRawAxis(RobotMap.RIGHT_JOYSTICK_Y);
+    double leftSpeed = Robot.m_oi.driverController.getRawAxis(RobotMap.RIGHT_JOYSTICK_Y);
+    double rightSpeed = Robot.m_oi.driverController.getRawAxis(RobotMap.LEFT_JOYSTICK_Y);
     //double tolerance = 0.1;
     //speed reduction
     if (Robot.m_oi.RB.get() == true) {
@@ -77,9 +77,7 @@ public class drive_command extends Command {
     
     System.out.println("Gear #: " + gear);
 
-
-    
-    Robot.drive_subsystem.drive(leftSpeed, rightSpeed);
+  Robot.drive_subsystem.drive(leftSpeed, rightSpeed);
   }
 
   // Make this return true when this Command no longer needs to run execute()
