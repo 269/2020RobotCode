@@ -73,12 +73,18 @@ public class Robot extends TimedRobot {
   public static void WriteOut(String message){
       PrintMessage(message, 5);
   }
+  public static void WriteOut(Double message){
+    PrintMessage(message.toString(), 5);
+}
 /** Prints a message to console
  * 0-5 (0=log nothing, 1=CRITICAL, 2=Errors, 3=Warnings, 4=Info, 5=everything)
  */
   public static void WriteOut(String message, int lvl){
       PrintMessage(message, lvl);
   }
+  public static void WriteOut(Double message, int lvl){
+    PrintMessage(message.toString(), lvl);
+}
 
   /**
    * The part that actually prints out the formated message.
