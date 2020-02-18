@@ -121,6 +121,12 @@ by the ALLIANCE’S TRENCH color sensor) to all OPERATOR CONSOLES simultaneously
    * @param speed
    */
   public void rotateColorWheel(double speed) {
+    if (speed > 0.5) {
+      speed = 0.5;
+    }
+    if (speed < -0.5) {
+      speed = -0.5;
+    }
     colorWheelWheel.set(speed);
   }
 }
