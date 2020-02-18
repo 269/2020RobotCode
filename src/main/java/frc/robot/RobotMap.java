@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
+import edu.wpi.first.wpilibj.I2C;
 
 /**
  The_Whole_Robot_Code_Trust_Me_I_Am_Always_Right_269_2020_Squire_Grace_Forever
@@ -61,4 +62,7 @@ public class RobotMap {
     public static final int RIGHT_BUTTON = 2;
     public static final int DOWN_BUTTON = 4;
     public static final int LEFT_BUTTON = 6;
+    
+    //color sensor
+    public static final I2C.Port i2cPort = I2C.Port.kOnboard;
 }

@@ -13,32 +13,23 @@ import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
 import frc.robot.RobotMap;
 import frc.robot.commands.colorWheel_command;
-// color wheel stuff
-import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 
 /**
- * Add your docs here.
+ *  color wheel stuff
  */
 public class colorWheel_subsystem extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
 
   WPI_TalonSRX colorWheelWheel = null;
-
-  /**
-   * Change the I2C port below to match the connection of your color sensor
-   */
-  private final I2C.Port i2cPort = I2C.Port.kOnboard;
 
   /**
    * A Rev Color Sensor V3 object is constructed with an I2C port as a 
    * parameter. The device will be automatically initialized with default 
    * parameters.
    */
-  private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
+  private final ColorSensorV3 m_colorSensor = new ColorSensorV3(RobotMap.i2cPort);
 
   /**
    * A Rev Color Match object is used to register and detect known colors. This can 

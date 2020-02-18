@@ -103,8 +103,6 @@ public class OI {
     public POVButton Intake_rightButton = new POVButton(intakeController, 90, RobotMap.RIGHT_BUTTON);
     public POVButton Intake_downButton = new POVButton(intakeController, 180, RobotMap.DOWN_BUTTON);
     public POVButton Intake_leftButton = new POVButton(intakeController, 270, RobotMap.LEFT_BUTTON);
-//*/
-
 
     /**
      * A custom method we made last year to bind the button commands early
