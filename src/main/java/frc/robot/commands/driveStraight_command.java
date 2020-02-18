@@ -19,7 +19,7 @@ public class driveStraight_command extends Command {
   public double leftSpeed;
   public double rightSpeed;
   public double inches;
-  public double slowestSpeed = 0.25;
+  public double slowestSpeed = 0.35;
   Timer stopwatch = new Timer();
 
    // Use requires() here to declare subsystem dependencies
@@ -38,16 +38,16 @@ public class driveStraight_command extends Command {
   protected void execute() {
     currentYaw=Robot.navx.getFusedHeading();
     System.out.println("yaw: "+ currentYaw);
-    if(360-tol > currentYaw && currentYaw > 180){
+    if(360-tol > currentYaw && currentYaw > 180){ // if turning too much to the left turn to the right
       leftSpeed = speed; // make speed mod. to make greater
       rightSpeed = speed;
     }
       
-    else if(180 > currentYaw && currentYaw > tol){
-      leftSpeed = speed;
+    else if(180 > currentYaw && currentYaw > tol){ // if turning too much to the right turn to the left
+      leftSpeed = speed;  
       rightSpeed = speed; //Make speed mod. to make greater
     }
-    else{
+    else{ // if in the goal area
       leftSpeed = speed;
       rightSpeed = speed;
     }
