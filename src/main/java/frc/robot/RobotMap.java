@@ -11,6 +11,18 @@ package frc.robot;
  The_Whole_Robot_Code_Trust_Me_I_Am_Always_Right_269_2020_Squire_Grace_Forever
  */
 public class RobotMap {
+
+    public static final boolean DEBUG = false;  //use this to toggle your system.print line statements
+    public static final int DEBUGLVL = 0;
+    /* ******************
+     *  DEBUGLVL INFO
+     * ******************
+     * Anything with a specified debug level thats smaller then the int here will be logged.
+     * Levels are as follows: 0-5 (0=log nothing, 1=CRITICAL, 2=Errors, 3=Warnings, 4=Info, 5=everything)
+     * This is just an example. Adjust this to meet your requirements. Other implemntation idea could be assign a
+     *  number to each component you want to test. i.e. log only gyro or log only drive or log gyo and drive..
+     */
+
     //Drive Motors
     public static final int MOTOR_LEFT_1 = 1;
     public static final int MOTOR_LEFT_2 = 2;
@@ -43,4 +55,10 @@ public class RobotMap {
     //Bumpers
     public static final int LB = 6;
     public static final int RB = 5;
+
+    //POV Buttons
+    public static final int UP_BUTTON = 0;
+    public static final int RIGHT_BUTTON = 2;
+    public static final int DOWN_BUTTON = 4;
+    public static final int LEFT_BUTTON = 6;
 }
