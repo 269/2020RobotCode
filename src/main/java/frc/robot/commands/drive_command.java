@@ -10,7 +10,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-
+/**
+ * Teleoperated control of robot (Default Drive Command)
+ */
 public class drive_command extends Command {
   int gear = 0;
   final int MAXGEAR = 3;
@@ -34,8 +36,8 @@ public class drive_command extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double leftSpeed = Robot.m_oi.driverController.getRawAxis(RobotMap.LEFT_JOYSTICK_Y);
-    double rightSpeed = Robot.m_oi.driverController.getRawAxis(RobotMap.RIGHT_JOYSTICK_Y);
+    double leftSpeed = Robot.m_oi.leftJoystickY(Robot.m_oi.driverController);
+    double rightSpeed = Robot.m_oi.rightJoystickY(Robot.m_oi.driverController);
     //double tolerance = 0.1;
     //speed reduction
     if (Robot.m_oi.RB.get() == true) {
