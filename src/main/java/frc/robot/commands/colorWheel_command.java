@@ -26,7 +26,7 @@ public class colorWheel_command extends Command {
   private boolean yPressed = false;
   private String initialColor;
   private long starttime;
-  private double colorDelay = 5000; //the amount of time the sensor needs to read that color in miliseconds
+  private double colorDelay = 1000; //the amount of time the sensor needs to read that color in miliseconds
   private String lastColor;
 
   public colorWheel_command() {
@@ -107,7 +107,7 @@ public class colorWheel_command extends Command {
           lastColor = colorNow;
           starttime = System.nanoTime();
         } else {  
-          if ((starttime - System.nanoTime())/1000000 >= colorDelay) {// check if its been on that color for specified time period.
+          if ((System.nanoTime() - starttime)/1000000 >= colorDelay) {// check if its been on that color for specified time period.
             rotateSpeed = 0;    //we got to the color so stop
             turnTo = null;
             yPressed = false;
