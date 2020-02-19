@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import java.util.ArrayList;
-// import frc.robot.subsystems.colorWheel_subsystem;
 import edu.wpi.first.wpilibj.DriverStation;
 
 public class colorWheel_command extends Command {
@@ -24,14 +23,16 @@ public class colorWheel_command extends Command {
   public static int indexOfColor;
   public static ArrayList<String> wheelColorsArray = new ArrayList<String>(); //half of the in order color set on the real wheel
   public static ArrayList<String> newColorsArray = new ArrayList<String>(); //half of the in order color set on the real wheel
-  double stopTimer;
-  boolean yPressed = false;
-  String initialColor;
+  private boolean yPressed = false;
+  private String initialColor;
+  private long starttime;
+  private double colorDelay = 1000; //the amount of time the sensor needs to read that color in miliseconds
+  private String lastColor;
 
   public colorWheel_command() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.colorWheel_subsystem);
+    requires(Robot.colorWheel_subsystem);//should use the bind() method and the .whenpressed for Y button instead of making default.
   }
 
   // Called just before this Command runs the first time
@@ -42,20 +43,19 @@ public class colorWheel_command extends Command {
     wheelColorsArray.add("Yellow");
     wheelColorsArray.add("Blue");
     wheelColorsArray.add("Green");
-    stopTimer = 5.0;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (Robot.m_oi.driverController.getRawButton(RobotMap.BUTTON_Y) && yPressed == false) {
+    if (Robot.m_oi.driverController.getRawButton(RobotMap.BUTTON_Y) && yPressed == false) {//this is not needed if you call the command when the button is pressed
       yPressed = true;
       initialColor = Robot.colorWheel_subsystem.getColor();
     }
 
 
     gameData = DriverStation.getInstance().getGameSpecificMessage();
-    System.out.println("Control panel sensor target: " + gameData); // color the control panel sensor needs to see for 5 sec
+    Robot.WriteOut("Control panel sensor target: " + gameData); // color the control panel sensor needs to see for 5 sec
     if(gameData.length() > 0 && yPressed)
     {
       switch (gameData.charAt(0))
@@ -90,25 +90,28 @@ public class colorWheel_command extends Command {
           break;
         default :
           //This is corrupt data
-          System.out.println("Corrupt FMS color data");
+          Robot.WriteOut("Corrupt FMS color data");
           break;
       }
     } else {
       // blah blah
     }
-    System.out.println("Robot sensor color target: " + turnTo); // color the *ROBOT* sensor has to turn to
+    Robot.WriteOut("Robot sensor color target: " + turnTo); // color the *ROBOT* sensor has to turn to
   
     String colorNow = Robot.colorWheel_subsystem.getColor();
-    SmartDashboard.putString("Color", colorNow); // show current sensed color on SD
-    if (turnTo != null) {             // if fms has provided a color
+    SmartDashboard.putString("targetcolor", turnTo); 
+    SmartDashboard.putString("FMScolor", initialColor); 
+    if (turnTo != null) {             // if fms HAS provided a color
       if (colorNow == turnTo) {       // if the wheel has reached its color
-        if (stopTimer <= 0) {
-          rotateSpeed = 0;
-          turnTo = null;
-          stopTimer = 5.0;
-          yPressed = false;
-        } else {
-          --stopTimer;                // subtract from over color stop timer
+        if (!lastColor.equals(colorNow)) {  //for the first iteration record the time.
+          lastColor = colorNow;
+          starttime = System.nanoTime();
+        } else {  
+          if ((System.nanoTime() - starttime)/1000000 >= colorDelay) {// check if its been on that color for specified time period.
+            rotateSpeed = 0;    //we got to the color so stop
+            turnTo = null;
+            yPressed = false;
+          }
         }
       } else {
         switch (initialColor) {
@@ -196,7 +199,7 @@ public class colorWheel_command extends Command {
     } else {                          // if fms has not provided a color
       rotateSpeed = 0;
     }
-    System.out.println(stopTimer);
+    lastColor = colorNow; //sets the last color to the current color for the next iteration.
     Robot.colorWheel_subsystem.rotateColorWheel(rotateSpeed); // set motor speed to rotate speed as defined above
   }
 
@@ -209,7 +212,6 @@ public class colorWheel_command extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    SmartDashboard.putString("Color", "No Color");
   }
 
   // Called when another command which requires one or more of the same

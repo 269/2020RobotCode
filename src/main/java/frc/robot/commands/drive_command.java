@@ -8,9 +8,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-
+/**
+ * Teleoperated control of robot (Default Drive Command)
+ */
 public class drive_command extends Command {
   int gear = 0;
   final int MAXGEAR = 3;
@@ -34,9 +37,21 @@ public class drive_command extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double leftSpeed = Robot.m_oi.driverController.getRawAxis(RobotMap.LEFT_JOYSTICK_Y);
-    double rightSpeed = Robot.m_oi.driverController.getRawAxis(RobotMap.RIGHT_JOYSTICK_Y);
-    //double tolerance = 0.1;
+
+    //directly map the speed from the joystick to the robot motor controllers. 
+    double leftSpeed = Robot.m_oi.leftJoystickY(Robot.m_oi.driverController);
+    double rightSpeed = Robot.m_oi.rightJoystickY(Robot.m_oi.driverController);
+
+    //provide a tolernce from the joystick input. 
+    //Some times if your not touching it it may read a very small value. We dont want the robot to think we are trying to drive it.
+    double tolerance = 0.05;
+    if(leftSpeed < tolerance && leftSpeed > -tolerance ){
+      leftSpeed = 0.0;
+    }
+    if(rightSpeed < tolerance && rightSpeed > -tolerance){
+      rightSpeed = 0.0;
+    }
+
     //speed reduction
     if (Robot.m_oi.RB.get() == true) {
       releaseR = false;
@@ -60,8 +75,6 @@ public class drive_command extends Command {
         releaseL = true;
       }
     }
-
-
     if (gear == 1){
       leftSpeed*=0.75;
       rightSpeed*=0.75;
@@ -74,11 +87,11 @@ public class drive_command extends Command {
       leftSpeed*=0.25;
       rightSpeed*=0.25;
     }
-    
-    System.out.println("Gear #: " + gear);
+    Robot.WriteOut("Gear #: " + gear);
+    SmartDashboard.putNumber("gear", gear );
 
 
-    
+    //pass the desired speed to the drive substem and make robot go!
     Robot.drive_subsystem.drive(leftSpeed, rightSpeed);
   }
 
