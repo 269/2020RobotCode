@@ -16,22 +16,6 @@ import edu.wpi.first.wpilibj.buttons.POVButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-//// TRIGGERING COMMANDS WITH BUTTONS
-  // Once you have a button, it's trivial to bind it to a button in one of
-  // three ways:
-
-  // Start the command when the button is pressed and let it run the command
-  // until it is finished as determined by it's isFinished method.
-  // button.whenPressed(new ExampleCommand());
-
-  // Run the command while the button is being held down and interrupt it once
-  // the button is released.
-  // button.whileHeld(new ExampleCommand());
-
-  // Start the command when the button is released and let it run the command
-  // until it is finished as determined by it's isFinished method.
-  // button.whenReleased(new ExampleCommand());
-
     //the xbox controllers considered a "Joystick" datatype
     public Joystick driverController = new Joystick(RobotMap.DRIVER_CONTROLLER);
     public Joystick intakeController = new Joystick(RobotMap.INTAKE_CONTROLLER);
@@ -108,7 +92,21 @@ public class OI {
      * A custom method we made last year to bind the button commands early
      */
     public void bind() {
-         //button.whenPressed(new ExampleCommand());
+         //// TRIGGERING COMMANDS WITH BUTTONS
+            // Once you have a button, it's trivial to bind it to a button in one of
+            // three ways:
+
+            // Start the command when the button is pressed and let it run the command
+            // until it is finished as determined by it's isFinished method.
+            // button.whenPressed(new ExampleCommand());
+
+            // Run the command while the button is being held down and interrupt it once
+            // the button is released.
+            // button.whileHeld(new ExampleCommand());
+
+            // Start the command when the button is released and let it run the command
+            // until it is finished as determined by it's isFinished method.
+            // button.whenReleased(new ExampleCommand());
     }
 
 }
