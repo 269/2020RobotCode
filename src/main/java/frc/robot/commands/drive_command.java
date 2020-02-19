@@ -29,7 +29,8 @@ public class drive_command extends Command {
     double leftSpeed = Robot.m_oi.driverController.getRawAxis(RobotMap.LEFT_JOYSTICK_Y);
     double rightSpeed = Robot.m_oi.driverController.getRawAxis(RobotMap.RIGHT_JOYSTICK_Y);
     //double tolerance = 0.1;
-
+    System.out.println("Left Encoder: " + Math.abs(Robot.drive_subsystem.leftEncoder.get()));
+    System.out.println("Right Encoder: " + Math.abs(Robot.drive_subsystem.rightEncoder.get()));
     Robot.drive_subsystem.drive(leftSpeed, rightSpeed);
   }
 
@@ -42,7 +43,7 @@ public class drive_command extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.drive_subsystem.drive(0,0);
+    Robot.drive_subsystem.drive(0);
   }
 
   // Called when another command which requires one or more of the same

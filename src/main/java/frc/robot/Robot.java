@@ -12,6 +12,9 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import frc.robot.commands.driveStraight_command;
+import frc.robot.commands.turnGyro_command;
+import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.subsystems.drive_subsystem;
 
 /**
@@ -27,6 +30,8 @@ public class Robot extends TimedRobot {
   public static AHRS navx;
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
+  Command driveStraight;
+  Command turnGyro;
 
   public Robot(){
     navx = new AHRS(SPI.Port.kMXP);
@@ -66,12 +71,18 @@ public class Robot extends TimedRobot {
    * <p>You can add additional auto modes by adding additional comparisons to
    * the switch structure below with additional strings. If using the
    * SendableChooser make sure to add them to the chooser code above as well.
-   */
+  */
   @Override
   public void autonomousInit() {
-    m_autoSelected = m_chooser.getSelected();
+    Robot.drive_subsystem.leftEncoder.setDistancePerPulse(0.0125);
+    Robot.drive_subsystem.rightEncoder.setDistancePerPulse(0.0125);
+    //m_autoSelected = m_chooser.getSelected();
+    //driveStraight = new driveStraightHelp_command();
+    turnGyro = new turnGyro_command(45.0, 0.5);
+    turnGyro.start();
+    //driveStraight.start();
     // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
-    System.out.println("Auto selected: " + m_autoSelected);
+    //System.out.println("Auto selected: " + m_autoSelected);
   }
 
   /**
@@ -79,6 +90,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+    Scheduler.getInstance().run();
    /* switch (m_autoSelected) {
       //case kCustomAuto:
         // Put custom auto code here
