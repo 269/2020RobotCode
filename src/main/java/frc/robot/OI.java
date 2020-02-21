@@ -38,4 +38,7 @@ public class OI {
     public JoystickButton dPadDown = new JoystickButton(driverController,RobotMap.D_PAD_DOWN);    
     public JoystickButton LB = new JoystickButton(driverController,RobotMap.LB);    
     public JoystickButton RB = new JoystickButton(driverController,RobotMap.RB);   
+
+    public JoystickButton buttonA1 = new JoystickButton(intakeController,RobotMap.BUTTON_A);    
+
 }

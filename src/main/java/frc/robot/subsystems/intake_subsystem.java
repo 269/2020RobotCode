@@ -26,8 +26,7 @@ public class intake_subsystem extends Subsystem {
     spinIntake = new WPI_TalonSRX(RobotMap.MOTOR_INTAKE);
   }
   public void rollerSpeed(double motorSpeed){
- 
-
+    spinIntake.set(motorSpeed);
   }
 
   @Override
