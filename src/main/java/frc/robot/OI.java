@@ -40,5 +40,10 @@ public class OI {
     public JoystickButton RB = new JoystickButton(driverController,RobotMap.RB);   
 
     public JoystickButton buttonA1 = new JoystickButton(intakeController,RobotMap.BUTTON_A);    
-
+    public JoystickButton buttonX1 = new JoystickButton(intakeController, RobotMap.BUTTON_X);
+    public JoystickButton buttonY1 = new JoystickButton(intakeController, RobotMap.BUTTON_Y);
+    public JoystickButton dPadUpInt = new JoystickButton(intakeController, RobotMap.D_PAD_UP);
+    public JoystickButton dPadRightInt = new JoystickButton(intakeController, RobotMap.D_PAD_RIGHT);
+    public JoystickButton dPadLeftInt = new JoystickButton(intakeController, RobotMap.D_PAD_LEFT);
+    public JoystickButton RBInt = new JoystickButton(intakeController, RobotMap.RB);
 }

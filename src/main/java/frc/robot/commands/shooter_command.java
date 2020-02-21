@@ -9,15 +9,18 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.intake_subsystem;
+import frc.robot.RobotMap;
+import frc.robot.subsystems.shooter_subsystem;
 
-public class intake_command extends Command {
-  double motorSpeed = 0.85;
-  public intake_command() {
+public class shooter_command extends Command {
+  double topSpeed;
+  double bottomSpeed;
+  public shooter_command() {
+    requires(Robot.shooter_subsystem);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.intake_subsystem);
   }
+
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
@@ -25,12 +28,24 @@ public class intake_command extends Command {
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
-    if (Robot.m_oi.buttonA1.get()){
-      Robot.intake_subsystem.rollerSpeed(motorSpeed);
+  protected void execute() {//Different speeds are set based on what position the d-pad was pushed
+    if(Robot.m_oi.dPadRightInt.get()){
+      topSpeed = 0.5;
+      bottomSpeed = 0.3;
+    }
+    else if(Robot.m_oi.dPadUpInt.get()){
+      topSpeed = 0.75;
+      bottomSpeed = 0.6;
+    }
+    else if(Robot.m_oi.dPadLeftInt.get()){
+      topSpeed = 1;
+      bottomSpeed = 1;
+    }
+    if(Robot.m_oi.RBInt.get()){
+      Robot.shooter_subsystem.setShooterSpeeds(topSpeed, bottomSpeed);
     }
     else{
-      Robot.intake_subsystem.rollerSpeed(0);
+      Robot.shooter_subsystem.setShooterSpeeds(0, 0);
     }
   }
 
@@ -43,13 +58,12 @@ public class intake_command extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.intake_subsystem.rollerSpeed(0);
+    Robot.shooter_subsystem.setShooterSpeeds(0, 0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    end();
   }
 }

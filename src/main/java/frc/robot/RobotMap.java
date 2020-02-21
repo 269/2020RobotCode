@@ -18,6 +18,12 @@ public class RobotMap {
     public static final int MOTOR_RIGHT_2 = 4;
     //Intake Motor
     public static final int MOTOR_INTAKE = 5;
+    //Shooter Motor
+    public static final int MOTOR_SHOOT_TOP = 1;
+    public static final int MOTOT_SHOOT_BOTTOM = 2;
+    //SOLENOID
+    public static final int SOLENOID_1 = 10;
+    public static final int SOLENOID_2 = 11;
     //Controllers
     public static final int DRIVER_CONTROLLER = 0;
     public static final int INTAKE_CONTROLLER = 1;

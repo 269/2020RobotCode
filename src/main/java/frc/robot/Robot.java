@@ -13,7 +13,9 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.robot.subsystems.drive_subsystem;
+import frc.robot.subsystems.index_subsystem;
 import frc.robot.subsystems.intake_subsystem;
+import frc.robot.subsystems.shooter_subsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,6 +28,8 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
   public static drive_subsystem drive_subsystem = null;
   public static intake_subsystem intake_subsystem = null;
+  public static index_subsystem index_subsystem = null;
+  public static shooter_subsystem shooter_subsystem = null;
   public static AHRS navx;
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
@@ -41,6 +45,8 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     drive_subsystem = new drive_subsystem();
     intake_subsystem = new intake_subsystem();
+    index_subsystem = new index_subsystem();
+    shooter_subsystem = new shooter_subsystem();
     m_oi = new OI();
   //  m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
   //  m_chooser.addOption("My Auto", kCustomAuto);
