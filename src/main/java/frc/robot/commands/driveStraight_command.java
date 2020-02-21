@@ -25,17 +25,17 @@ public class driveStraight_command extends Command {
   public double rightDist;
   public double leftDist;
   public double distTol;
-  public double targetYaw;
   public static driveStraight_command driveStraight = null;
   Timer stopwatch = new Timer();
 
    // Use requires() here to declare subsystem dependencies
    // eg. requires(chassis);
-  public driveStraight_command(double speed, double inches, double targetYaw) {
+  public driveStraight_command(double speed, double inches) {
     requires(Robot.drive_subsystem);
+    this.leftSpeed = speed;
+    this.rightSpeed = speed;
     this.speed = speed;
     this.inches = inches;
-    this.targetYaw = targetYaw;
     timeoutActivated = false;
   }
   /*public driveStraight_command(double speed, double inches, double timeout){
@@ -53,51 +53,43 @@ public class driveStraight_command extends Command {
   protected void initialize() {
     Robot.drive_subsystem.leftEncoder.reset();
     Robot.drive_subsystem.rightEncoder.reset();
-    targetYaw = Robot.navx.getFusedHeading();
+    Robot.navx.reset();
     stopwatch.reset();
     stopwatch.start();
   }
 
+  public static double getFullYaw(){
+    if(Robot.navx.getYaw() <= 0){
+      return -Robot.navx.getYaw();
+    }
+    else{
+      return 360 - Robot.navx.getYaw();
+    }
+  }
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    currentYaw = Robot.navx.getFusedHeading();
+    currentYaw = getFullYaw();
     System.out.println("Yaw: "+ currentYaw);
     System.out.println("Encoder Avg: " + (Math.abs(Robot.drive_subsystem.rightEncoder.getRaw()) + Math.abs(Robot.drive_subsystem.leftEncoder.getRaw()))/2);
     rightDist = Math.abs(Robot.drive_subsystem.rightEncoder.getDistance());
     leftDist = Math.abs(Robot.drive_subsystem.rightEncoder.getDistance());
     //if(speed+(1/speedTol) <= 1){ //Speed cant be 1 or it will overflow (go past 1) since speedTol is 5
     //if(Robot.m_oi.buttonA.get()){
-      if(targetYaw > 180){
-        targetYaw = 360-targetYaw;
-      }
-      if(((rightDist+leftDist)/2) + 5 <= inches){ //If the encoders from both sides have an average distance plus a tolerance of distTol inches
-        if(targetYaw-tol > currentYaw && currentYaw > 180+targetYaw){ //If the degrees off of straight (a.k.a 0 degrees) is greater than 180 but less than 355
-          leftSpeed = -((-((currentYaw/180)/(speedTol))+((-speed)+(2/speedTol)))); //Ex. 315/180 = 1.75 -> 1.75/5 = 0.35 -> -0.35 -> -0.35+(.5+(2/5)) -> -0.35 + 0.9 -> Speed = 0.55 at 315 deg
-          rightSpeed = speed;
-          System.out.println("Outta left");
-          System.out.println("Outta left");
-          System.out.println("Outta left");
-        }
-        else if(180+targetYaw >= currentYaw && currentYaw > tol+targetYaw){ //If the degrees off of straight (a.k.a 0 degrees) is less than or equal to 180 but greater than 5
-          leftSpeed = speed;
-          rightSpeed = -((((currentYaw/180)/(speedTol))+(-speed))); //Ex. 45/180 = 0.25 -> 0.25/5 = 0.05 -> 0.05 + 0.5 -> Speed = 0.55 at 45 deg
-          System.out.println("Outta right");
-          System.out.println("Outta right");
-          System.out.println("Outta right");
-        }
-        else{ //If the degrees off of straight (a.k.a 0 degrees) is 5 greater/less than straight
-          leftSpeed = speed;
-          rightSpeed = speed;
-          System.out.println("Norm");
-          System.out.println("Norm");
-          System.out.println("Norm");
-        }
-        Robot.drive_subsystem.drive(leftSpeed, rightSpeed);
-      }  
-      else{
-        Robot.drive_subsystem.drive(0);
-      }
+      double leftSpeedEdit = (-((currentYaw/180)/(speedTol))+(speed+(2/speedTol)));;
+      double rightSpeedEdit = (((currentYaw/180)/(speedTol))+speed);
+          if(360-tol > currentYaw && currentYaw > 180){ //If the degrees off of straight (a.k.a 0 degrees) is greater than 180 but less than 355
+            leftSpeed = -leftSpeedEdit; //Ex. 315/180 = 1.75 -> 1.75/5 = 0.35 -> -0.35 -> -0.35+(.5+(2/5)) -> -0.35 + 0.9 -> Speed = 0.55 at 315 deg
+            rightSpeed = -speed;
+          }
+          else if(180 >= currentYaw && currentYaw > tol){ //If the degrees off of straight (a.k.a 0 degrees) is less than or equal to 180 but greater than 5
+            leftSpeed = -speed;
+            rightSpeed = -rightSpeedEdit; //Ex. 45/180 = 0.25 -> 0.25/5 = 0.05 -> 0.05 + 0.5 -> Speed = 0.55 at 45 deg
+          }
+          else{ //If the degrees off of straight (a.k.a 0 degrees) is 5 greater/less than straight
+            leftSpeed = -speed;
+            rightSpeed = -speed;
+          }
       //}
       
       /*else{
