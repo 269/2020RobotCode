@@ -25,9 +25,9 @@ public class RobotMap {
     public static final int RIGHT_JOYSTICK_X = 4;
     public static final int RIGHT_JOYSTICK_Y = 5;
     //Buttons
-    public static final int BUTTON_X = 1;
+    public static final int BUTTON_X = 3;
     public static final int BUTTON_Y = 2;
-    public static final int BUTTON_A = 3;
+    public static final int BUTTON_A = 1;
     public static final int BUTTON_B = 4;
     public static final int D_PAD_LEFT = 5;
     public static final int D_PAD_UP = 6;
@@ -44,8 +44,8 @@ public class RobotMap {
     public static final int RB = 5;
     
     //Encoders
-    public static final int leftEncoderPort1 = 1000;
-	public static final int leftEncoderPort2 = 1000;
-	public static final int rightEncoderPort1 = 1000;
-	public static final int rightEncoderPort2 = 1000;
+    public static final int leftEncoderPort1 = 3;
+	public static final int leftEncoderPort2 = 2;
+	public static final int rightEncoderPort1 = 0;
+	public static final int rightEncoderPort2 = 1;
 }
