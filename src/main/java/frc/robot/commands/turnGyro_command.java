@@ -33,22 +33,14 @@ public class turnGyro_command extends Command {
   protected void initialize() {
   }
 
-  public static double getFullYaw(){
-    if(Robot.navx.getYaw() <= 0){
-      return -Robot.navx.getYaw();
-    }
-    else{
-      return 360 - Robot.navx.getYaw();
-    }
-  }
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    currentYaw = getFullYaw()+targetYaw;
+    currentYaw = Robot.getFullYaw()+targetYaw;
     System.out.println("Yaw: "+ currentYaw);
-    System.out.println("Encoder Avg: " + (Math.abs(Robot.drive_subsystem.rightEncoder.getRaw()) + Math.abs(Robot.drive_subsystem.leftEncoder.getRaw()))/2);
-    rightDist = Math.abs(Robot.drive_subsystem.rightEncoder.getDistance());
-    leftDist = Math.abs(Robot.drive_subsystem.rightEncoder.getDistance());
+    System.out.println("Encoder Avg: " + (Math.abs(Robot.rightEncoder.getRaw()) + Math.abs(Robot.leftEncoder.getRaw()))/2);
+    rightDist = Math.abs(Robot.rightEncoder.getDistance());
+    leftDist = Math.abs(Robot.rightEncoder.getDistance());
     //double leftSpeedEdit = (-((currentYaw/180)/(speedTol))+(speed+(2/speedTol)));;
     //double rightSpeedEdit = (((currentYaw/180)/(speedTol))+speed);
         if(360-tol > currentYaw && currentYaw > 180){ //If the degrees off of straight (a.k.a 0 degrees) is greater than 180 but less than 355

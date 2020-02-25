@@ -51,29 +51,21 @@ public class driveStraight_command extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.drive_subsystem.leftEncoder.reset();
-    Robot.drive_subsystem.rightEncoder.reset();
+    Robot.leftEncoder.reset();
+    Robot.rightEncoder.reset();
     Robot.navx.reset();
     stopwatch.reset();
     stopwatch.start();
   }
 
-  public static double getFullYaw(){
-    if(Robot.navx.getYaw() <= 0){
-      return -Robot.navx.getYaw();
-    }
-    else{
-      return 360 - Robot.navx.getYaw();
-    }
-  }
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    currentYaw = getFullYaw();
+    currentYaw = Robot.getFullYaw();
     System.out.println("Yaw: "+ currentYaw);
-    System.out.println("Encoder Avg: " + (Math.abs(Robot.drive_subsystem.rightEncoder.getRaw()) + Math.abs(Robot.drive_subsystem.leftEncoder.getRaw()))/2);
-    rightDist = Math.abs(Robot.drive_subsystem.rightEncoder.getDistance());
-    leftDist = Math.abs(Robot.drive_subsystem.rightEncoder.getDistance());
+    System.out.println("Encoder Avg: " + (Math.abs(Robot.rightEncoder.getRaw()) + Math.abs(Robot.leftEncoder.getRaw()))/2);
+    rightDist = Math.abs(Robot.rightEncoder.getDistance());
+    leftDist = Math.abs(Robot.rightEncoder.getDistance());
     //if(speed+(1/speedTol) <= 1){ //Speed cant be 1 or it will overflow (go past 1) since speedTol is 5
     //if(Robot.m_oi.buttonA.get()){
       double leftSpeedEdit = (-((currentYaw/180)/(speedTol))+(speed+(2/speedTol)));;
