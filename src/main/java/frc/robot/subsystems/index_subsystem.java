@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.index_command;
+import edu.wpi.first.wpilibj.Compressor;
+
 
 /**
  * Add your docs here.
@@ -21,6 +23,7 @@ public class index_subsystem extends Subsystem {
 
   Solenoid solenoid_right; 
   Solenoid solenoid_left; 
+  Compressor airComp;
 
   @Override
   public void initDefaultCommand() {
@@ -29,8 +32,15 @@ public class index_subsystem extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
   public index_subsystem(){
+    airComp = new Compressor(RobotMap.AIRCOMP);
     solenoid_right = new Solenoid(RobotMap.SOLENOID_1);
     solenoid_left = new Solenoid(RobotMap.SOLENOID_2);
+    if(airComp.getPressureSwitchValue()){
+      airComp.start();
+    }
+    else{
+      airComp.stop();
+    }
   }
   
   public void indexActivate(boolean active){

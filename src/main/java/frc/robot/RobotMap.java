@@ -24,6 +24,8 @@ public class RobotMap {
     //SOLENOID
     public static final int SOLENOID_1 = 10;
     public static final int SOLENOID_2 = 11;
+    //AIR COMPRESSOR
+    public static final int AIRCOMP = 0;
     //Controllers
     public static final int DRIVER_CONTROLLER = 0;
     public static final int INTAKE_CONTROLLER = 1;

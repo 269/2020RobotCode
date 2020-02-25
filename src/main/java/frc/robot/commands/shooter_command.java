@@ -30,16 +30,16 @@ public class shooter_command extends Command {
   @Override
   protected void execute() {//Different speeds are set based on what position the d-pad was pushed
     if(Robot.m_oi.dPadRightInt.get()){
-      topSpeed = 0.5;
-      bottomSpeed = 0.3;
+      topSpeed = 3000;
+      bottomSpeed = 1500;
     }
     else if(Robot.m_oi.dPadUpInt.get()){
-      topSpeed = 0.75;
-      bottomSpeed = 0.6;
+      topSpeed = 3750;
+      bottomSpeed = 3000;
     }
     else if(Robot.m_oi.dPadLeftInt.get()){
-      topSpeed = 1;
-      bottomSpeed = 1;
+      topSpeed = 5000;
+      bottomSpeed = 5000;
     }
     if(Robot.m_oi.RBInt.get()){
       Robot.shooter_subsystem.setShooterSpeeds(topSpeed, bottomSpeed);
