@@ -15,7 +15,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.robot.commands.driveStraight_command;
 import frc.robot.commands.turnGyro_command;
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.subsystems.colorWheel_subsystem;
 import frc.robot.subsystems.drive_subsystem;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.DateFormat;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,12 +30,15 @@ import frc.robot.subsystems.drive_subsystem;
  */
 public class Robot extends TimedRobot {
   public static OI m_oi;
-  public static drive_subsystem drive_subsystem = null;
   public static AHRS navx;
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
-  Command driveStraight;
-  Command turnGyro;
+  private static DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+	private static Date date = new Date();
+
+  //declare subsystems
+  public static drive_subsystem drive_subsystem = null;
+  public static colorWheel_subsystem colorWheel_subsystem = null;
 
   public Robot(){
     navx = new AHRS(SPI.Port.kMXP);
@@ -43,6 +50,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     drive_subsystem = new drive_subsystem();
+    colorWheel_subsystem = new colorWheel_subsystem();
     m_oi = new OI();
   //  m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
   //  m_chooser.addOption("My Auto", kCustomAuto);
@@ -59,6 +67,56 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+  }
+
+  /**
+   * Output at default debug level
+   * @param message The plain text that you want to output directly
+   */
+  public static void WriteOut(String message){
+      PrintMessage(message, 5);
+  }
+  public static void WriteOut(Double message){
+    PrintMessage(message.toString(), 5);
+}
+/** Prints a message to console
+ * 0-5 (0=log nothing, 1=CRITICAL, 2=Errors, 3=Warnings, 4=Info, 5=everything)
+ */
+  public static void WriteOut(String message, int lvl){
+      PrintMessage(message, lvl);
+  }
+  public static void WriteOut(Double message, int lvl){
+    PrintMessage(message.toString(), lvl);
+}
+
+  /**
+   * The part that actually prints out the formated message.
+   * Allows for additional global modification here.
+   * @param message
+   */
+  private static void PrintMessage(String message, int lvl){
+      if (RobotMap.DEBUG) {
+          if(lvl <= RobotMap.DEBUGLVL && lvl != 0) {
+              System.out.println("["+ dateFormat.format(date) + "] " + message);
+          }
+      }
+  }
+
+  /**
+   * Returns the navx fused heading from 0.0 to 360.0
+   * Combines the magnomiter, gyro, and accelerometer 
+   * "gives you the direction the robots facing"
+   */
+  public static double getFullYaw() {
+     double currentYaw = Robot.navx.getFusedHeading();
+    if (Robot.navx.getYaw() <= 0) {
+      currentYaw = -Robot.navx.getYaw();
+    } else {
+      currentYaw = 360 - Robot.navx.getYaw();
+    }
+    //System.out.println("yaw: "+ currentYaw);
+    WriteOut("Fused Yaw: "+ currentYaw, 0);
+    return currentYaw;
   }
 
   /**
@@ -109,7 +167,9 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    System.out.println("yaw: "+ Robot.navx.getFusedHeading());
+    if(RobotMap.DEBUG) {
+      getFullYaw(); //only used for debuging.
+    }
   }
 
   /**
