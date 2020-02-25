@@ -9,10 +9,14 @@ package frc.robot;
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANPIDController;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import frc.robot.commands.turnGyro_command;
+import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.subsystems.colorWheel_subsystem;
 import frc.robot.subsystems.drive_subsystem;
 import frc.robot.subsystems.index_subsystem;
@@ -35,14 +39,17 @@ public class Robot extends TimedRobot {
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
   private static DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-	private static Date date = new Date();
-
+  private static Date date = new Date();
+  public static Encoder rightEncoder = new Encoder(RobotMap.leftEncoderPort1, RobotMap.leftEncoderPort2, false, EncodingType.k4X);
+  public static Encoder leftEncoder = new Encoder(RobotMap.rightEncoderPort1, RobotMap.rightEncoderPort2, false, EncodingType.k4X);
   //declare subsystems
   public static colorWheel_subsystem colorWheel_subsystem = null;
   public static drive_subsystem drive_subsystem = null;
   public static intake_subsystem intake_subsystem = null;
   public static index_subsystem index_subsystem = null;
   public static shooter_subsystem shooter_subsystem = null;
+
+  
 
   public Robot(){
     navx = new AHRS(SPI.Port.kMXP);
@@ -87,10 +94,12 @@ public class Robot extends TimedRobot {
    * <p>You can add additional auto modes by adding additional comparisons to
    * the switch structure below with additional strings. If using the
    * SendableChooser make sure to add them to the chooser code above as well.
-   */
+  */
   @Override
   public void autonomousInit() {
-    m_autoSelected = m_chooser.getSelected();
+    leftEncoder.setDistancePerPulse(0.0125);
+    rightEncoder.setDistancePerPulse(0.0125);
+    //m_autoSelected = m_chooser.getSelected();
     // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
     //System.out.println("Auto selected: " + m_autoSelected);
   }
@@ -100,6 +109,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+    Scheduler.getInstance().run();
    /* switch (m_autoSelected) {
       //case kCustomAuto:
         // Put custom auto code here
