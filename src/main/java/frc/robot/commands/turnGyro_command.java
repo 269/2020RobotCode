@@ -9,7 +9,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import edu.wpi.first.wpilibj.Timer;
 
 public class turnGyro_command extends Command {
   double currentYaw;
@@ -21,6 +20,11 @@ public class turnGyro_command extends Command {
   double speedTol;
   double rightDist;
   double leftDist;
+
+  /**Sets the angle at for the robot to turn to
+   * @param targetYaw the goal angle for the robot to move to
+   * @param speed the speed the robot will turn
+   */
   public turnGyro_command(double targetYaw, double speed) {
     requires(Robot.drive_subsystem);
     this.targetYaw = targetYaw;

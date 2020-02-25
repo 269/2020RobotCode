@@ -10,7 +10,6 @@ import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.shooter_command;
@@ -35,6 +34,7 @@ public class shooter_subsystem extends Subsystem {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
+  //Declaring PID and motors for shooter
   public shooter_subsystem(){
     topMotor = new CANSparkMax(RobotMap.MOTOR_SHOOT_TOP, MotorType.kBrushless);
     bottomMotor = new CANSparkMax(RobotMap.MOTOT_SHOOT_BOTTOM, MotorType.kBrushless);
@@ -51,6 +51,10 @@ public class shooter_subsystem extends Subsystem {
     bottomPID.setFF(kFF);
     bottomPID.setIZone(kIz);
   }
+  /** Sets the shooters speeds (in RPM)
+  *@param topRPM the max RPM for the top of the shooter (can not exceed 5700 RPM)
+  *@param bottomRPM the max RPM for the bottom of the shooter (can not exceed 5700 RPM)
+  */
   public void setShooterSpeeds(double topRPM, double bottomRPM){
     if(topRPM < 5700 && bottomRPM < 5700 && topRPM > 100 && bottomRPM > 100){
     bottomPID.setSmartMotionMaxVelocity(bottomRPM, 0);

@@ -21,7 +21,6 @@ public class driveStraight_command extends Command {
   public double rightSpeed;
   public double inches;
   public double timeout;
-  public boolean timeoutActivated;
   public double rightDist;
   public double leftDist;
   public double distTol;
@@ -30,24 +29,22 @@ public class driveStraight_command extends Command {
 
    // Use requires() here to declare subsystem dependencies
    // eg. requires(chassis);
-  public driveStraight_command(double speed, double inches) {
-    requires(Robot.drive_subsystem);
-    this.leftSpeed = speed;
-    this.rightSpeed = speed;
-    this.speed = speed;
-    this.inches = inches;
-    timeoutActivated = false;
-  }
-  /*public driveStraight_command(double speed, double inches, double timeout){
+
+   /** Setting the robot to 'drive straight' for a certain amount of time or distance
+    * @param speed the speed at which the robot should move
+    * @param inches the distance at which the robot should travel
+    * @param timeout the time at which the robot will stop moving
+    */
+  public driveStraight_command(double speed, double inches, double timeout) {
     requires(Robot.drive_subsystem);
     this.leftSpeed = speed;
     this.rightSpeed = speed;
     this.speed = speed;
     this.inches = inches;
     this.timeout = timeout;
-    timeoutActivated = true;
-    Robot.drive_subsystem.drive(leftSpeed, rightSpeed);
-  }*/
+    this.timeout = timeout;
+  }
+
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
@@ -66,8 +63,6 @@ public class driveStraight_command extends Command {
     System.out.println("Encoder Avg: " + (Math.abs(Robot.rightEncoder.getRaw()) + Math.abs(Robot.leftEncoder.getRaw()))/2);
     rightDist = Math.abs(Robot.rightEncoder.getDistance());
     leftDist = Math.abs(Robot.rightEncoder.getDistance());
-    //if(speed+(1/speedTol) <= 1){ //Speed cant be 1 or it will overflow (go past 1) since speedTol is 5
-    //if(Robot.m_oi.buttonA.get()){
       double leftSpeedEdit = (-((currentYaw/180)/(speedTol))+(speed+(2/speedTol)));;
       double rightSpeedEdit = (((currentYaw/180)/(speedTol))+speed);
           if(360-tol > currentYaw && currentYaw > 180){ //If the degrees off of straight (a.k.a 0 degrees) is greater than 180 but less than 355
@@ -82,15 +77,7 @@ public class driveStraight_command extends Command {
             leftSpeed = -speed;
             rightSpeed = -speed;
           }
-      //}
-      
-      /*else{
-        System.out.println("Button not pressed");
-      }*/
-      //}
-      /*else{
-        System.out.println("Overpowered error!");
-      }*/
+
       System.out.println("Left distance: " + leftDist);
       System.out.println("Right distance: " + rightDist);
       System.out.println("Left Spd: " + leftSpeed);
@@ -100,7 +87,12 @@ public class driveStraight_command extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    if(stopwatch.get() == timeout){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 
   // Called once after isFinished returns true

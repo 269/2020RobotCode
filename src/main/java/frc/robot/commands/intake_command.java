@@ -9,7 +9,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.intake_subsystem;
 
 public class intake_command extends Command {
   double motorSpeed = 0.85;

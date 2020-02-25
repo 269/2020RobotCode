@@ -30,6 +30,6 @@ public class AutoCrossOutline extends CommandGroup {
     // e.g. if Command1 requires chassis, and Command2 requires arm,
     // a CommandGroup containing them would require both the chassis and the
     // arm.
-    addSequential(new driveStraight_command(.5, 10));
+    addSequential(new driveStraight_command(.5, 10, -1)); // -1 means timeout isn't used
   }
 }

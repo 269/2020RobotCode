@@ -43,6 +43,9 @@ public class index_subsystem extends Subsystem {
     }
   }
   
+  /** Extends or retracts both pneumatic pistons based on 'active'
+   * @param active if true pistons are extended if false they are retracted
+   */
   public void indexActivate(boolean active){
     solenoid_right.set(active);
     solenoid_left.set(active);

@@ -8,7 +8,6 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.intake_command;
@@ -25,6 +24,9 @@ public class intake_subsystem extends Subsystem {
   public intake_subsystem(){
     spinIntake = new WPI_TalonSRX(RobotMap.MOTOR_INTAKE);
   }
+  /** Sets intake roller speed
+   * @param motorSpeed sets the speed of the intake roller
+   */
   public void rollerSpeed(double motorSpeed){
     spinIntake.set(motorSpeed);
   }

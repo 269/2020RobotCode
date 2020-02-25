@@ -7,16 +7,12 @@
 
 package frc.robot;
 import com.kauailabs.navx.frc.AHRS;
-import com.revrobotics.CANPIDController;
-
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import frc.robot.commands.turnGyro_command;
-import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.subsystems.colorWheel_subsystem;
 import frc.robot.subsystems.drive_subsystem;
 import frc.robot.subsystems.index_subsystem;
@@ -117,19 +113,18 @@ public class Robot extends TimedRobot {
   }
 
   /**
-   * Returns the navx fused heading from 0.0 to 360.0
-   * Combines the magnomiter, gyro, and accelerometer 
-   * "gives you the direction the robots facing"
+   * Returns the navx angle from 0.0 to 360.0
+   * 
    */
   public static double getFullYaw() {
-     double currentYaw = Robot.navx.getFusedHeading();
+    double currentYaw;
     if (Robot.navx.getYaw() <= 0) {
       currentYaw = -Robot.navx.getYaw();
     } else {
       currentYaw = 360 - Robot.navx.getYaw();
     }
     //System.out.println("yaw: "+ currentYaw);
-    WriteOut("Fused Yaw: "+ currentYaw, 5);
+    WriteOut("Current Yaw: "+ currentYaw, 5);
     return currentYaw;
   }
 

@@ -8,16 +8,11 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
 import frc.robot.commands.drive_command;
-//import frc.robot.commands.driveStraight_command;
-//import frc.robot.Robot;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 
 /**
  * Controls the Drive Motors
@@ -47,7 +42,7 @@ public class drive_subsystem extends Subsystem {
     SpeedControllerGroup rightMotors = new SpeedControllerGroup(frontRightMotor, backRightMotor);
     difDrive = new DifferentialDrive(leftMotors, rightMotors);
   }
-  /**
+  /** Sets the speed of the main drive
    * @param leftSpeed speed of combined left motors from -1.0 to 1.0
    * @param rightSpeed speed of combined right motors from -1.0 to 1.0
    */
