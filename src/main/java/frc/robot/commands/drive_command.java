@@ -87,7 +87,7 @@ public class drive_command extends Command {
       leftSpeed*=0.25;
       rightSpeed*=0.25;
     }
-    //Robot.WriteOut("Gear #: " + gear);
+    Robot.WriteOut("Gear #: " + gear);
     SmartDashboard.putNumber("gear", gear );
 
 

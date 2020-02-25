@@ -41,8 +41,6 @@ public class turnGyro_command extends Command {
     System.out.println("Encoder Avg: " + (Math.abs(Robot.rightEncoder.getRaw()) + Math.abs(Robot.leftEncoder.getRaw()))/2);
     rightDist = Math.abs(Robot.rightEncoder.getDistance());
     leftDist = Math.abs(Robot.rightEncoder.getDistance());
-    //double leftSpeedEdit = (-((currentYaw/180)/(speedTol))+(speed+(2/speedTol)));;
-    //double rightSpeedEdit = (((currentYaw/180)/(speedTol))+speed);
         if(360-tol > currentYaw && currentYaw > 180){ //If the degrees off of straight (a.k.a 0 degrees) is greater than 180 but less than 355
           leftSpeed = -speed; //Ex. 315/180 = 1.75 -> 1.75/5 = 0.35 -> -0.35 -> -0.35+(.5+(2/5)) -> -0.35 + 0.9 -> Speed = 0.55 at 315 deg
           rightSpeed = speed;
