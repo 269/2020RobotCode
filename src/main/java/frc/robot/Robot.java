@@ -13,10 +13,14 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import frc.robot.subsystems.colorWheel_subsystem;
 import frc.robot.subsystems.drive_subsystem;
 import frc.robot.subsystems.index_subsystem;
 import frc.robot.subsystems.intake_subsystem;
 import frc.robot.subsystems.shooter_subsystem;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.DateFormat;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -27,13 +31,18 @@ import frc.robot.subsystems.shooter_subsystem;
  */
 public class Robot extends TimedRobot {
   public static OI m_oi;
+  public static AHRS navx;
+  private String m_autoSelected;
+  private final SendableChooser<String> m_chooser = new SendableChooser<>();
+  private static DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+	private static Date date = new Date();
+
+  //declare subsystems
+  public static colorWheel_subsystem colorWheel_subsystem = null;
   public static drive_subsystem drive_subsystem = null;
   public static intake_subsystem intake_subsystem = null;
   public static index_subsystem index_subsystem = null;
   public static shooter_subsystem shooter_subsystem = null;
-  public static AHRS navx;
-  private String m_autoSelected;
-  private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
   public Robot(){
     navx = new AHRS(SPI.Port.kMXP);
@@ -48,6 +57,7 @@ public class Robot extends TimedRobot {
     intake_subsystem = new intake_subsystem();
     index_subsystem = new index_subsystem();
     shooter_subsystem = new shooter_subsystem();
+    colorWheel_subsystem = new colorWheel_subsystem();
     m_oi = new OI();
   //  m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
   //  m_chooser.addOption("My Auto", kCustomAuto);
@@ -82,7 +92,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     m_autoSelected = m_chooser.getSelected();
     // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
-    System.out.println("Auto selected: " + m_autoSelected);
+    //System.out.println("Auto selected: " + m_autoSelected);
   }
 
   /**
@@ -108,10 +118,13 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    if(RobotMap.DEBUG) {
+      getFullYaw(); //only used for debuging.
+    }
   }
 
   /**
-   * This function is called periodically during test mode.
+   * This function is called periodfinal String message, final st mode.
    */
   @Override
   public void testPeriodic() {

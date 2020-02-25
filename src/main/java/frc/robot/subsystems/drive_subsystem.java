@@ -14,10 +14,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
 import frc.robot.commands.drive_command;
-import frc.robot.Robot;
-
 /**
- * Add your docs here.
+ * Controls the Drive Motors
  */
 public class drive_subsystem extends Subsystem {
   // Put methods for controlling this subsystem
@@ -28,7 +26,6 @@ public class drive_subsystem extends Subsystem {
   WPI_TalonSRX backRightMotor = null;
   WPI_TalonSRX frontRightMotor = null;
   DifferentialDrive difDrive = null;
-  public double currentYaw;
 
   @Override
   public void initDefaultCommand() {
@@ -45,6 +42,10 @@ public class drive_subsystem extends Subsystem {
     SpeedControllerGroup rightMotors = new SpeedControllerGroup(frontRightMotor, backRightMotor);
     difDrive = new DifferentialDrive(leftMotors, rightMotors);
   }
+  /**
+   * @param leftSpeed speed of combined left motors from -1.0 to 1.0
+   * @param rightSpeed speed of combined right motors from -1.0 to 1.0
+   */
   public void drive(double leftSpeed, double rightSpeed){
     difDrive.tankDrive(leftSpeed, rightSpeed);
 
