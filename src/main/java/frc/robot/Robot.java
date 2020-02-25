@@ -113,7 +113,7 @@ public class Robot extends TimedRobot {
       currentYaw = 360 - Robot.navx.getYaw();
     }
     //System.out.println("yaw: "+ currentYaw);
-    WriteOut("Fused Yaw: "+ currentYaw, 0);
+    WriteOut("Fused Yaw: "+ currentYaw, 5);
     return currentYaw;
   }
 
