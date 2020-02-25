@@ -7,6 +7,7 @@
 
 package frc.robot;
 import com.kauailabs.navx.frc.AHRS;
+import com.revrobotics.CANPIDController;
 
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.TimedRobot;
