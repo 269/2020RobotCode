@@ -55,7 +55,7 @@ public class colorWheel_command extends Command {
 
 
     gameData = DriverStation.getInstance().getGameSpecificMessage();
-    Robot.WriteOut("Control panel sensor target: " + gameData); // color the control panel sensor needs to see for 5 sec
+    //Robot.WriteOut("Control panel sensor target: " + gameData); // color the control panel sensor needs to see for 5 sec
     if(gameData.length() > 0 && yPressed)
     {
       switch (gameData.charAt(0))
@@ -90,13 +90,13 @@ public class colorWheel_command extends Command {
           break;
         default :
           //This is corrupt data
-          Robot.WriteOut("Corrupt FMS color data");
+          //Robot.WriteOut("Corrupt FMS color data");
           break;
       }
     } else {
       // blah blah
     }
-    Robot.WriteOut("Robot sensor color target: " + turnTo); // color the *ROBOT* sensor has to turn to
+    //Robot.WriteOut("Robot sensor color target: " + turnTo); // color the *ROBOT* sensor has to turn to
   
     String colorNow = Robot.colorWheel_subsystem.getColor();
     SmartDashboard.putString("targetcolor", turnTo); 

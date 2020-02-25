@@ -29,19 +29,19 @@ public class shooter_command extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {//Different speeds are set based on what position the d-pad was pushed
-    if(Robot.m_oi.dPadRightInt.get()){
+    if(Robot.m_oi.Intake_dPadLeft.get()){
       topSpeed = 3000;
       bottomSpeed = 1500;
     }
-    else if(Robot.m_oi.dPadUpInt.get()){
+    else if(Robot.m_oi.Intake_dPadUp.get()){
       topSpeed = 3750;
       bottomSpeed = 3000;
     }
-    else if(Robot.m_oi.dPadLeftInt.get()){
+    else if(Robot.m_oi.Intake_dPadRight.get()){
       topSpeed = 5000;
       bottomSpeed = 5000;
     }
-    if(Robot.m_oi.RBInt.get()){
+    if(Robot.m_oi.Intake_RB.get()){
       Robot.shooter_subsystem.setShooterSpeeds(topSpeed, bottomSpeed);
     }
     else{

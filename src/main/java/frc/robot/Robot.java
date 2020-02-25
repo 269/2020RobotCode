@@ -110,7 +110,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
-   /* switch (m_autoSelected) {
+   /* switch (m_autoSelected) 
       //case kCustomAuto:
         // Put custom auto code here
         break;
@@ -120,6 +120,14 @@ public class Robot extends TimedRobot {
         break;
     }
     */
+  }
+  public static double getFullYaw(){
+    if(navx.getYaw() <= 0){
+      return -navx.getYaw();
+    }
+    else{
+      return 360 - navx.getYaw();
+    }
   }
 
   /**

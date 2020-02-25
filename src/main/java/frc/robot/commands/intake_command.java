@@ -26,7 +26,7 @@ public class intake_command extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (Robot.m_oi.buttonA1.get()){
+    if (Robot.m_oi.Intake_buttonA.get()){
       Robot.intake_subsystem.rollerSpeed(motorSpeed);
     }
     else{
