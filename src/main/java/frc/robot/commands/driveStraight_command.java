@@ -16,7 +16,6 @@ public class driveStraight_command extends Command {
   public double currentYaw;
   public double tol = 1.5;
   public double speed;
-  public double speedTol = 2;
   public double leftSpeed;
   public double rightSpeed;
   public double inches;
@@ -24,6 +23,7 @@ public class driveStraight_command extends Command {
   public double rightDist;
   public double leftDist;
   public double distTol;
+  public double averageDist;
   public static driveStraight_command driveStraight = null;
   Timer stopwatch = new Timer();
 
@@ -58,36 +58,35 @@ public class driveStraight_command extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    currentYaw = Robot.getFullYaw();
+    currentYaw = -Robot.getFullYaw();
     System.out.println("Yaw: "+ currentYaw);
-    System.out.println("Encoder Avg: " + (Math.abs(Robot.rightEncoder.getRaw()) + Math.abs(Robot.leftEncoder.getRaw()))/2);
+    //System.out.println("Encoder Avg: " + (Math.abs(Robot.rightEncoder.getRaw()) + Math.abs(Robot.leftEncoder.getRaw()))/2);
     rightDist = Math.abs(Robot.rightEncoder.getDistance());
     leftDist = Math.abs(Robot.rightEncoder.getDistance());
-    double leftSpeedEdit = ((currentYaw/180)/speedTol)-(2/speedTol);
-    double rightSpeedEdit = ((-currentYaw/180)/speedTol);
+    averageDist = (leftDist+rightDist)/2;
         if(360-tol > currentYaw && currentYaw > 180){ //If the degrees off of straight (a.k.a 0 degrees) is greater than 180 but less than 355
-          leftSpeed = speed; //Ex. 315/180 = 1.75 -> 1.75/5 = 0.35 -> -0.35 -> -0.35+(.5+(2/5)) -> -0.35 + 0.9 -> Speed = 0.55 at 315 deg
-          rightSpeed = speed+(-leftSpeedEdit);
+          leftSpeed = speed; 
+          rightSpeed = speed - ((360 - currentYaw)/(180/speed));
         }
         else if(180 >= currentYaw && currentYaw > tol){ //If the degrees off of straight (a.k.a 0 degrees) is less than or equal to 180 but greater than 5
-          leftSpeed = speed+(-rightSpeedEdit);
-          rightSpeed = speed; //Ex. 45/180 = 0.25 -> 0.25/5 = 0.05 -> 0.05 + 0.5 -> Speed = 0.55 at 45 deg
+          leftSpeed = speed - ((currentYaw)/(180/speed));
+          rightSpeed = speed;
         }
         else{ //If the degrees off of straight (a.k.a 0 degrees) is 5 greater/less than straight
           leftSpeed = speed;
           rightSpeed = speed;
         }
         Robot.drive_subsystem.drive(leftSpeed, rightSpeed);
-      System.out.println("Left distance: " + leftDist);
+      /*System.out.println("Left distance: " + leftDist);
       System.out.println("Right distance: " + rightDist);
       System.out.println("Left Spd: " + leftSpeed);
-      System.out.println("Right Spd: " + rightSpeed);
+      System.out.println("Right Spd: " + rightSpeed);*/
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if(stopwatch.get() == timeout){
+    if(stopwatch.get() == timeout || averageDist >= inches){
       return true;
     }
     else{
@@ -98,11 +97,13 @@ public class driveStraight_command extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.drive_subsystem.drive(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }
