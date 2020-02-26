@@ -50,7 +50,7 @@ public class driveStraight_command extends Command {
   protected void initialize() {
     Robot.leftEncoder.reset();
     Robot.rightEncoder.reset();
-    Robot.navx.reset();
+    startingYaw = Robot.navx.getFusedHeading();
     stopwatch.reset();
     stopwatch.start();
   }
@@ -58,7 +58,7 @@ public class driveStraight_command extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    currentYaw = -Robot.getFullYaw();
+    currentYaw = Robot.getFullYaw(startingYaw);
     System.out.println("Yaw: "+ currentYaw);
     //System.out.println("Encoder Avg: " + (Math.abs(Robot.rightEncoder.getRaw()) + Math.abs(Robot.leftEncoder.getRaw()))/2);
     rightDist = Math.abs(Robot.rightEncoder.getDistance());
@@ -72,7 +72,7 @@ public class driveStraight_command extends Command {
           leftSpeed = speed - ((currentYaw)/(180/speed));
           rightSpeed = speed;
         }
-        else{ //If the degrees off of straight (a.k.a 0 degrees) is 5 greater/less than straight
+        else{ //If the degrees off of straight (a.k.a 0 degrees) is 'tol' greater/less than straight
           leftSpeed = speed;
           rightSpeed = speed;
         }

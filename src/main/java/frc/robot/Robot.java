@@ -116,12 +116,11 @@ public class Robot extends TimedRobot {
    * Returns the navx angle from 0.0 to 360.0
    * 
    */
-  public static double getFullYaw() {
+  public static double getFullYaw(double startingYaw) {
     double currentYaw;
-    if (Robot.navx.getYaw() <= 0) {
-      currentYaw = -Robot.navx.getYaw();
-    } else {
-      currentYaw = 360 - Robot.navx.getYaw();
+      currentYaw = Robot.navx.getFusedHeading()-startingYaw;
+    if(Robot.navx.getFusedHeading() < 0){
+      currentYaw = 360-(Robot.navx.getFusedHeading()-startingYaw);
     }
     //System.out.println("yaw: "+ currentYaw);
     WriteOut("Current Yaw: "+ currentYaw, 5);
@@ -175,7 +174,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     if(RobotMap.DEBUG) {
-      getFullYaw(); //only used for debuging.
+      getFullYaw(0); //only used for debuging.
     }
   }
 

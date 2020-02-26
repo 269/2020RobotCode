@@ -20,6 +20,7 @@ public class turnGyro_command extends Command {
   double speedTol;
   double rightDist;
   double leftDist;
+  double startingYaw;
 
   /**Sets the angle at for the robot to turn to
    * @param targetYaw the goal angle for the robot to move to
@@ -35,23 +36,24 @@ public class turnGyro_command extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    startingYaw = Robot.navx.getFusedHeading();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    currentYaw = Robot.getFullYaw()+targetYaw;
+    currentYaw = Robot.getFullYaw(startingYaw);
     System.out.println("Yaw: "+ currentYaw);
     System.out.println("Encoder Avg: " + (Math.abs(Robot.rightEncoder.getRaw()) + Math.abs(Robot.leftEncoder.getRaw()))/2);
     rightDist = Math.abs(Robot.rightEncoder.getDistance());
     leftDist = Math.abs(Robot.rightEncoder.getDistance());
         if(360-tol > currentYaw && currentYaw > 180){ //If the degrees off of straight (a.k.a 0 degrees) is greater than 180 but less than 355
-          leftSpeed = -speed; //Ex. 315/180 = 1.75 -> 1.75/5 = 0.35 -> -0.35 -> -0.35+(.5+(2/5)) -> -0.35 + 0.9 -> Speed = 0.55 at 315 deg
-          rightSpeed = speed;
+          leftSpeed = -(speed - ((360 - currentYaw)/(180/speed))); //Ex. 315/180 = 1.75 -> 1.75/5 = 0.35 -> -0.35 -> -0.35+(.5+(2/5)) -> -0.35 + 0.9 -> Speed = 0.55 at 315 deg
+          rightSpeed = speed - ((360 - currentYaw)/(180/speed));
         }
         else if(180 >= currentYaw && currentYaw > tol){ //If the degrees off of straight (a.k.a 0 degrees) is less than or equal to 180 but greater than 5
-          leftSpeed = speed;
-          rightSpeed = -speed; //Ex. 45/180 = 0.25 -> 0.25/5 = 0.05 -> 0.05 + 0.5 -> Speed = 0.55 at 45 deg
+          leftSpeed = speed - ((currentYaw)/(180/speed));
+          rightSpeed = -(speed - ((currentYaw)/(180/speed))); //Ex. 45/180 = 0.25 -> 0.25/5 = 0.05 -> 0.05 + 0.5 -> Speed = 0.55 at 45 deg
         }
         else{ //If the degrees off of straight (a.k.a 0 degrees) is 5 greater/less than straight
           leftSpeed = 0;
