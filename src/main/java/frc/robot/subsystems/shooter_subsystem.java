@@ -66,6 +66,8 @@ public class shooter_subsystem extends Subsystem {
     }
     else{
       System.out.println("Too fast!");
+      topMotor.stopMotor();
+      bottomMotor.stopMotor();
     }
   }
 }
