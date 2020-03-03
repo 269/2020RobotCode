@@ -58,7 +58,7 @@ public class driveStraight_command extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    currentYaw = Robot.getFullYaw(startingYaw);
+    currentYaw = Robot.getFullYaw()-startingYaw;
     System.out.println("Yaw: "+ currentYaw);
     //System.out.println("Encoder Avg: " + (Math.abs(Robot.rightEncoder.getRaw()) + Math.abs(Robot.leftEncoder.getRaw()))/2);
     rightDist = Math.abs(Robot.rightEncoder.getDistance());
