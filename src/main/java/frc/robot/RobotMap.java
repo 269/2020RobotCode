@@ -82,4 +82,7 @@ public class RobotMap {
     
     //color sensor
     public static final I2C.Port i2cPort = I2C.Port.kOnboard;
+
+    //lift motor
+    public static final int LIFTMOTOR = 7;
 }

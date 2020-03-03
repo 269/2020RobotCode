@@ -17,6 +17,7 @@ import frc.robot.subsystems.colorWheel_subsystem;
 import frc.robot.subsystems.drive_subsystem;
 import frc.robot.subsystems.index_subsystem;
 import frc.robot.subsystems.intake_subsystem;
+import frc.robot.subsystems.lift_subsystem;
 import frc.robot.subsystems.shooter_subsystem;
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -44,6 +45,7 @@ public class Robot extends TimedRobot {
   public static intake_subsystem intake_subsystem = null;
   public static index_subsystem index_subsystem = null;
   public static shooter_subsystem shooter_subsystem = null;
+  public static lift_subsystem lift_subsystem = null;
 
   
 
@@ -61,6 +63,7 @@ public class Robot extends TimedRobot {
     index_subsystem = new index_subsystem();
     shooter_subsystem = new shooter_subsystem();
     colorWheel_subsystem = new colorWheel_subsystem();
+    lift_subsystem = new lift_subsystem();
     m_oi = new OI();
   //  m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
   //  m_chooser.addOption("My Auto", kCustomAuto);
