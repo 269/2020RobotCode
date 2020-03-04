@@ -13,6 +13,9 @@ import frc.robot.Robot;
 public class shooter_command extends Command {
   double topSpeed;
   double bottomSpeed;
+  double bottomSpeedSet;
+  double topSpeedSet;
+  double maxRPM = 5700;
   public shooter_command() {
     requires(Robot.shooter_subsystem);
     // Use requires() here to declare subsystem dependencies
@@ -30,20 +33,27 @@ public class shooter_command extends Command {
     if(Robot.m_oi.Intake_dPadLeft.get()){
       topSpeed = 3000;
       bottomSpeed = 1500;
+      topSpeedSet = topSpeed/maxRPM;
+      bottomSpeedSet = bottomSpeed/maxRPM;
     }
     else if(Robot.m_oi.Intake_dPadUp.get()){
       topSpeed = 3750;
       bottomSpeed = 3000;
+      topSpeedSet = topSpeed/maxRPM;
+      bottomSpeedSet = bottomSpeed/maxRPM;
     }
     else if(Robot.m_oi.Intake_dPadRight.get()){
       topSpeed = 5000;
       bottomSpeed = 5000;
+      topSpeedSet = topSpeed/maxRPM;
+      bottomSpeedSet = bottomSpeed/maxRPM;
     }
     if(Robot.m_oi.Intake_RB.get()){
       Robot.shooter_subsystem.setShooterSpeeds(topSpeed, bottomSpeed);
+      Robot.shooter_subsystem.shootAnyway(topSpeedSet, bottomSpeedSet);
     }
     else{
-      Robot.shooter_subsystem.setShooterSpeeds(0, 0);
+      end();
     }
   }
 
@@ -57,6 +67,7 @@ public class shooter_command extends Command {
   @Override
   protected void end() {
     Robot.shooter_subsystem.setShooterSpeeds(0, 0);
+    Robot.shooter_subsystem.shootAnyway(0, 0);
   }
 
   // Called when another command which requires one or more of the same

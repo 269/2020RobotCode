@@ -52,11 +52,11 @@ public class shooter_subsystem extends Subsystem {
     bottomPID.setIZone(kIz);
   }
   /** Sets the shooters speeds (in RPM)
-  *@param topRPM the max RPM for the top of the shooter (can not exceed 5700 RPM)
-  *@param bottomRPM the max RPM for the bottom of the shooter (can not exceed 5700 RPM)
+  *@param topRPM the max RPM for the top of the shooter (between 5700RPM-1000RPM)
+  *@param bottomRPM the max RPM for the bottom of the shooter (between 5700RPM-1000RPM)
   */
   public void setShooterSpeeds(double topRPM, double bottomRPM){
-    if(topRPM < 5700 && bottomRPM < 5700 && topRPM > 100 && bottomRPM > 100){
+    if(topRPM < 5700 && bottomRPM < 5700 && topRPM > 1000 && bottomRPM > 1000){
     bottomPID.setSmartMotionMaxVelocity(bottomRPM, 0);
     topPID.setSmartMotionMaxVelocity(topRPM, 0);
     bottomPID.setSmartMotionMinOutputVelocity(bottomRPM-100, 0);
@@ -69,5 +69,9 @@ public class shooter_subsystem extends Subsystem {
       topMotor.stopMotor();
       bottomMotor.stopMotor();
     }
+  }
+  public void shootAnyway(double topMotorSpeed, double bottomMotorSpeed){
+    topMotor.set(topMotorSpeed);
+    bottomMotor.set(bottomMotorSpeed);
   }
 }
