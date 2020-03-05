@@ -44,12 +44,36 @@ public class Robot extends TimedRobot {
   public static intake_subsystem intake_subsystem = null;
   public static index_subsystem index_subsystem = null;
   public static shooter_subsystem shooter_subsystem = null;
+  //declare other variables
+  private static boolean navxInitalized = false;
 
   
 
   public Robot(){
-    navx = new AHRS(SPI.Port.kMXP);
+        //initalize navx over roborio MXP SPI port and check for errors.
+        try{
+          navx = new AHRS(SPI.Port.kMXP);
+          WriteOut("it's trying its best fam", 5);
+          navxInitalized = false;
+        } catch (RuntimeException ex ) {
+          WriteOut("Error instantiating navX-MXP:  " + ex.getMessage(),1);
+          navxInitalized = true;
+        }   
   }
+
+  /**
+   * @return the navxInitalized
+   */
+  public static boolean isNavxInitalized() {
+    return navxInitalized;
+  }
+  /**
+   * @param navxInitalized the navxInitalized to set
+   */
+  public static void setNavxInitalized(boolean navxInitalized) {
+    Robot.navxInitalized = navxInitalized;
+  }
+
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
