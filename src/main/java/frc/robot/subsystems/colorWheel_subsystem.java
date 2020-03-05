@@ -117,8 +117,8 @@ by the ALLIANCE’S TRENCH color sensor) to all OPERATOR CONSOLES simultaneously
     return result;
   }
   /**
-   * Speed is the speed at which you want to rotate the color wheel's wheel (-1.0 to 1.0)
-   * @param speed
+   * Setting the color wheel speed motor
+   * @param speed the speed at which you want to rotate the color wheel's wheel (-1.0 to 1.0)
    */
   public void rotateColorWheel(double speed) {
     if (speed > 0.5) {

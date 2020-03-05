@@ -10,7 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
+
 /**
  * Teleoperated control of robot (Default Drive Command)
  */
@@ -104,7 +104,7 @@ public class drive_command extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.drive_subsystem.drive(0,0);
+    Robot.drive_subsystem.drive(0);
   }
 
   // Called when another command which requires one or more of the same
