@@ -62,6 +62,7 @@ public class Robot extends TimedRobot {
     shooter_subsystem = new shooter_subsystem();
     colorWheel_subsystem = new colorWheel_subsystem();
     m_oi = new OI();
+    m_oi.bind(); //bind the buttons to commands
   //  m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
   //  m_chooser.addOption("My Auto", kCustomAuto);
    // SmartDashboard.putData("Auto choices", m_chooser);
