@@ -68,14 +68,14 @@ public class Robot extends TimedRobot {
     intake_subsystem = new intake_subsystem();
     //index_subsystem = new index_subsystem();
     shooter_subsystem = new shooter_subsystem();
-    colorWheel_subsystem = new colorWheel_subsystem();
+    //colorWheel_subsystem = new colorWheel_subsystem();
     m_oi = new OI();
 
     leftEncoder.setDistancePerPulse(0.0125);
     rightEncoder.setDistancePerPulse(0.0125);
 
     SmartDashboard.putNumber("Position",  0);
-		SmartDashboard.putString("Priority",  "Priority");
+		SmartDashboard.putString("Priority",  "Priority 1");
   //  m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
   //  m_chooser.addOption("My Auto", kCustomAuto);
    // SmartDashboard.putData("Auto choices", m_chooser);

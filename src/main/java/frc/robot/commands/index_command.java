@@ -25,7 +25,12 @@ public class index_command extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-      Robot.index_subsystem.indexActivate(Robot.m_oi.Intake_buttonX.get());
+    if(Robot.m_oi.Intake_buttonX.get()){
+      Robot.index_subsystem.indexActivate(true);
+    }
+    else{
+      end();
+    }
       // If the a button is pressed the boolean value is true which activates the pnuematics of the indexing system
   }
 
@@ -45,5 +50,6 @@ public class index_command extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

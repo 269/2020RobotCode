@@ -40,8 +40,8 @@ public class shooter_subsystem extends Subsystem {
     bottomMotor = new CANSparkMax(RobotMap.MOTOT_SHOOT_BOTTOM, MotorType.kBrushless);
     topPID = topMotor.getPIDController();
     bottomPID = bottomMotor.getPIDController();
-    topPID.setReference(0, ControlType.kSmartMotion);
-    bottomPID.setReference(0, ControlType.kSmartMotion);
+    //topPID.setReference(0, ControlType.kSmartMotion);
+    //bottomPID.setReference(0, ControlType.kSmartMotion);
     topPID.setP(kP);
     topPID.setI(kI);
     topPID.setFF(kFF);
@@ -65,7 +65,7 @@ public class shooter_subsystem extends Subsystem {
     topPID.setSmartMotionMaxAccel(1500, 0);
     }
     else{
-      System.out.println("Too fast!");
+      //System.out.println("Too fast!");
       topMotor.stopMotor();
       bottomMotor.stopMotor();
     }

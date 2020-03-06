@@ -13,8 +13,8 @@ import frc.robot.Robot;
 public class shooter_command extends Command {
   double topSpeed;
   double bottomSpeed;
-  double bottomSpeedSet;
-  double topSpeedSet;
+  double bottomSpeedSet = 0.8;
+  double topSpeedSet = 0.8;
   double maxRPM = 5700;
   public shooter_command() {
     requires(Robot.shooter_subsystem);
@@ -49,7 +49,7 @@ public class shooter_command extends Command {
       bottomSpeedSet = bottomSpeed/maxRPM;
     }
     if(Robot.m_oi.Intake_RB.get()){
-      Robot.shooter_subsystem.setShooterSpeeds(topSpeed, bottomSpeed);
+      //Robot.shooter_subsystem.setShooterSpeeds(topSpeed, bottomSpeed);
       Robot.shooter_subsystem.shootAnyway(topSpeedSet, bottomSpeedSet);
     }
     else{

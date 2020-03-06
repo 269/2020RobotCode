@@ -59,7 +59,7 @@ public class driveStraight_command extends Command {
   @Override
   protected void execute() {
     currentYaw = Robot.getFullYaw()-startingYaw;
-    System.out.println("Yaw: "+ currentYaw);
+    //System.out.println("Yaw: "+ currentYaw);
     //System.out.println("Encoder Avg: " + (Math.abs(Robot.rightEncoder.getRaw()) + Math.abs(Robot.leftEncoder.getRaw()))/2);
     rightDist = Math.abs(Robot.rightEncoder.getDistance());
     leftDist = Math.abs(Robot.rightEncoder.getDistance());
