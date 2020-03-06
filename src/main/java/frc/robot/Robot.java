@@ -7,17 +7,12 @@
 
 package frc.robot;
 import com.kauailabs.navx.frc.AHRS;
-
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.autonomousSelector;
 import frc.robot.subsystems.colorWheel_subsystem;
 import frc.robot.subsystems.drive_subsystem;
 import frc.robot.subsystems.index_subsystem;
@@ -37,8 +32,12 @@ import java.text.DateFormat;
 public class Robot extends TimedRobot {
   public static OI m_oi;
   public static AHRS navx;
+  private String m_autoSelected;
+  private final SendableChooser<String> m_chooser = new SendableChooser<>();
   private static DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
   private static Date date = new Date();
+  private static boolean indexInitalized;
+  private static boolean colorwheelInitalized;
   public static Encoder rightEncoder = new Encoder(RobotMap.leftEncoderPort1, RobotMap.leftEncoderPort2, false, EncodingType.k4X);
   public static Encoder leftEncoder = new Encoder(RobotMap.rightEncoderPort1, RobotMap.rightEncoderPort2, false, EncodingType.k4X);
   //declare subsystems
@@ -47,11 +46,6 @@ public class Robot extends TimedRobot {
   public static intake_subsystem intake_subsystem = null;
   public static index_subsystem index_subsystem = null;
   public static shooter_subsystem shooter_subsystem = null;
-  //Autonomous Selections
-  public String priority;
-	public double position;
-  public static String gameData;
-  public Command m_autonomousCommand;
 
   
 
@@ -64,18 +58,13 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    //index_subsystem = new index_subsystem();
+    //shooter_subsystem = new shooter_subsystem();
+    colorWheel_subsystem = new colorWheel_subsystem();
     drive_subsystem = new drive_subsystem();
     intake_subsystem = new intake_subsystem();
-    //index_subsystem = new index_subsystem();
-    shooter_subsystem = new shooter_subsystem();
-    //colorWheel_subsystem = new colorWheel_subsystem();
     m_oi = new OI();
-
-    leftEncoder.setDistancePerPulse(0.0125);
-    rightEncoder.setDistancePerPulse(0.0125);
-
-    SmartDashboard.putNumber("Position",  0);
-		SmartDashboard.putString("Priority",  "Priority 1");
+    m_oi.bind();
   //  m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
   //  m_chooser.addOption("My Auto", kCustomAuto);
    // SmartDashboard.putData("Auto choices", m_chooser);
@@ -156,18 +145,11 @@ public class Robot extends TimedRobot {
   */
   @Override
   public void autonomousInit() {
-    
-		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		WriteOut("Game Data: " + gameData);
-		
-		position = SmartDashboard.getNumber("Position", 0);
-		priority = SmartDashboard.getString("Priority", "error");
-		m_autonomousCommand = new autonomousSelector(position, priority);
-				
-		//Call the autonomous command if and after the user has made selections
-				if (m_autonomousCommand != null) {
-					m_autonomousCommand.start();
-				}
+    leftEncoder.setDistancePerPulse(0.0125);
+    rightEncoder.setDistancePerPulse(0.0125);
+    //m_autoSelected = m_chooser.getSelected();
+    // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
+    //System.out.println("Auto selected: " + m_autoSelected);
   }
 
   /**

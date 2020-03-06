@@ -30,7 +30,7 @@ public class RobotMap {
     public static final int MOTOR_RIGHT_1 = 1; //Front right motor
     public static final int MOTOR_RIGHT_2 = 2; /**Back right motor**/
     //Intake Motor
-    public static final int MOTOR_INTAKE = 5;
+    public static final int MOTOR_INTAKE = 6;
     //Shooter Motor
     public static final int MOTOR_SHOOT_TOP = 2;
     public static final int MOTOT_SHOOT_BOTTOM = 1;
@@ -38,9 +38,9 @@ public class RobotMap {
     public static final int SOLENOID_1 = 10;
     public static final int SOLENOID_2 = 11;
     //AIR COMPRESSOR
-    public static final int AIRCOMP = 0;
+    //public static final int AIRCOMP = 0;
     //COLOR WHEEL
-    public static final int MOTOR_COLOR_WHEEL = 5;
+    public static final int MOTOR_COLOR_WHEEL = 7;
     //Controllers
     public static final int DRIVER_CONTROLLER = 0;
     public static final int INTAKE_CONTROLLER = 1;
@@ -51,9 +51,9 @@ public class RobotMap {
     public static final int RIGHT_JOYSTICK_Y = 5;
     //Buttons
     public static final int BUTTON_X = 3;
-    public static final int BUTTON_Y = 2;
+    public static final int BUTTON_Y = 4;
     public static final int BUTTON_A = 1;
-    public static final int BUTTON_B = 4;
+    public static final int BUTTON_B = 2;
     public static final int D_PAD_LEFT = 5;
     public static final int D_PAD_UP = 6;
     public static final int D_PAD_DOWN = 7;

@@ -14,7 +14,6 @@ import frc.robot.RobotMap;
 import java.util.ArrayList;
 import edu.wpi.first.wpilibj.DriverStation;
 
-
 public class colorWheel_command extends Command {
   public static String gameData; //letter that fms will give us
   //public static char gameData = 'B'; //letter that fms will give us
@@ -49,9 +48,10 @@ public class colorWheel_command extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (Robot.m_oi.driverController.getRawButton(RobotMap.BUTTON_Y) && yPressed == false) {//this is not needed if you call the command when the button is pressed
+    if (Robot.m_oi.Intake_buttonY.get() && yPressed == false) {//this is not needed if you call the command when the button is pressed
       yPressed = true;
       initialColor = Robot.colorWheel_subsystem.getColor();
+      SmartDashboard.putString("FMScolor", initialColor);
     }
 
 
@@ -94,12 +94,13 @@ public class colorWheel_command extends Command {
           //Robot.WriteOut("Corrupt FMS color data");
           break;
       }
+      SmartDashboard.putString("targetcolor", turnTo); 
+    } else {
+      // blah blah
     }
     //Robot.WriteOut("Robot sensor color target: " + turnTo); // color the *ROBOT* sensor has to turn to
   
     String colorNow = Robot.colorWheel_subsystem.getColor();
-    SmartDashboard.putString("targetcolor", turnTo); 
-    SmartDashboard.putString("FMScolor", initialColor); 
     if (turnTo != null) {             // if fms HAS provided a color
       if (colorNow == turnTo) {       // if the wheel has reached its color
         if (!lastColor.equals(colorNow)) {  //for the first iteration record the time.

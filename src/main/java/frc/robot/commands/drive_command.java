@@ -53,7 +53,7 @@ public class drive_command extends Command {
     }
 
     //speed reduction
-    if (Robot.m_oi.RB.get() == true) {
+    if (Robot.m_oi.RB.get()) {
       releaseR = false;
     } else{
       if(releaseR == false) {
@@ -64,7 +64,7 @@ public class drive_command extends Command {
         releaseR = true;
       }
     }
-    if (Robot.m_oi.LB.get() == true) {
+    if (Robot.m_oi.LB.get()) {
       releaseL = false;
     } else{
       if(releaseL == false) {
@@ -92,7 +92,7 @@ public class drive_command extends Command {
 
 
     //pass the desired speed to the drive substem and make robot go!
-    Robot.drive_subsystem.drive(leftSpeed, rightSpeed);
+    Robot.drive_subsystem.drive(-leftSpeed, -rightSpeed);
   }
 
   // Make this return true when this Command no longer needs to run execute()

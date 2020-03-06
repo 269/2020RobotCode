@@ -32,7 +32,7 @@ public class index_subsystem extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
   public index_subsystem(){
-    airComp = new Compressor(RobotMap.AIRCOMP);
+    airComp = new Compressor();
     solenoid_right = new Solenoid(RobotMap.SOLENOID_1);
     solenoid_left = new Solenoid(RobotMap.SOLENOID_2);
     if(airComp.getPressureSwitchValue()){
@@ -47,6 +47,12 @@ public class index_subsystem extends Subsystem {
    * @param active if true pistons are extended if false they are retracted
    */
   public void indexActivate(boolean active){
+    if(active){
+      airComp.start();
+    }
+    else{
+      airComp.stop();
+    }
     solenoid_right.set(active);
     solenoid_left.set(active);
   }
