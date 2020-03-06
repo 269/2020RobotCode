@@ -63,18 +63,18 @@ public class OI {
     public JoystickButton RB = new JoystickButton(driverController,RobotMap.RB);  
     
     //Intake Controller Buttons
-    public JoystickButton Intake_buttonX = new JoystickButton(driverController,RobotMap.BUTTON_X);
-    public JoystickButton Intake_buttonY = new JoystickButton(driverController,RobotMap.BUTTON_Y);
-    public JoystickButton Intake_buttonA = new JoystickButton(driverController,RobotMap.BUTTON_A);    
-    public JoystickButton Intake_buttonB = new JoystickButton(driverController,RobotMap.BUTTON_B);    
-    public JoystickButton Intake_startButton = new JoystickButton(driverController,RobotMap.START_BUTTON);  
-    public JoystickButton Intake_selectButton = new JoystickButton(driverController,RobotMap.SELECT_BUTTON);
-    public JoystickButton Intake_dPadLeft = new JoystickButton(driverController,RobotMap.D_PAD_LEFT);
-    public JoystickButton Intake_dPadRight = new JoystickButton(driverController,RobotMap.D_PAD_RIGHT);    
-    public JoystickButton Intake_dPadUp = new JoystickButton(driverController,RobotMap.D_PAD_UP);    
-    public JoystickButton Intake_dPadDown = new JoystickButton(driverController,RobotMap.D_PAD_DOWN);    
-    public JoystickButton Intake_LB = new JoystickButton(driverController,RobotMap.LB);    
-    public JoystickButton Intake_RB = new JoystickButton(driverController,RobotMap.RB);  
+    public JoystickButton Intake_buttonX = new JoystickButton(intakeController,RobotMap.BUTTON_X);
+    public JoystickButton Intake_buttonY = new JoystickButton(intakeController,RobotMap.BUTTON_Y);
+    public JoystickButton Intake_buttonA = new JoystickButton(intakeController,RobotMap.BUTTON_A);    
+    public JoystickButton Intake_buttonB = new JoystickButton(intakeController,RobotMap.BUTTON_B);    
+    public JoystickButton Intake_startButton = new JoystickButton(intakeController,RobotMap.START_BUTTON);  
+    public JoystickButton Intake_selectButton = new JoystickButton(intakeController,RobotMap.SELECT_BUTTON);
+    public JoystickButton Intake_dPadLeft = new JoystickButton(intakeController,RobotMap.D_PAD_LEFT);
+    public JoystickButton Intake_dPadRight = new JoystickButton(intakeController,RobotMap.D_PAD_RIGHT);    
+    public JoystickButton Intake_dPadUp = new JoystickButton(intakeController,RobotMap.D_PAD_UP);    
+    public JoystickButton Intake_dPadDown = new JoystickButton(intakeController,RobotMap.D_PAD_DOWN);    
+    public JoystickButton Intake_LB = new JoystickButton(intakeController,RobotMap.LB);    
+    public JoystickButton Intake_RB = new JoystickButton(intakeController,RobotMap.RB);  
 
     
     //POV Buttons
