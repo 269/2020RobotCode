@@ -35,8 +35,8 @@ public class RobotMap {
     public static final int MOTOR_SHOOT_TOP = 2;
     public static final int MOTOT_SHOOT_BOTTOM = 1;
     //SOLENOID
-    public static final int SOLENOID_1 = 10;
-    public static final int SOLENOID_2 = 11;
+    public static final int SOLENOID_IN = 0;
+    public static final int SOLENOID_OUT = 1;
     //AIR COMPRESSOR
     //public static final int AIRCOMP = 0;
     //COLOR WHEEL

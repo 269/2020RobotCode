@@ -7,11 +7,12 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.index_command;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 
 /**
@@ -21,9 +22,8 @@ public class index_subsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  Solenoid solenoid_right; 
-  Solenoid solenoid_left; 
-  Compressor airComp;
+  DoubleSolenoid solenoid; 
+  public static Compressor airComp;
 
   @Override
   public void initDefaultCommand() {
@@ -32,9 +32,10 @@ public class index_subsystem extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
   public index_subsystem(){
-    airComp = new Compressor();
-    solenoid_right = new Solenoid(RobotMap.SOLENOID_1);
-    solenoid_left = new Solenoid(RobotMap.SOLENOID_2);
+    airComp = new Compressor(10);
+    airComp.clearAllPCMStickyFaults();
+    airComp.stop();
+    solenoid = new DoubleSolenoid(RobotMap.SOLENOID_IN, RobotMap.SOLENOID_OUT);
     if(airComp.getPressureSwitchValue()){
       airComp.start();
     }
@@ -46,15 +47,8 @@ public class index_subsystem extends Subsystem {
   /** Extends or retracts both pneumatic pistons based on 'active'
    * @param active if true pistons are extended if false they are retracted
    */
-  public void indexActivate(boolean active){
-    if(active){
-      airComp.start();
-    }
-    else{
-      airComp.stop();
-    }
-    solenoid_right.set(active);
-    solenoid_left.set(active);
+  public void indexActivate(Value status){
+    solenoid.set(status);
   }
 
 }
