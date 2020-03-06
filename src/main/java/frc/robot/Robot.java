@@ -64,11 +64,7 @@ public class Robot extends TimedRobot {
     drive_subsystem = new drive_subsystem();
     intake_subsystem = new intake_subsystem();
     m_oi = new OI();
-<<<<<<< HEAD
-    m_oi.bind();
-=======
     m_oi.bind(); //bind the buttons to commands
->>>>>>> 3d3c70cac745b5549e3c313b054f7dc3644f6640
   //  m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
   //  m_chooser.addOption("My Auto", kCustomAuto);
    // SmartDashboard.putData("Auto choices", m_chooser);
