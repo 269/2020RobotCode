@@ -22,7 +22,7 @@ public class shooter_subsystem extends Subsystem {
   CANPIDController bottomPID;
   CANPIDController topPID;
   CANSparkMax bottomMotor;
-  CANSparkMax topMotor;
+ // CANSparkMax topMotor;
   double kP = 0;
   double kI = 0;
   double kD = 0;
@@ -36,42 +36,42 @@ public class shooter_subsystem extends Subsystem {
   }
   //Declaring PID and motors for shooter
   public shooter_subsystem(){
-    topMotor = new CANSparkMax(RobotMap.MOTOR_SHOOT_TOP, MotorType.kBrushless);
+    //topMotor = new CANSparkMax(RobotMap.MOTOR_SHOOT_TOP, MotorType.kBrushless);
     bottomMotor = new CANSparkMax(RobotMap.MOTOT_SHOOT_BOTTOM, MotorType.kBrushless);
-    topPID = topMotor.getPIDController();
+    //topPID = topMotor.getPIDController();
     bottomPID = bottomMotor.getPIDController();
     //topPID.setReference(0, ControlType.kSmartMotion);
     //bottomPID.setReference(0, ControlType.kSmartMotion);
-    topPID.setP(kP);
+   /*  topPID.setP(kP);
     topPID.setI(kI);
     topPID.setFF(kFF);
     topPID.setIZone(kIz);
     bottomPID.setP(kP);
     bottomPID.setI(kI);
     bottomPID.setFF(kFF);
-    bottomPID.setIZone(kIz);
+    bottomPID.setIZone(kIz); */
   }
   /** Sets the shooters speeds (in RPM)
   *@param topRPM the max RPM for the top of the shooter (between 5700RPM-1000RPM)
   *@param bottomRPM the max RPM for the bottom of the shooter (between 5700RPM-1000RPM)
   */
-  public void setShooterSpeeds(double topRPM, double bottomRPM){
+  /* public void setShooterSpeeds(double topRPM, double bottomRPM){
     if(topRPM < 5700 && bottomRPM < 5700 && topRPM > 1000 && bottomRPM > 1000){
     bottomPID.setSmartMotionMaxVelocity(bottomRPM, 0);
-    topPID.setSmartMotionMaxVelocity(topRPM, 0);
+    //topPID.setSmartMotionMaxVelocity(topRPM, 0);
     bottomPID.setSmartMotionMinOutputVelocity(bottomRPM-100, 0);
-    topPID.setSmartMotionMinOutputVelocity(topRPM-100, 0);
+   // topPID.setSmartMotionMinOutputVelocity(topRPM-100, 0);
     bottomPID.setSmartMotionMaxAccel(1500, 0);
-    topPID.setSmartMotionMaxAccel(1500, 0);
+   // topPID.setSmartMotionMaxAccel(1500, 0);
     }
     else{
       //System.out.println("Too fast!");
-      topMotor.stopMotor();
+      //topMotor.stopMotor();
       bottomMotor.stopMotor();
-    }
-  }
-  public void shootAnyway(double topMotorSpeed, double bottomMotorSpeed){
-    topMotor.set(topMotorSpeed);
+    } */
+ // }
+  public void shootAnyway(double bottomMotorSpeed){ // add back double topMotorSpeed
+    //topMotor.set(topMotorSpeed);
     bottomMotor.set(bottomMotorSpeed);
   }
 }

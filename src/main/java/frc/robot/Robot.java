@@ -58,9 +58,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    index_subsystem = new index_subsystem();
-    //shooter_subsystem = new shooter_subsystem();
-    colorWheel_subsystem = new colorWheel_subsystem();
+    //index_subsystem = new index_subsystem();
+    shooter_subsystem = new shooter_subsystem();
+    //colorWheel_subsystem = new colorWheel_subsystem();
     drive_subsystem = new drive_subsystem();
     intake_subsystem = new intake_subsystem();
     m_oi = new OI();
