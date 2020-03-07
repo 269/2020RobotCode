@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.subsystems.colorWheel_subsystem;
+
 import java.util.ArrayList;
 // import frc.robot.subsystems.colorWheel_subsystem;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -55,7 +57,7 @@ public class colorWheel_command extends Command {
 
 
     gameData = DriverStation.getInstance().getGameSpecificMessage();
-    System.out.println("Control panel sensor target: " + gameData); // color the control panel sensor needs to see for 5 sec
+    System.out.println("Control panel sensor target: " + gameData); // color the *CONTROL PANEL* sensor needs to see (for 5 sec)
     if(gameData.length() > 0 && yPressed)
     {
       switch (gameData.charAt(0))
@@ -108,7 +110,7 @@ public class colorWheel_command extends Command {
           stopTimer = 5.0;
           yPressed = false;
         } else {
-          --stopTimer;                // subtract from over color stop timer
+          --stopTimer;                // subtract from over color stop timer, this will happen until the color timer = 0, if it still sees the target color, then the motor can stop
         }
       } else {
         switch (initialColor) {
@@ -193,11 +195,23 @@ public class colorWheel_command extends Command {
             break;
         }
       }
-    } else {                          // if fms has not provided a color
+    } else if (yPressed) {            // PRESUMABLY if y is pressed but no fms data is/was received
+      if (Robot.colorWheel_subsystem.numOfColorWheelRotations() >= 4) { // checking to see if the color wheel has completed 4 or more rotations
+        yPressed = false;             // stopping the yPressed loop
+        rotateSpeed = 0;              // cancelling motor movement
+        Robot.colorWheel_subsystem.resetColorWheelEncoder();
+      } else {
+        rotateSpeed = 0.23;           // spinning color wheel in this loop at a higher speed because it doesn't matter (I think), will continue PRESUMABLY until the color wheel has spun 4 or more times
+      }
+    } else {                          // if fms has not provided a color and Y is not pressed
       rotateSpeed = 0;
     }
-    System.out.println(stopTimer);
+    System.out.println(stopTimer);    // TEMPORARY logging the timer that iterates when a different color is seen to make sure it counts down
     Robot.colorWheel_subsystem.rotateColorWheel(rotateSpeed); // set motor speed to rotate speed as defined above
+
+    /* TESTING FOR NEXT TIME TO HOPEFULLY SEE THE NUMBER OF **PULSES??** IT TAKES TO COVER CERTAIN DISTANCE WITH ENCODER */
+    // system out sc "syso"
+    System.out.println(Robot.colorWheel_subsystem.numOfColorWheelRotations());
   }
 
   // Make this return true when this Command no longer needs to run execute()

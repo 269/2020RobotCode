@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
+import edu.wpi.first.wpilibj.Encoder;
 
 /**
  * Add your docs here.
@@ -27,6 +28,8 @@ public class colorWheel_subsystem extends Subsystem {
   // here. Call these from Commands.
 
   WPI_TalonSRX colorWheelWheel = null;
+  // Encoder colorWheelEncoder = null;
+  Encoder colorWheelEncoder = new Encoder(0, 1); // for use in getting the number of rotations the color wheel has had // FIX PORT NUMBERS NOT SURE WHAT THEY ARE
 
   /**
    * Change the I2C port below to match the connection of your color sensor
@@ -75,11 +78,12 @@ by the ALLIANCE’S TRENCH color sensor) to all OPERATOR CONSOLES simultaneously
     m_colorMatcher.setConfidenceThreshold(0.8);
 
     colorWheelWheel = new WPI_TalonSRX(RobotMap.MOTOR_COLOR_WHEEL);
+    // colorWheelEncoder = new Encoder(0, 1); // FIX PORT NUMBERS NOT SURE WHAT THEY ARE
   }
   // method called by command to get color from sensor
   /**
    * Get the current color (as defined) that the color sensor sees
-   * @return
+   * @return color result
    */
   public String getColor() {
     String result;
@@ -131,5 +135,13 @@ by the ALLIANCE’S TRENCH color sensor) to all OPERATOR CONSOLES simultaneously
    */
   public void rotateColorWheel(double speed) {
     colorWheelWheel.set(speed);
+  }
+
+  public double numOfColorWheelRotations() {
+    return colorWheelEncoder.getDistance();
+  }
+
+  public void resetColorWheelEncoder() {
+    colorWheelEncoder.reset();
   }
 }
