@@ -52,8 +52,7 @@ public class shooter_command extends Command {
       bottomSpeedSet = bottomSpeed/maxRPM;
       System.out.println("High spd");
     }*/
-    SmartDashboard.putNumber("Top RPM", Robot.shooter_subsystem.bottomEncoder.getVelocity());
-    SmartDashboard.putNumber("Bottom RPM", Robot.shooter_subsystem.topEncoder.getVelocity());
+    SmartDashboard.putNumber("Bottom RPM", Robot.shooter_subsystem.bottomEncoder.getVelocity());
     if(Robot.m_oi.Intake_RB.get()){
       //Robot.shooter_subsystem.setShooterSpeeds(topSpeed, bottomSpeed);
       Robot.shooter_subsystem.setShooterSpeeds(0,2000);
