@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 public class shooter_command extends Command {
@@ -15,7 +16,7 @@ public class shooter_command extends Command {
   double bottomSpeed;
   double bottomSpeedSet = 0.8;
   double topSpeedSet = 0.8;
-  double maxRPM = 5700;
+  //double maxRPM = 5700;
   public shooter_command() {
     requires(Robot.shooter_subsystem);
     // Use requires() here to declare subsystem dependencies
@@ -30,7 +31,7 @@ public class shooter_command extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {//Different speeds are set based on what position the d-pad was pushed
-    if(Robot.m_oi.Intake_leftButton.get()){
+  /*  if(Robot.m_oi.Intake_leftButton.get()){
       topSpeed = 3000;
       bottomSpeed = 1500;
       topSpeedSet = 0.5;
@@ -50,14 +51,32 @@ public class shooter_command extends Command {
       topSpeedSet = topSpeed/maxRPM;
       bottomSpeedSet = bottomSpeed/maxRPM;
       System.out.println("High spd");
-    }
+    }*/
+    SmartDashboard.putNumber("Top RPM", Robot.shooter_subsystem.bottomEncoder.getVelocity());
+    SmartDashboard.putNumber("Bottom RPM", Robot.shooter_subsystem.topEncoder.getVelocity());
     if(Robot.m_oi.Intake_RB.get()){
       //Robot.shooter_subsystem.setShooterSpeeds(topSpeed, bottomSpeed);
-      Robot.shooter_subsystem.shootAnywayTop(topSpeedSet);
-      Robot.shooter_subsystem.shootAnywayBottom(bottomSpeedSet);
+      Robot.shooter_subsystem.setShooterSpeeds(0,2000);
+    }
+    else if(Robot.m_oi.Intake_LB.get()){
+      Robot.shooter_subsystem.setShooterSpeeds(2000,0);
+    }
+    else if(Robot.m_oi.Intake_LB.get() || Robot.m_oi.Intake_RB.get()){
+      Robot.shooter_subsystem.setShooterSpeeds(2000,2000);
+    }
+    else if(Robot.m_oi.Intake_buttonA.get()){
+      Robot.shooter_subsystem.setShooterSpeeds(3000,3000);
+    }
+    else if(Robot.m_oi.Intake_buttonY.get()){
+      Robot.shooter_subsystem.shootAnywayTop(0.075);
+      Robot.shooter_subsystem.shootAnywayBottom(0.1);
+    }
+    else if(Robot.m_oi.Intake_buttonB.get()){
+      Robot.shooter_subsystem.shootAnywayTop(-0.075);
+      Robot.shooter_subsystem.shootAnywayBottom(-0.1);    
     }
     else{
-      end();
+      Robot.shooter_subsystem.shootAnywayBoth(0);
     }
   }
 
@@ -79,5 +98,6 @@ public class shooter_command extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

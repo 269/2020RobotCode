@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.index_command;
 import edu.wpi.first.wpilibj.Compressor;
@@ -32,15 +33,13 @@ public class index_subsystem extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
   public index_subsystem(){
-    airComp = new Compressor(10);
+    airComp = new Compressor(1);
+    airComp.setClosedLoopControl(true);
     airComp.clearAllPCMStickyFaults();
-    airComp.stop();
-    solenoid = new DoubleSolenoid(RobotMap.SOLENOID_IN, RobotMap.SOLENOID_OUT);
-    if(airComp.getPressureSwitchValue()){
+    //solenoid = new DoubleSolenoid(RobotMap.SOLENOID_IN, RobotMap.SOLENOID_OUT);
+    System.out.println("Switch val: " + airComp.getPressureSwitchValue());
+    if(Robot.m_oi.buttonY.get()){
       airComp.start();
-    }
-    else{
-      airComp.stop();
     }
   }
   
@@ -48,7 +47,7 @@ public class index_subsystem extends Subsystem {
    * @param active if true pistons are extended if false they are retracted
    */
   public void indexActivate(Value status){
-    solenoid.set(status);
+    //solenoid.set(status);
   }
 
 }

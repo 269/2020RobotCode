@@ -33,7 +33,7 @@ public class RobotMap {
     public static final int MOTOR_INTAKE = 6;
     //Shooter Motor
     public static final int MOTOR_SHOOT_TOP = 8;
-    public static final int MOTOT_SHOOT_BOTTOM = 9;
+    public static final int MOTOR_SHOOT_BOTTOM = 9;
     //SOLENOID
     public static final int SOLENOID_IN = 0;
     public static final int SOLENOID_OUT = 1;
@@ -58,15 +58,15 @@ public class RobotMap {
     public static final int D_PAD_UP = 6;
     public static final int D_PAD_DOWN = 7;
     public static final int D_PAD_RIGHT = 8;
-    public static final int START_BUTTON = 9;
-    public static final int SELECT_BUTTON = 10;
+    public static final int START_BUTTON = 8;
+    public static final int SELECT_BUTTON = 7;
 
     //Triggers
     public static final int LT = 0;
     public static final int RT = 1;
     //Bumpers
-    public static final int LB = 5;
-    public static final int RB = 6;
+    public static final int LB = 6;
+    public static final int RB = 5;
     
     //Encoders
     public static final int leftEncoderPort1 = 3;

@@ -48,7 +48,7 @@ public class colorWheel_command extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (Robot.m_oi.Intake_buttonY.get() && yPressed == false) {//this is not needed if you call the command when the button is pressed
+    if (Robot.m_oi.Intake_startButton.get() && yPressed == false) {//this is not needed if you call the command when the button is pressed
       yPressed = true;
       initialColor = Robot.colorWheel_subsystem.getColor();
       SmartDashboard.putString("FMScolor", initialColor);

@@ -26,19 +26,20 @@ public class intake_command extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (Robot.m_oi.Intake_buttonA.get()){
+    if(Robot.m_oi.Intake_buttonX.get()){
       Robot.intake_subsystem.rollerSpeed(intakeSpeed);
-      Robot.shooter_subsystem.shootAnywayBoth(shootSpeed);
+    }
+    else if(Robot.m_oi.Intake_buttonY.get()){
+      Robot.intake_subsystem.rollerSpeed(1.0);
+    }
+    else if(Robot.m_oi.Intake_buttonB.get()){
+      Robot.intake_subsystem.rollerSpeed(1.0);
+    }
+    else if(Robot.m_oi.Intake_selectButton.get()){
+      Robot.intake_subsystem.rollerSpeed(-1.0);
     }
     else{
-      end();
-    }
-    if(Robot.m_oi.Intake_buttonB.get()){
-      Robot.intake_subsystem.rollerSpeed(intakeSpeed);
-      Robot.shooter_subsystem.shootAnywayBoth(-shootSpeed);
-    }
-    else{
-      end();
+      Robot.intake_subsystem.rollerSpeed(0);
     }
   }
 
@@ -52,7 +53,7 @@ public class intake_command extends Command {
   @Override
   protected void end() {
     Robot.intake_subsystem.rollerSpeed(0);
-    Robot.shooter_subsystem.shootAnywayBoth(0);
+    //Robot.shooter_subsystem.shootAnywayBoth(0);
   }
 
   // Called when another command which requires one or more of the same
