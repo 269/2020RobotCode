@@ -42,14 +42,14 @@ public class shooter_subsystem extends Subsystem {
     bottomPID = bottomMotor.getPIDController();
     //topPID.setReference(0, ControlType.kSmartMotion);
     //bottomPID.setReference(0, ControlType.kSmartMotion);
-    topPID.setP(kP);
+    /*topPID.setP(kP);
     topPID.setI(kI);
     topPID.setFF(kFF);
     topPID.setIZone(kIz);
     bottomPID.setP(kP);
     bottomPID.setI(kI);
     bottomPID.setFF(kFF);
-    bottomPID.setIZone(kIz);
+    bottomPID.setIZone(kIz);*/
   }
   /** Sets the shooters speeds (in RPM)
   *@param topRPM the max RPM for the top of the shooter (between 5700RPM-1000RPM)
@@ -70,8 +70,14 @@ public class shooter_subsystem extends Subsystem {
       bottomMotor.stopMotor();
     }
   }
-  public void shootAnyway(double topMotorSpeed, double bottomMotorSpeed){
+  public void shootAnywayTop(double topMotorSpeed){
     topMotor.set(topMotorSpeed);
+  }
+  public void shootAnywayBottom(double bottomMotorSpeed){
     bottomMotor.set(bottomMotorSpeed);
+  }
+  public void shootAnywayBoth(double speed){
+    shootAnywayBottom(speed);
+    shootAnywayTop(speed);
   }
 }

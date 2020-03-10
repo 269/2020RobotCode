@@ -11,7 +11,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class intake_command extends Command {
-  double motorSpeed = 0.85;
+  double intakeSpeed = 0.85;
+  double shootSpeed = 0.2;
   public intake_command() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -26,10 +27,18 @@ public class intake_command extends Command {
   @Override
   protected void execute() {
     if (Robot.m_oi.Intake_buttonA.get()){
-      Robot.intake_subsystem.rollerSpeed(motorSpeed);
+      Robot.intake_subsystem.rollerSpeed(intakeSpeed);
+      Robot.shooter_subsystem.shootAnywayBoth(shootSpeed);
     }
     else{
-      Robot.intake_subsystem.rollerSpeed(0);
+      end();
+    }
+    if(Robot.m_oi.Intake_buttonB.get()){
+      Robot.intake_subsystem.rollerSpeed(intakeSpeed);
+      Robot.shooter_subsystem.shootAnywayBoth(-shootSpeed);
+    }
+    else{
+      end();
     }
   }
 
@@ -43,6 +52,7 @@ public class intake_command extends Command {
   @Override
   protected void end() {
     Robot.intake_subsystem.rollerSpeed(0);
+    Robot.shooter_subsystem.shootAnywayBoth(0);
   }
 
   // Called when another command which requires one or more of the same
