@@ -60,13 +60,8 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     //index_subsystem = new index_subsystem();
     shooter_subsystem = new shooter_subsystem();
-<<<<<<< HEAD
     colorWheel_subsystem = new colorWheel_subsystem();
     //drive_subsystem = new drive_subsystem();
-=======
-    //colorWheel_subsystem = new colorWheel_subsystem();
-    drive_subsystem = new drive_subsystem();
->>>>>>> 1ca642cd509727647d9a1ec9415cc5d38815c79c
     intake_subsystem = new intake_subsystem();
     m_oi = new OI();
     m_oi.bind(); //bind the buttons to commands
