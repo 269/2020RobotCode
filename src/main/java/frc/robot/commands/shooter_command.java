@@ -12,11 +12,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 public class shooter_command extends Command {
-  double topSpeed;
+ // double topSpeed;
   double bottomSpeed;
   double bottomSpeedSet = 0.8;
   double topSpeedSet = 0.8;
   //double maxRPM = 5700;
+  //double topSpeedSet = 0.8;
+  double maxRPM = 5700;
   public shooter_command() {
     requires(Robot.shooter_subsystem);
     // Use requires() here to declare subsystem dependencies
@@ -31,6 +33,7 @@ public class shooter_command extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {//Different speeds are set based on what position the d-pad was pushed
+<<<<<<< HEAD
   /*  if(Robot.m_oi.Intake_leftButton.get()){
       topSpeed = 3000;
       bottomSpeed = 1500;
@@ -40,17 +43,31 @@ public class shooter_command extends Command {
     }
     else if(Robot.m_oi.Intake_upButton.get()){
       topSpeed = 3750;
+=======
+/*     if(Robot.m_oi.Intake_dPadLeft.get()){
+      //topSpeed = 3000;
+      bottomSpeed = 1500;
+     // topSpeedSet = topSpeed/maxRPM;
+      bottomSpeedSet = bottomSpeed/maxRPM;
+    }
+    else if(Robot.m_oi.Intake_dPadUp.get()){
+      //topSpeed = 3750;
+>>>>>>> 1ca642cd509727647d9a1ec9415cc5d38815c79c
       bottomSpeed = 3000;
-      topSpeedSet = topSpeed/maxRPM;
+      //topSpeedSet = topSpeed/maxRPM;
       bottomSpeedSet = bottomSpeed/maxRPM;
       System.out.println("Med spd");
     }
+<<<<<<< HEAD
     else if(Robot.m_oi.Intake_rightButton.get()){
       topSpeed = 5000;
+=======
+    else if(Robot.m_oi.Intake_dPadRight.get()){
+     // topSpeed = 5000;
+>>>>>>> 1ca642cd509727647d9a1ec9415cc5d38815c79c
       bottomSpeed = 5000;
-      topSpeedSet = topSpeed/maxRPM;
+     // topSpeedSet = topSpeed/maxRPM;
       bottomSpeedSet = bottomSpeed/maxRPM;
-      System.out.println("High spd");
     }*/
     SmartDashboard.putNumber("Bottom RPM", Robot.shooter_subsystem.bottomEncoder.getVelocity());
     if(Robot.m_oi.Intake_RB.get()){
@@ -77,20 +94,10 @@ public class shooter_command extends Command {
     else{
       Robot.shooter_subsystem.shootAnywayBoth(0);
     }
-  }
-
-  // Make this return true when this Command no longer needs to run execute()
-  @Override
-  protected boolean isFinished() {
-    return false;
-  }
-
-  // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.shooter_subsystem.setShooterSpeeds(0, 0);
-    Robot.shooter_subsystem.shootAnywayTop(0);
-    Robot.shooter_subsystem.shootAnywayBottom(0);
+   // Robot.shooter_subsystem.setShooterSpeeds(0, 0);
+    Robot.shooter_subsystem.shootAnyway(0); // add back 0
   }
 
   // Called when another command which requires one or more of the same

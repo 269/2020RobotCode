@@ -32,8 +32,13 @@ public class RobotMap {
     //Intake Motor
     public static final int MOTOR_INTAKE = 6;
     //Shooter Motor
+<<<<<<< HEAD
     public static final int MOTOR_SHOOT_TOP = 8;
     public static final int MOTOR_SHOOT_BOTTOM = 9;
+=======
+    public static final int MOTOR_SHOOT_TOP = 9;
+    public static final int MOTOT_SHOOT_BOTTOM = 8;
+>>>>>>> 1ca642cd509727647d9a1ec9415cc5d38815c79c
     //SOLENOID
     public static final int SOLENOID_IN = 0;
     public static final int SOLENOID_OUT = 1;
@@ -65,8 +70,8 @@ public class RobotMap {
     public static final int LT = 0;
     public static final int RT = 1;
     //Bumpers
-    public static final int LB = 6;
-    public static final int RB = 5;
+    public static final int LB = 5;
+    public static final int RB = 6;
     
     //Encoders
     public static final int leftEncoderPort1 = 3;

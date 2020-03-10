@@ -71,7 +71,7 @@ public class shooter_subsystem extends Subsystem {
     topPID.setSmartMotionMaxAccel(1500, 0);
     }
     else{
-      //System.out.println("Too fast!");
+      System.out.println("Too fast!");
       topMotor.stopMotor();
       bottomMotor.stopMotor();
     }
