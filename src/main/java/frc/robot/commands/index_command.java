@@ -33,15 +33,15 @@ public class index_command extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    /*if(Robot.m_oi.buttonB.get()){
-      System.out.println("B");
-      Robot.index_subsystem.indexActivate(kForward);
+   if(Robot.m_oi.buttonB.get()){
+      Robot.index_subsystem.indexActivate(kReverse);
     }
     else{
-      Robot.index_subsystem.indexActivate(kReverse);
-    }*/
+      Robot.index_subsystem.indexActivate(kForward);    }
       // If the a button is pressed the boolean value is true which activates the pnuematics of the indexing system
-  }
+      Robot.index_subsystem.checkCompressor();
+    }
+
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
@@ -52,7 +52,7 @@ public class index_command extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    //Robot.index_subsystem.indexActivate(kOff);
+    Robot.index_subsystem.indexActivate(kOff);
   }
 
   // Called when another command which requires one or more of the same
