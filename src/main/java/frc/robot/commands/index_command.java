@@ -37,10 +37,10 @@ public class index_command extends Command {
       Robot.index_subsystem.indexActivate(kReverse);
     }
     else{
-      Robot.index_subsystem.indexActivate(kForward);    }
-      // If the a button is pressed the boolean value is true which activates the pnuematics of the indexing system
+      Robot.index_subsystem.indexActivate(kForward);   
+    }// If the a button is pressed the boolean value is true which activates the pnuematics of the indexing system
       Robot.index_subsystem.checkCompressor();
-    }
+  }
 
 
   // Make this return true when this Command no longer needs to run execute()

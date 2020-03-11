@@ -32,7 +32,6 @@ public class index_subsystem extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
   public index_subsystem(){
-    System.out.println("Made it2");
     airComp = new Compressor(1);
     //airComp.clearAllPCMStickyFaults();
     solenoid = new DoubleSolenoid(1, RobotMap.SOLENOID_IN, RobotMap.SOLENOID_OUT);
@@ -57,16 +56,6 @@ public class index_subsystem extends Subsystem {
   public void indexActivate(Value status){
     System.out.println("Status " + status);
     solenoid.set(status);
-    // airComp = new Compressor(1);
-    // //airComp.clearAllPCMStickyFaults();
-    // solenoid = new DoubleSolenoid(1, RobotMap.SOLENOID_IN, RobotMap.SOLENOID_OUT);
-    // System.out.println("Switch "+ airComp.getPressureSwitchValue());
-    // if(airComp.getPressureSwitchValue()){
-    //   airComp.start();
-    // }
-    // else{
-    //   airComp.stop();
-    // }
   }
 
 }
