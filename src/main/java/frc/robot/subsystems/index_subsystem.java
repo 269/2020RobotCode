@@ -8,7 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.Robot;
+import frc.robot.RobotMap;
 import frc.robot.commands.index_command;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -33,20 +33,29 @@ public class index_subsystem extends Subsystem {
   }
   public index_subsystem(){
     airComp = new Compressor(1);
-    airComp.setClosedLoopControl(true);
-    airComp.clearAllPCMStickyFaults();
-    //solenoid = new DoubleSolenoid(RobotMap.SOLENOID_IN, RobotMap.SOLENOID_OUT);
-    System.out.println("Switch val: " + airComp.getPressureSwitchValue());
-    if(Robot.m_oi.buttonY.get()){
+    //airComp.clearAllPCMStickyFaults();
+    solenoid = new DoubleSolenoid(1, RobotMap.SOLENOID_IN, RobotMap.SOLENOID_OUT);
+  }
+
+  /** Turns on or off the compressor
+   */
+  public void checkCompressor(){
+    System.out.println("Switch "+ airComp.getPressureSwitchValue());
+    if(!airComp.getPressureSwitchValue()){ // remember to fix this so take away the !
       airComp.start();
     }
+    else{
+      airComp.stop();
+    }
   }
-  
+
+
   /** Extends or retracts both pneumatic pistons based on 'active'
    * @param active if true pistons are extended if false they are retracted
    */
   public void indexActivate(Value status){
-    //solenoid.set(status);
+    System.out.println("Status " + status);
+    solenoid.set(status);
   }
 
 }
