@@ -37,10 +37,11 @@ public class shooter_subsystem extends Subsystem {
     bottomMotor = new CANSparkMax(RobotMap.MOTOR_SHOOT_BOTTOM, MotorType.kBrushless);
     topEncoder = new CANEncoder(topMotor);
     bottomEncoder = new CANEncoder(bottomMotor);
+    topMotor.setInverted(true);
   }
   /** Sets the shooters speeds (in RPM)
-  *@param topRPM the max RPM for the top of the shooter (between 5700RPM-1000RPM)
-  *@param bottomRPM the max RPM for the bottom of the shooter (between 5700RPM-1000RPM)
+  *@param topMotorSpeed the speed for the top of the shooter (-1 to 1)
+  *@param bottomMotorSpeed the speed for the bottom of the shooter (-1 to 1)
   */
   public void shooterSet(double topMotorSpeed, double bottomMotorSpeed){
     topMotor.set(topMotorSpeed);
