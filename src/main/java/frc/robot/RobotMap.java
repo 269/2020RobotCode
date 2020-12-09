@@ -25,22 +25,22 @@ public class RobotMap {
      */
 
     //Drive Motors
-    public static final int MOTOR_LEFT_1 = 1;
-    public static final int MOTOR_LEFT_2 = 2;
-    public static final int MOTOR_RIGHT_1 = 3;
-    public static final int MOTOR_RIGHT_2 = 4;
+    public static final int MOTOR_LEFT_1 = 4; //Front left motor
+    public static final int MOTOR_LEFT_2 = 3; //Back left motor
+    public static final int MOTOR_RIGHT_1 = 1; //Front right motor
+    public static final int MOTOR_RIGHT_2 = 2; /**Back right motor**/
     //Intake Motor
-    public static final int MOTOR_INTAKE = 5;
+    public static final int MOTOR_INTAKE = 6;
     //Shooter Motor
-    public static final int MOTOR_SHOOT_TOP = 1;
-    public static final int MOTOT_SHOOT_BOTTOM = 2;
+    public static final int MOTOR_SHOOT_TOP = 8;
+    public static final int MOTOR_SHOOT_BOTTOM = 9;
     //SOLENOID
-    public static final int SOLENOID_1 = 10;
-    public static final int SOLENOID_2 = 11;
+    public static final int SOLENOID_IN = 0;
+    public static final int SOLENOID_OUT = 1;
     //AIR COMPRESSOR
-    public static final int AIRCOMP = 0;
+    //public static final int AIRCOMP = 0;
     //COLOR WHEEL
-    public static final int MOTOR_COLOR_WHEEL = 4;
+    public static final int MOTOR_COLOR_WHEEL = 7;
     //Controllers
     public static final int DRIVER_CONTROLLER = 0;
     public static final int INTAKE_CONTROLLER = 1;
@@ -51,22 +51,22 @@ public class RobotMap {
     public static final int RIGHT_JOYSTICK_Y = 5;
     //Buttons
     public static final int BUTTON_X = 3;
-    public static final int BUTTON_Y = 2;
+    public static final int BUTTON_Y = 4;
     public static final int BUTTON_A = 1;
-    public static final int BUTTON_B = 4;
+    public static final int BUTTON_B = 2;
     public static final int D_PAD_LEFT = 5;
     public static final int D_PAD_UP = 6;
     public static final int D_PAD_DOWN = 7;
     public static final int D_PAD_RIGHT = 8;
-    public static final int START_BUTTON = 9;
-    public static final int SELECT_BUTTON = 10;
+    public static final int START_BUTTON = 8;
+    public static final int SELECT_BUTTON = 7;
 
     //Triggers
     public static final int LT = 0;
     public static final int RT = 1;
     //Bumpers
-    public static final int LB = 6;
-    public static final int RB = 5;
+    public static final int LB = 5;
+    public static final int RB = 6;
     
     //Encoders
     public static final int leftEncoderPort1 = 3;
@@ -82,7 +82,11 @@ public class RobotMap {
     
     //color sensor
     public static final I2C.Port i2cPort = I2C.Port.kOnboard;
+<<<<<<< HEAD
 
     //lift motor
     public static final int LIFTMOTOR = 7;
 }
+=======
+}
+>>>>>>> ebd7965a5aa467985b9c695cf2139d17adc028d9

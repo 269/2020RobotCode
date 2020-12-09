@@ -1,0 +1,4 @@
+Position 1 Maneuver 1 - Used to only drive over line.
+Position 1 Maneuver 2 - Used to turn "right" 90 degrees and then drive straight 100 inches.
+Position 2 Maneuver 1 - null
+Position 2 Maneuver 2 - null

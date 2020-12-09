@@ -113,6 +113,7 @@ by the ALLIANCE’S TRENCH color sensor) to all OPERATOR CONSOLES simultaneously
     // SmartDashboard.putNumber("Green", detectedColor.green);
     // SmartDashboard.putNumber("Blue", detectedColor.blue);
     // SmartDashboard.putString("Confidence", Math.round(match.confidence * 100) + "%");
+    
     SmartDashboard.putString("DetectedColor", result);
 
     return result;

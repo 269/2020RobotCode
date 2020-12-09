@@ -40,6 +40,8 @@ public class drive_subsystem extends Subsystem {
     backLeftMotor = new WPI_TalonSRX(RobotMap.MOTOR_LEFT_2);
     SpeedControllerGroup leftMotors = new SpeedControllerGroup(frontLeftMotor, backLeftMotor);
     SpeedControllerGroup rightMotors = new SpeedControllerGroup(frontRightMotor, backRightMotor);
+    //rightMotors.setInverted(true);
+    //leftMotors.setInverted(true);
     difDrive = new DifferentialDrive(leftMotors, rightMotors);
   }
   /** Sets the speed of the main drive

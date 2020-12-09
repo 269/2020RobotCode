@@ -11,53 +11,85 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class turnGyro_command extends Command {
-  double currentYaw;
-  double targetYaw;
-  double speed;
-  double leftSpeed;
-  double rightSpeed;
-  double tol;
-  double speedTol;
-  double rightDist;
-  double leftDist;
+  double currentYaw;        //the current fused heading yaw for each iteration (0.0 to 360.0)
+  double turnAmount;         //the amount of degrees to turn
+  double startingYaw;       //records the yaw when the command is initalized
+  double correctedCurYaw;   //the adjusted yaw that zeros out the navx without reseting it
+  double speed;             //desired robot speed
+  double leftSpeed;         //calculated left speed
+  double rightSpeed;        //calulcated right speed
+  double tol = 5;               //The amount of degrees in each direction the robot is considered to be within the target angle. (tolernce)
+  double rightDist;         //right drive encoder value in inches travled since start of command
+  double leftDist;          //left drive encoder value in inches travled since start of command
+  double avgDist;           //the average of rightDist and leftDist
 
-  /**Sets the angle at for the robot to turn to
-   * @param targetYaw the goal angle for the robot to move to
-   * @param speed the speed the robot will turn
+  int rotations;
+  double remainingyaw;
+
+  /**turns the robot a specified amount of degreees left or right
+   * @param turnAmount the amount of degrees the robot will move in postive or negative direction(- turns CCW, + turns CW)
+   * @param speed the speed the robot will turn (-1.0 to 1.0)
    */
-  public turnGyro_command(double targetYaw, double speed) {
+  public turnGyro_command(double turnAmount, double speed) {
     requires(Robot.drive_subsystem);
-    this.targetYaw = targetYaw;
+    this.turnAmount = turnAmount;
     this.speed = speed;
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
   }
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    startingYaw  = Robot.getFullYaw();
+    rotations = (int) (startingYaw + Math.abs(turnAmount))/360; //how many times will we pass 360, yes we can rotate multiple times.
+    remainingyaw = Math.abs(turnAmount)%360; //the remaining amount of degrees to rotate after all full rotations.
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    currentYaw = Robot.getFullYaw()+targetYaw;
-    System.out.println("Yaw: "+ currentYaw);
-    System.out.println("Encoder Avg: " + (Math.abs(Robot.rightEncoder.getRaw()) + Math.abs(Robot.leftEncoder.getRaw()))/2);
-    rightDist = Math.abs(Robot.rightEncoder.getDistance());
-    leftDist = Math.abs(Robot.rightEncoder.getDistance());
-        if(360-tol > currentYaw && currentYaw > 180){ //If the degrees off of straight (a.k.a 0 degrees) is greater than 180 but less than 355
-          leftSpeed = -speed; //Ex. 315/180 = 1.75 -> 1.75/5 = 0.35 -> -0.35 -> -0.35+(.5+(2/5)) -> -0.35 + 0.9 -> Speed = 0.55 at 315 deg
+
+    //get the corrected current yaw. (zeroed out from initial start yaw)
+    currentYaw = Robot.navx.getFusedHeading();
+    if (startingYaw - currentYaw < 0) {                   // current yaw - starting yaw should be 0 + any diffrence the next iteration. 
+      correctedCurYaw = 360 + (startingYaw - currentYaw); //if the corrected yaw passes 0 then we need to correct it to be > 360 instead of negative.
+    } else {
+      correctedCurYaw = startingYaw - currentYaw;
+    }
+ 
+    if (turnAmount > 0) { //if we give it a positive number turn to the right(CW), else turn to the left.
+      if (correctedCurYaw < remainingyaw || rotations > 0) {  //if we have not completed all rotations or have not reached the remaining degrees keep turning.
+        if (rotations <= 1) {
+          leftSpeed = (speed - ((360 - correctedCurYaw)/(180/speed)));
+          rightSpeed = -(speed - ((360 - correctedCurYaw)/(180/speed)));
+        } else {
+          leftSpeed = speed;
+          rightSpeed = -speed;
+        }
+        if (correctedCurYaw >= 360-tol) { //for each rotation we complete
+          rotations = rotations - 1;
+        }
+      } else {//completed turn.
+        end();
+      }
+    } else {  //turn to the left(CCW)
+      if (correctedCurYaw > remainingyaw || rotations > 0) {  //if we have not completed all rotations or have not reached the remaining degrees keep turning.
+        if (rotations <= 1) {
+          leftSpeed = -(speed - ((360 - correctedCurYaw)/(180/speed)));
+          rightSpeed = (speed - ((360 - correctedCurYaw)/(180/speed)));
+        } else {
+          leftSpeed = -speed;
           rightSpeed = speed;
         }
-        else if(180 >= currentYaw && currentYaw > tol){ //If the degrees off of straight (a.k.a 0 degrees) is less than or equal to 180 but greater than 5
-          leftSpeed = speed;
-          rightSpeed = -speed; //Ex. 45/180 = 0.25 -> 0.25/5 = 0.05 -> 0.05 + 0.5 -> Speed = 0.55 at 45 deg
+        if (correctedCurYaw <= tol) { //for each rotation we complete
+          rotations = rotations - 1;
         }
-        else{ //If the degrees off of straight (a.k.a 0 degrees) is 5 greater/less than straight
-          leftSpeed = 0;
-          rightSpeed = 0;
-        }
+      } else {//completed turn.
+        end();
+      }
+    }
+
+    Robot.drive_subsystem.drive(leftSpeed, rightSpeed);
   }
+ 
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
@@ -68,11 +100,13 @@ public class turnGyro_command extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.drive_subsystem.drive(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

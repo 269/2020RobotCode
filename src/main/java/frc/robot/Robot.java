@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+//import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.robot.subsystems.colorWheel_subsystem;
 import frc.robot.subsystems.drive_subsystem;
 import frc.robot.subsystems.index_subsystem;
@@ -33,8 +33,8 @@ import java.text.DateFormat;
 public class Robot extends TimedRobot {
   public static OI m_oi;
   public static AHRS navx;
-  private String m_autoSelected;
-  private final SendableChooser<String> m_chooser = new SendableChooser<>();
+  //private String m_autoSelected;
+  //private final SendableChooser<String> m_chooser = new SendableChooser<>();
   private static DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
   private static Date date = new Date();
   public static Encoder rightEncoder = new Encoder(RobotMap.leftEncoderPort1, RobotMap.leftEncoderPort2, false, EncodingType.k4X);
@@ -58,13 +58,18 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    drive_subsystem = new drive_subsystem();
-    intake_subsystem = new intake_subsystem();
+    System.out.println("Made it");
     index_subsystem = new index_subsystem();
     shooter_subsystem = new shooter_subsystem();
     colorWheel_subsystem = new colorWheel_subsystem();
+<<<<<<< HEAD
     lift_subsystem = new lift_subsystem();
+=======
+    drive_subsystem = new drive_subsystem();
+    intake_subsystem = new intake_subsystem();
+>>>>>>> ebd7965a5aa467985b9c695cf2139d17adc028d9
     m_oi = new OI();
+    m_oi.bind(); //bind the buttons to commands
   //  m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
   //  m_chooser.addOption("My Auto", kCustomAuto);
    // SmartDashboard.putData("Auto choices", m_chooser);
@@ -121,10 +126,9 @@ public class Robot extends TimedRobot {
    */
   public static double getFullYaw() {
     double currentYaw;
-    if (Robot.navx.getYaw() <= 0) {
-      currentYaw = -Robot.navx.getYaw();
-    } else {
-      currentYaw = 360 - Robot.navx.getYaw();
+      currentYaw = Robot.navx.getFusedHeading();
+    if(Robot.navx.getFusedHeading() < 0){
+      currentYaw = 360-(Robot.navx.getFusedHeading());
     }
     //System.out.println("yaw: "+ currentYaw);
     WriteOut("Current Yaw: "+ currentYaw, 5);

@@ -6,9 +6,9 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.subsystems;
+import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -21,13 +21,10 @@ public class shooter_subsystem extends Subsystem {
   // here. Call these from Commands.
   CANPIDController bottomPID;
   CANPIDController topPID;
+  public CANEncoder topEncoder;
+  public CANEncoder bottomEncoder;
   CANSparkMax bottomMotor;
   CANSparkMax topMotor;
-  double kP = 0;
-  double kI = 0;
-  double kD = 0;
-  double kIz = 0;
-  double kFF = 0;
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new shooter_command());
@@ -37,35 +34,18 @@ public class shooter_subsystem extends Subsystem {
   //Declaring PID and motors for shooter
   public shooter_subsystem(){
     topMotor = new CANSparkMax(RobotMap.MOTOR_SHOOT_TOP, MotorType.kBrushless);
-    bottomMotor = new CANSparkMax(RobotMap.MOTOT_SHOOT_BOTTOM, MotorType.kBrushless);
-    topPID = topMotor.getPIDController();
-    bottomPID = bottomMotor.getPIDController();
-    topPID.setReference(0, ControlType.kSmartMotion);
-    bottomPID.setReference(0, ControlType.kSmartMotion);
-    topPID.setP(kP);
-    topPID.setI(kI);
-    topPID.setFF(kFF);
-    topPID.setIZone(kIz);
-    bottomPID.setP(kP);
-    bottomPID.setI(kI);
-    bottomPID.setFF(kFF);
-    bottomPID.setIZone(kIz);
+    bottomMotor = new CANSparkMax(RobotMap.MOTOR_SHOOT_BOTTOM, MotorType.kBrushless);
+    topEncoder = new CANEncoder(topMotor);
+    bottomEncoder = new CANEncoder(bottomMotor);
+    topMotor.setInverted(true);
   }
   /** Sets the shooters speeds (in RPM)
-  *@param topRPM the max RPM for the top of the shooter (can not exceed 5700 RPM)
-  *@param bottomRPM the max RPM for the bottom of the shooter (can not exceed 5700 RPM)
+  *@param topMotorSpeed the speed for the top of the shooter (-1 to 1)
+  *@param bottomMotorSpeed the speed for the bottom of the shooter (-1 to 1)
   */
-  public void setShooterSpeeds(double topRPM, double bottomRPM){
-    if(topRPM < 5700 && bottomRPM < 5700 && topRPM > 100 && bottomRPM > 100){
-    bottomPID.setSmartMotionMaxVelocity(bottomRPM, 0);
-    topPID.setSmartMotionMaxVelocity(topRPM, 0);
-    bottomPID.setSmartMotionMinOutputVelocity(bottomRPM-100, 0);
-    topPID.setSmartMotionMinOutputVelocity(topRPM-100, 0);
-    bottomPID.setSmartMotionMaxAccel(1500, 0);
-    topPID.setSmartMotionMaxAccel(1500, 0);
-    }
-    else{
-      System.out.println("Too fast!");
-    }
+  public void shooterSet(double topMotorSpeed, double bottomMotorSpeed){
+    topMotor.set(topMotorSpeed);
+    bottomMotor.set(bottomMotorSpeed);
+
   }
 }
