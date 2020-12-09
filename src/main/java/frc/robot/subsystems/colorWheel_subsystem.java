@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj.util.Color;
 public class colorWheel_subsystem extends Subsystem {
 
   WPI_TalonSRX colorWheelWheel = null;
+  private static boolean wheelInitialized = false;
 
   /**
    * A Rev Color Sensor V3 object is constructed with an I2C port as a 
@@ -84,13 +85,13 @@ by the ALLIANCE’S TRENCH color sensor) to all OPERATOR CONSOLES simultaneously
      * an object is the more light from the surroundings will bleed into the 
      * measurements and make it difficult to accurately determine its color.
      */
-    Color detectedColor = m_colorSensor.getColor();
+    final Color detectedColor = m_colorSensor.getColor();
 
     /**
      * Run the color match algorithm on our detected color
      */
     // String colorString;
-    ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
+    final ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
 
     if (match.color == kBlueTarget) {
       result = "Blue";

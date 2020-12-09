@@ -65,18 +65,19 @@ public class driveStraight_command extends Command {
     leftDist = Math.abs(Robot.rightEncoder.getDistance());
       double leftSpeedEdit = (-((currentYaw/180)/(speedTol))+(speed+(2/speedTol)));;
       double rightSpeedEdit = (((currentYaw/180)/(speedTol))+speed);
-          if(360-tol > currentYaw && currentYaw > 180){ //If the degrees off of straight (a.k.a 0 degrees) is greater than 180 but less than 355
-            leftSpeed = -leftSpeedEdit; //Ex. 315/180 = 1.75 -> 1.75/5 = 0.35 -> -0.35 -> -0.35+(.5+(2/5)) -> -0.35 + 0.9 -> Speed = 0.55 at 315 deg
-            rightSpeed = -speed;
-          }
-          else if(180 >= currentYaw && currentYaw > tol){ //If the degrees off of straight (a.k.a 0 degrees) is less than or equal to 180 but greater than 5
-            leftSpeed = -speed;
-            rightSpeed = -rightSpeedEdit; //Ex. 45/180 = 0.25 -> 0.25/5 = 0.05 -> 0.05 + 0.5 -> Speed = 0.55 at 45 deg
-          }
-          else{ //If the degrees off of straight (a.k.a 0 degrees) is 5 greater/less than straight
-            leftSpeed = -speed;
-            rightSpeed = -speed;
-          }
+
+      if(360-tol > currentYaw && currentYaw > 180){ //If the degrees off of straight (a.k.a 0 degrees) is greater than 180 but less than 355
+        leftSpeed = -leftSpeedEdit; //Ex. 315/180 = 1.75 -> 1.75/5 = 0.35 -> -0.35 -> -0.35+(.5+(2/5)) -> -0.35 + 0.9 -> Speed = 0.55 at 315 deg
+        rightSpeed = -speed;
+      }
+      else if(180 >= currentYaw && currentYaw > tol){ //If the degrees off of straight (a.k.a 0 degrees) is less than or equal to 180 but greater than 5
+        leftSpeed = -speed;
+        rightSpeed = -rightSpeedEdit; //Ex. 45/180 = 0.25 -> 0.25/5 = 0.05 -> 0.05 + 0.5 -> Speed = 0.55 at 45 deg
+      }
+      else{ //If the degrees off of straight (a.k.a 0 degrees) is 5 greater/less than straight
+        leftSpeed = -speed;
+        rightSpeed = -speed;
+      }
 
       System.out.println("Left distance: " + leftDist);
       System.out.println("Right distance: " + rightDist);
