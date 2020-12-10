@@ -9,7 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.lift_subsystem;
+//import frc.robot.subsystems.lift_subsystem;
 
 public class lift_command extends Command {
   public boolean dpad_up;

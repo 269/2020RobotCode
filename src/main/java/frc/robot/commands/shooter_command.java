@@ -74,10 +74,6 @@ public class shooter_command extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-<<<<<<< HEAD
-   end();
-=======
     end();
->>>>>>> ebd7965a5aa467985b9c695cf2139d17adc028d9
   }
 }

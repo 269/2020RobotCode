@@ -62,12 +62,9 @@ public class Robot extends TimedRobot {
     index_subsystem = new index_subsystem();
     shooter_subsystem = new shooter_subsystem();
     colorWheel_subsystem = new colorWheel_subsystem();
-<<<<<<< HEAD
-    lift_subsystem = new lift_subsystem();
-=======
     drive_subsystem = new drive_subsystem();
     intake_subsystem = new intake_subsystem();
->>>>>>> ebd7965a5aa467985b9c695cf2139d17adc028d9
+    //lift_subsystem = new lift_subsystem();
     m_oi = new OI();
     m_oi.bind(); //bind the buttons to commands
   //  m_chooser.setDefaultOption("Default Auto", kDefaultAuto);

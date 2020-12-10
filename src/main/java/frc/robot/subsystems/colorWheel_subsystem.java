@@ -23,7 +23,8 @@ import edu.wpi.first.wpilibj.util.Color;
 public class colorWheel_subsystem extends Subsystem {
 
   WPI_TalonSRX colorWheelWheel = null;
-  private static boolean wheelInitialized = false;
+  //private static boolean wheelInitialized = false;
+  // ^^^^^^^ WHAT IS THIS FOR?????
 
   /**
    * A Rev Color Sensor V3 object is constructed with an I2C port as a 
