@@ -32,12 +32,12 @@ import java.text.DateFormat;
 public class Robot extends TimedRobot {
   public static OI m_oi;
   public static AHRS navx;
-  private String m_autoSelected;
+  //private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
   private static DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
   private static Date date = new Date();
-  private static boolean indexInitalized;
-  private static boolean colorwheelInitalized;
+  //private static boolean indexInitalized;
+  //private static boolean colorwheelInitalized;
   public static Encoder rightEncoder = new Encoder(RobotMap.leftEncoderPort1, RobotMap.leftEncoderPort2, false, EncodingType.k4X);
   public static Encoder leftEncoder = new Encoder(RobotMap.rightEncoderPort1, RobotMap.rightEncoderPort2, false, EncodingType.k4X);
   //declare subsystems
@@ -59,10 +59,10 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     //index_subsystem = new index_subsystem();
-    shooter_subsystem = new shooter_subsystem();
+    //shooter_subsystem = new shooter_subsystem();
     //colorWheel_subsystem = new colorWheel_subsystem();
     drive_subsystem = new drive_subsystem();
-    intake_subsystem = new intake_subsystem();
+    //intake_subsystem = new intake_subsystem();
     m_oi = new OI();
     m_oi.bind(); //bind the buttons to commands
   //  m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
