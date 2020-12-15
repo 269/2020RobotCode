@@ -33,7 +33,7 @@ public class index_command extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-   if(Robot.m_oi.buttonB.get()){
+    if(Robot.m_oi.buttonB.get()){
       Robot.index_subsystem.indexActivate(kReverse);
     }
     else{

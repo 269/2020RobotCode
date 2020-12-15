@@ -35,7 +35,6 @@ public class autonomousSelector extends CommandGroup {
         }
         else if(priority.equalsIgnoreCase("mane2")){
           Robot.WriteOut("Selected Maneuver 2 on Position 2");
-          
         }
       }
   }

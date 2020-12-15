@@ -37,6 +37,8 @@ public class Robot extends TimedRobot {
   //private final SendableChooser<String> m_chooser = new SendableChooser<>();
   private static DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
   private static Date date = new Date();
+  //private static boolean indexInitalized;
+  //private static boolean colorwheelInitalized;
   public static Encoder rightEncoder = new Encoder(RobotMap.leftEncoderPort1, RobotMap.leftEncoderPort2, false, EncodingType.k4X);
   public static Encoder leftEncoder = new Encoder(RobotMap.rightEncoderPort1, RobotMap.rightEncoderPort2, false, EncodingType.k4X);
   //declare subsystems

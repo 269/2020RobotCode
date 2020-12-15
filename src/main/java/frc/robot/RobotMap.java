@@ -25,15 +25,17 @@ public class RobotMap {
      */
 
     //Drive Motors
-    public static final int MOTOR_LEFT_1 = 4; //Front left motor
-    public static final int MOTOR_LEFT_2 = 3; //Back left motor
+    public static final int MOTOR_LEFT_1 = 2; //Front left motor
+    public static final int MOTOR_LEFT_2 = 2; //Back left motor
     public static final int MOTOR_RIGHT_1 = 1; //Front right motor
-    public static final int MOTOR_RIGHT_2 = 2; /**Back right motor**/
+    public static final int MOTOR_RIGHT_2 = 1; //Back right motor
     //Intake Motor
     public static final int MOTOR_INTAKE = 6;
     //Shooter Motor
-    public static final int MOTOR_SHOOT_TOP = 8;
-    public static final int MOTOR_SHOOT_BOTTOM = 9;
+    public static final int MOTOR_SHOOT_TOP = 9;
+    public static final int MOTOT_SHOOT_BOTTOM = 8;
+    //public static final int MOTOR_SHOOT_TOP = 8;
+    //public static final int MOTOR_SHOOT_BOTTOM = 9;
     //SOLENOID
     public static final int SOLENOID_IN = 0;
     public static final int SOLENOID_OUT = 1;
@@ -70,9 +72,9 @@ public class RobotMap {
     
     //Encoders
     public static final int leftEncoderPort1 = 3;
-	public static final int leftEncoderPort2 = 2;
-	public static final int rightEncoderPort1 = 0;
-	public static final int rightEncoderPort2 = 1;
+	  public static final int leftEncoderPort2 = 2;
+	  public static final int rightEncoderPort1 = 0;
+	  public static final int rightEncoderPort2 = 1;
 
     //POV Buttons
     public static final int UP_BUTTON = 0;
@@ -82,8 +84,6 @@ public class RobotMap {
     
     //color sensor
     public static final I2C.Port i2cPort = I2C.Port.kOnboard;
-
-    
     //lift motor
     public static final int LIFTMOTOR = 7;
 }

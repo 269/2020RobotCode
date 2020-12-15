@@ -42,6 +42,11 @@ public class index_subsystem extends Subsystem {
   public void checkCompressor(){
     System.out.println("Switch "+ airComp.getPressureSwitchValue());
     if(!airComp.getPressureSwitchValue()){ // remember to fix this so take away the !
+    //airComp = new Compressor(10);
+    //airComp.clearAllPCMStickyFaults();
+    //airComp.stop();
+    //solenoid = new DoubleSolenoid(RobotMap.SOLENOID_IN, RobotMap.SOLENOID_OUT);
+    //if(airComp.getPressureSwitchValue()){
       airComp.start();
     }
     else{
@@ -54,7 +59,7 @@ public class index_subsystem extends Subsystem {
    * @param active if true pistons are extended if false they are retracted
    */
   public void indexActivate(Value status){
-    System.out.println("Status " + status);
+    System.out.println("Status " + status);// CONFLICT, CHECK VAR status
     solenoid.set(status);
   }
 

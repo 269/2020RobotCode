@@ -15,7 +15,7 @@ public class shooter_command extends Command {
  // double topSpeed;
   double bottomSpeed;
   double bottomSpeedSet = 0.8;
-  double topSpeedSet = 0.8;
+  double topSpeedSet = 0.8;// WASN'T HERE BEFORE MERGE
   //double maxRPM = 5700;
   //double topSpeedSet = 0.8;
   double maxRPM = 5700;
@@ -66,6 +66,9 @@ public class shooter_command extends Command {
   @Override
   protected void end() {
     Robot.shooter_subsystem.shooterSet(0, 0); // add back 0
+    // VVV CODE IN MERGE CONFLICT
+    // Robot.shooter_subsystem.setShooterSpeeds(0, 0);
+    //Robot.shooter_subsystem.shootAnyway(0); // add back 0
   }
     // Make this return true when this Command no longer needs to run execute()
   
