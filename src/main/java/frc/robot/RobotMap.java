@@ -33,7 +33,7 @@ public class RobotMap {
     public static final int MOTOR_INTAKE = 6;
     //Shooter Motor
     public static final int MOTOR_SHOOT_TOP = 9;
-    public static final int MOTOT_SHOOT_BOTTOM = 8;
+    public static final int MOTOR_SHOOT_BOTTOM = 8;
     //public static final int MOTOR_SHOOT_TOP = 8;
     //public static final int MOTOR_SHOOT_BOTTOM = 9;
     //SOLENOID
