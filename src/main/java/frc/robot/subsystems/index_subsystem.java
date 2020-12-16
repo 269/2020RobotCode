@@ -32,22 +32,34 @@ public class index_subsystem extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
   public index_subsystem(){
-    airComp = new Compressor(10);
-    airComp.clearAllPCMStickyFaults();
-    airComp.stop();
-    solenoid = new DoubleSolenoid(RobotMap.SOLENOID_IN, RobotMap.SOLENOID_OUT);
-    if(airComp.getPressureSwitchValue()){
+    airComp = new Compressor(1);
+    //airComp.clearAllPCMStickyFaults();
+    solenoid = new DoubleSolenoid(1, RobotMap.SOLENOID_IN, RobotMap.SOLENOID_OUT);
+  }
+
+  /** Turns on or off the compressor
+   */
+  public void checkCompressor(){
+    System.out.println("Switch "+ airComp.getPressureSwitchValue());
+    if(!airComp.getPressureSwitchValue()){ // remember to fix this so take away the !
+    //airComp = new Compressor(10);
+    //airComp.clearAllPCMStickyFaults();
+    //airComp.stop();
+    //solenoid = new DoubleSolenoid(RobotMap.SOLENOID_IN, RobotMap.SOLENOID_OUT);
+    //if(airComp.getPressureSwitchValue()){
       airComp.start();
     }
     else{
       airComp.stop();
     }
   }
-  
+
+
   /** Extends or retracts both pneumatic pistons based on 'active'
    * @param active if true pistons are extended if false they are retracted
    */
   public void indexActivate(Value status){
+    System.out.println("Status " + status);// CONFLICT, CHECK VAR status
     solenoid.set(status);
   }
 

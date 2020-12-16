@@ -15,6 +15,6 @@ public class turnRightGoStraight extends CommandGroup {
    */
   public turnRightGoStraight() {
     addSequential(new turnGyro_command(90, .5));
-    addSequential(new driveStraight_command(0.5,100,-1));
+    addSequential(new driveStraight_command(0.5, 100, -1));
   }
 }

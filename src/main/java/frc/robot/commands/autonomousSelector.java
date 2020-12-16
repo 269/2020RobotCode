@@ -18,21 +18,22 @@ public class autonomousSelector extends CommandGroup {
       Robot.WriteOut("Autonomous Selector Initialized");
       if(position == 1){
         Robot.WriteOut("Selected Postition 1");
-        if(priority.equalsIgnoreCase("Mane1")){
+        if(priority.equalsIgnoreCase("mane1")){
           Robot.WriteOut("Selected Maneuver 1 on Position 1");
           addSequential(new driveOverLine());
         }
-        else if(priority.equalsIgnoreCase("Mane2")){
+        else if(priority.equalsIgnoreCase("mane2")){
           Robot.WriteOut("Selected Maneuver 2 on Position 1");
           addSequential(new turnRightGoStraight());
         }
       }
       else if(position == 2){
         Robot.WriteOut("Selected Postition 2");
-        if(priority.equalsIgnoreCase("Mane1")){
+        if(priority.equalsIgnoreCase("mane1")){
           Robot.WriteOut("Selected Maneuver 1 on Position 2");
+
         }
-        else if(priority.equalsIgnoreCase("Mane2")){
+        else if(priority.equalsIgnoreCase("mane2")){
           Robot.WriteOut("Selected Maneuver 2 on Position 2");
         }
       }

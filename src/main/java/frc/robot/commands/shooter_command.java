@@ -8,12 +8,15 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 public class shooter_command extends Command {
  // double topSpeed;
   double bottomSpeed;
   double bottomSpeedSet = 0.8;
+  double topSpeedSet = 0.8;// WASN'T HERE BEFORE MERGE
+  //double maxRPM = 5700;
   //double topSpeedSet = 0.8;
   double maxRPM = 5700;
   public shooter_command() {
@@ -29,50 +32,51 @@ public class shooter_command extends Command {
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {//Different speeds are set based on what position the d-pad was pushed
-/*     if(Robot.m_oi.Intake_dPadLeft.get()){
-      //topSpeed = 3000;
-      bottomSpeed = 1500;
-     // topSpeedSet = topSpeed/maxRPM;
-      bottomSpeedSet = bottomSpeed/maxRPM;
-    }
-    else if(Robot.m_oi.Intake_dPadUp.get()){
-      //topSpeed = 3750;
-      bottomSpeed = 3000;
-      //topSpeedSet = topSpeed/maxRPM;
-      bottomSpeedSet = bottomSpeed/maxRPM;
-    }
-    else if(Robot.m_oi.Intake_dPadRight.get()){
-     // topSpeed = 5000;
-      bottomSpeed = 5000;
-     // topSpeedSet = topSpeed/maxRPM;
-      bottomSpeedSet = bottomSpeed/maxRPM;
-    } */
+  protected void execute() {
+    SmartDashboard.putNumber("Bottom RPM: ", Robot.shooter_subsystem.bottomEncoder.getVelocity());
+    SmartDashboard.putNumber("Top RPM: ", Robot.shooter_subsystem.topEncoder.getVelocity());
     if(Robot.m_oi.Intake_RB.get()){
-      //Robot.shooter_subsystem.setShooterSpeeds(topSpeed, bottomSpeed);
-      Robot.shooter_subsystem.shootAnyway(bottomSpeedSet); // add  abck topSpeedSet
+      Robot.shooter_subsystem.shooterSet(0, 0.4);
+    }
+    else if(Robot.m_oi.Intake_LB.get()){
+      Robot.shooter_subsystem.shooterSet(0.4, 0);
+    }
+    else if(Robot.m_oi.Intake_LB.get() || Robot.m_oi.Intake_RB.get()){
+      Robot.shooter_subsystem.shooterSet(0.4, 0.4);
+    }
+    else if(Robot.m_oi.Intake_buttonA.get()){
+      Robot.shooter_subsystem.shooterSet(0.65, 0.65);
+    }
+    //Partly keeping intake in check (check intake_command with same buttons)
+    else if(Robot.m_oi.Intake_buttonY.get()){
+      Robot.shooter_subsystem.shooterSet(0.075, 0.1);
+    }
+    else if(Robot.m_oi.Intake_buttonB.get()){
+      Robot.shooter_subsystem.shooterSet(-0.075, -0.1);
     }
     else{
-      Robot.shooter_subsystem.shootAnyway(0); // add  abck topSpeedSet
+      Robot.shooter_subsystem.shooterSet(0, 0);
     }
   }
-
-  // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
-    return false;
+   protected boolean isFinished() {
+      return false;
   }
 
-  // Called once after isFinished returns true
   @Override
   protected void end() {
-   // Robot.shooter_subsystem.setShooterSpeeds(0, 0);
-    Robot.shooter_subsystem.shootAnyway(0); // add back 0
+    Robot.shooter_subsystem.shooterSet(0, 0); // add back 0
+    // VVV CODE IN MERGE CONFLICT
+    // Robot.shooter_subsystem.setShooterSpeeds(0, 0);
+    //Robot.shooter_subsystem.shootAnyway(0); // add back 0
   }
+    // Make this return true when this Command no longer needs to run execute()
+  
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }
