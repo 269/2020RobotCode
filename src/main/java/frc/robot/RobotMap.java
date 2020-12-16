@@ -32,6 +32,9 @@ public class RobotMap {
     public static final int MOTOR_RIGHT_1 = 1; //Front right motor
     public static final int MOTOR_RIGHT_2 = 1; //Back right motor
 
+    // Hammer Motors (? still not sure what the hammer is)
+    public static final int MOTOR_HAMMER_1 = 3;
+
     // Intake Motors
     public static final int MOTOR_INTAKE = 6;
 

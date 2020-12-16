@@ -13,15 +13,16 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.command.Scheduler;
 //import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.DateFormat;
 import frc.robot.subsystems.colorWheel_subsystem;
 import frc.robot.subsystems.drive_subsystem;
 import frc.robot.subsystems.index_subsystem;
 import frc.robot.subsystems.intake_subsystem;
 import frc.robot.subsystems.lift_subsystem;
 import frc.robot.subsystems.shooter_subsystem;
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.text.DateFormat;
+import frc.robot.subsystems.hammer_subsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -48,6 +49,7 @@ public class Robot extends TimedRobot {
   public static index_subsystem index_subsystem = null;
   public static shooter_subsystem shooter_subsystem = null;
   public static lift_subsystem lift_subsystem = null;
+  public static hammer_subsystem hammer_subsystem = null;
 
   
 
@@ -66,6 +68,7 @@ public class Robot extends TimedRobot {
     colorWheel_subsystem = new colorWheel_subsystem();
     drive_subsystem = new drive_subsystem();
     intake_subsystem = new intake_subsystem();
+    hammer_subsystem = new hammer_subsystem();
     //lift_subsystem = new lift_subsystem();
     m_oi = new OI();
     m_oi.bind(); //bind the buttons to commands
