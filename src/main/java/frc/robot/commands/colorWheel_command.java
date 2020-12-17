@@ -53,7 +53,6 @@ public class colorWheel_command extends Command {
       SmartDashboard.putString("FMScolor", initialColor);
     }
 
-
     gameData = DriverStation.getInstance().getGameSpecificMessage();
     //Robot.WriteOut("Control panel sensor target: " + gameData); // color the control panel sensor needs to see for 5 sec
     if(gameData.length() > 0 && yPressed)
