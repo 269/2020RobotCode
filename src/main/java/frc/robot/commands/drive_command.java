@@ -55,7 +55,7 @@ public class drive_command extends Command {
     //speed reduction
     if (Robot.m_oi.RB.get()) {
       releaseR = false;
-    } else{
+    } else {
       if(releaseR == false) {
         toggleR = !toggleR;
         if (gear < MAXGEAR) {
@@ -66,7 +66,7 @@ public class drive_command extends Command {
     }
     if (Robot.m_oi.LB.get()) {
       releaseL = false;
-    } else{
+    } else {
       if(releaseL == false) {
         toggleL = !toggleL;
         if (gear > MINGEAR) {
@@ -80,12 +80,12 @@ public class drive_command extends Command {
       rightSpeed*=0.75;
     }
     if(gear == 2){
-      leftSpeed*=0.5;
-      rightSpeed*=0.5;
+      leftSpeed*=0.6;
+      rightSpeed*=0.6;
     }
     if(gear == 3){
-      leftSpeed*=0.25;
-      rightSpeed*=0.25;
+      leftSpeed*=0.4;
+      rightSpeed*=0.4;
     }
     Robot.WriteOut("Gear #: " + gear);
     SmartDashboard.putNumber("gear", gear );
