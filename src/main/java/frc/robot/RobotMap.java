@@ -66,7 +66,7 @@ public class RobotMap {
 
     // Controllers
     public static final int DRIVER_CONTROLLER = 0;
-    public static final int INTAKE_CONTROLLER = 1;
+    public static final int INTAKE_CONTROLLER = 0;// TODO: switch back to port 1, currently configured for one controller
 
     // Joysticks (two-axis thumbsticks on the controllers)
     public static final int LEFT_JOYSTICK_X = 0;
