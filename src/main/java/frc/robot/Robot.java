@@ -63,11 +63,11 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     System.out.println("Made it");
-    index_subsystem = new index_subsystem();
-    shooter_subsystem = new shooter_subsystem();
-    colorWheel_subsystem = new colorWheel_subsystem();
+    //index_subsystem = new index_subsystem();
+    //shooter_subsystem = new shooter_subsystem();
+    //colorWheel_subsystem = new colorWheel_subsystem();
     drive_subsystem = new drive_subsystem();
-    intake_subsystem = new intake_subsystem();
+    //intake_subsystem = new intake_subsystem();
     hammer_subsystem = new hammer_subsystem();
     //lift_subsystem = new lift_subsystem();
     m_oi = new OI();
@@ -94,20 +94,20 @@ public class Robot extends TimedRobot {
    * @param message The plain text that you want to output directly
    */
   public static void WriteOut(String message){
-      PrintMessage(message, 5);
+    PrintMessage(message, 5);
   }
   public static void WriteOut(Double message){
     PrintMessage(message.toString(), 5);
-}
-/** Prints a message to console
- * 0-5 (0=log nothing, 1=CRITICAL, 2=Errors, 3=Warnings, 4=Info, 5=everything)
- */
+  }
+  /** Prints a message to console
+   * 0-5 (0=log nothing, 1=CRITICAL, 2=Errors, 3=Warnings, 4=Info, 5=everything)
+   */
   public static void WriteOut(String message, int lvl){
       PrintMessage(message, lvl);
   }
   public static void WriteOut(Double message, int lvl){
-    PrintMessage(message.toString(), lvl);
-}
+      PrintMessage(message.toString(), lvl);
+  }
 
   /**
    * The part that actually prints out the formated message.
