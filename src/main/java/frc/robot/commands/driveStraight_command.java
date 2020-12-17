@@ -26,22 +26,20 @@ public class driveStraight_command extends Command {
   public double averageDist;
   public static driveStraight_command driveStraight = null;
   Timer stopwatch = new Timer();
-
-   // Use requires() here to declare subsystem dependencies
-   // eg. requires(chassis);
-
-   /** Setting the robot to 'drive straight' for a certain amount of time or distance
-    * @param speed the speed at which the robot should move
-    * @param inches the distance at which the robot should travel
-    * @param timeout the time at which the robot will stop moving
-    */
+  
+  /** Setting the robot to 'drive straight' for a certain amount of time or distance
+   * @param speed the speed at which the robot should move
+   * @param inches the distance at which the robot should travel
+   * @param timeout the time at which the robot will stop moving
+   */
   public driveStraight_command(double speed, double inches, double timeout) {
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
     requires(Robot.drive_subsystem);
     this.leftSpeed = speed;
     this.rightSpeed = speed;
     this.speed = speed;
     this.inches = inches;
-    this.timeout = timeout;
     this.timeout = timeout;
   }
 
