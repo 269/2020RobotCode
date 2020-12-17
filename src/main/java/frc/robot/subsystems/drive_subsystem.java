@@ -33,7 +33,8 @@ public class drive_subsystem extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
     setDefaultCommand(new drive_command());
   }
-  public drive_subsystem(){
+
+  public drive_subsystem() {
     frontRightMotor = new WPI_TalonSRX(RobotMap.MOTOR_RIGHT_1);
     frontLeftMotor = new WPI_TalonSRX(RobotMap.MOTOR_LEFT_1);
     backRightMotor = new WPI_TalonSRX(RobotMap.MOTOR_RIGHT_2);
@@ -43,6 +44,7 @@ public class drive_subsystem extends Subsystem {
     //rightMotors.setInverted(true);
     //leftMotors.setInverted(true);
     difDrive = new DifferentialDrive(leftMotors, rightMotors);
+    System.out.println(difDrive.isSafetyEnabled());
   }
   /** Sets the speed of the main drive
    * @param leftSpeed speed of combined left motors from -1.0 to 1.0
