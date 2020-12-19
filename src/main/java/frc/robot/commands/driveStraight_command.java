@@ -62,7 +62,7 @@ public class driveStraight_command extends Command {
     rightDist = Math.abs(Robot.rightEncoder.getDistance());
     leftDist = Math.abs(Robot.rightEncoder.getDistance());
     averageDist = (leftDist+rightDist)/2;
-    if(360-tol > currentYaw && currentYaw > 180){ //If the degrees off of straight (a.k.a 0 degrees) is greater than 180 but less than 355
+    if(360 - tol > currentYaw && currentYaw > 180){ //If the degrees off of straight (a.k.a 0 degrees) is greater than 180 but less than 355
       leftSpeed = speed; 
       rightSpeed = speed - ((360 - currentYaw)/(180/speed));
     }
