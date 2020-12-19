@@ -42,6 +42,7 @@ public class Robot extends TimedRobot {
   //private static boolean colorwheelInitalized;
   public static Encoder rightEncoder = new Encoder(RobotMap.leftEncoderPort1, RobotMap.leftEncoderPort2, false, EncodingType.k4X);
   public static Encoder leftEncoder = new Encoder(RobotMap.rightEncoderPort1, RobotMap.rightEncoderPort2, false, EncodingType.k4X);
+  public static Encoder hammerEncoder = new Encoder(RobotMap.hammerEncoderP1, RobotMap.hammerEncoderP2, false, EncodingType.k4X);
   //declare subsystems
   public static colorWheel_subsystem colorWheel_subsystem = null;
   public static drive_subsystem drive_subsystem = null;

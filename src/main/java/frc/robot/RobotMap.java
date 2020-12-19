@@ -53,6 +53,8 @@ public class RobotMap {
     public static final int leftEncoderPort2 = 2;
     public static final int rightEncoderPort1 = 0;
     public static final int rightEncoderPort2 = 1;
+    public static final int hammerEncoderP1 = 4;
+    public static final int hammerEncoderP2 = 5;
 
     // SOLENOID
     public static final int SOLENOID_IN = 0;
