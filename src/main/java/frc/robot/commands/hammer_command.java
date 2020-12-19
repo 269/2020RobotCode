@@ -8,10 +8,11 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
+//import edu.wpi.first.wpilibj.interfaces.Gyro;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.controller.PIDController;
 
 /**
  * The aim of this class is to manage a "hammer" that the design team is building to practice pre-season.
@@ -31,14 +32,16 @@ import edu.wpi.first.wpilibj.Timer;
 public class hammer_command extends Command {
   private boolean astat;                             // is set to status (on/off) of A-Button
   private int hammerMode = 0;                        // configures what will happen when A-Button is pressed
-  private int P, I, D = 1;                           // the gradients of the PID inputs; will multiply with the PID in the PID() function to adjust the values
-  //private int P, I, D = 1;                         // the PID inputs; will be multiplied by the gradients in the PID() function
-  private double integral, previous_error, setpoint = 0;// values for PID control
-  private boolean activeSetpoint = true;             // whether the PID should affect the motor input value
-  private double rcw = 0;                            // the motor input value
   private Timer bTimer;                              // timer to time how far apart the A-Button is pressed
+  private PIDController hpid;
+  private double ang = 0;
 
-  //private Gyro gyro;                                 // not doing anything right now, would get the position of the robot, but there is no physical gyro
+  private double rcw = 0;                            // the motor input value
+  //private int P, I = 1;                              // the gradients of the PID inputs; will multiply with the PID in the PID() function to adjust the values
+  //private int P, I, D = 1;                         // the PID inputs; will be multiplied by the gradients in the PID() function
+  //private double integral, previous_error, setpoint = 0;// values for PID control
+  //private boolean activeSetpoint = true;             // whether the PID should affect the motor input value
+  //private Gyro gyro;                               // not doing anything right now, would get the position of the robot, but there is no physical gyro
   // TODO: need to get encoders to work with this, anything to get how stuff is working because there is no gyro
 
   public hammer_command() {
@@ -55,33 +58,37 @@ public class hammer_command extends Command {
     bTimer = new Timer();
     bTimer.start();
     SmartDashboard.putString("Hammer Position", "starting position");
+    hpid = new PIDController(1, 1, 1, 0);
+    //hpid.setIntegratorRange(-1, 1);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    PID();// run the pid repeatedly to adjust to the setpoint
-    //System.out.println(bTimer.get());
+    //PID();// run the pid repeatedly to adjust to the setpoint
+
+    hpid.enableContinuousInput(0, 90);
+    hpid.setIntegratorRange(-1, 1);
     if (Robot.m_oi.buttonA.get() && !astat) {// NOTE: the hammer setting remains at 0 the first time A-Button is pushed
       bTimer.stop();
       if (bTimer.get() > 0.1) {
         if (hammerMode == 0) {
-          // TODO: add subystem interaction here
-          activeSetpoint = true;
-          setSetpoint(90);
-          hammerMode++;
+          //activeSetpoint = true;
+          //setSetpoint(90);
+          hpid.setSetpoint(90);
+          hammerMode = 1;
           SmartDashboard.putString("Hammer Position", "up");
         } else if (hammerMode == 1) {
-          // TODO: add subystem interaction here
-          activeSetpoint = true;
-          setSetpoint(0);
-          hammerMode++;
+          //activeSetpoint = true;
+          //setSetpoint(0);
+          hpid.setSetpoint(0);
+          hammerMode = 2;
           SmartDashboard.putString("Hammer Position", "power down");
           //Robot.hammer_subsystem.hammerActivate(false);
         } else {
-          // TODO: add subystem interaction here
-          activeSetpoint = false;
-          setSetpoint(0);
+          //activeSetpoint = false;
+          //setSetpoint(0);
+          hpid.setSetpoint(0);
           hammerMode = 0;
           SmartDashboard.putString("Hammer Position", "down");
         }
@@ -92,6 +99,24 @@ public class hammer_command extends Command {
       // TODO: add timer listening feature here
       //bTimer.start();
     }
+    ang = Robot.hammerEncoder.getRaw() * 0.0125 * 360;
+    System.out.println(hpid.calculate(ang));
+    SmartDashboard.putNumber("ANG", ang);
+    switch (hammerMode) {
+      case 0:
+        rcw = hpid.calculate(ang);
+        break;
+      case 1:
+        hpid.setSetpoint(0);
+        rcw = -1;
+        break;
+      case 2:
+        rcw = hpid.calculate(ang);
+        break;
+      default:
+        rcw = hpid.calculate(ang);
+        break;
+    }
     Robot.hammer_subsystem.hammerSet(rcw);
     //Robot.hammer_subsystem.hammerActivate();// other idea would be to make it take a boolean that instructs it whether to be active
 
@@ -100,7 +125,7 @@ public class hammer_command extends Command {
     //System.out.println("A stat:" + astat);
   }
 
-  public void setSetpoint(int stpnt) {
+  /*public void setSetpoint(int stpnt) {
     setpoint = stpnt;
   }
 
@@ -124,7 +149,7 @@ public class hammer_command extends Command {
     } else {
       rcw = 0;
     }
-  }
+  }*/
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
