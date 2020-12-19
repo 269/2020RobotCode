@@ -9,6 +9,8 @@ package frc.robot.subsystems;
 
 //import edu.wpi.first.wpilibj2.command.CommandScheduler;//https://docs.wpilib.org/en/stable/docs/software/commandbased/subsystems.html#setting-default-commands
 import edu.wpi.first.wpilibj.command.Subsystem;
+//import edu.wpi.first.wpilibj.interfaces.Gyro;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import frc.robot.RobotMap;
 import frc.robot.commands.hammer_command;
@@ -17,7 +19,15 @@ import frc.robot.commands.hammer_command;
  * Add your docs here.
  */
 public class hammer_subsystem extends Subsystem {
-  WPI_TalonSRX hamMotor = null;
+  private WPI_TalonSRX hamMotor = null;
+
+  @Override
+  public void initDefaultCommand() {
+    // Set the default command for a subsystem here.
+    // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new hammer_command());
+  }
+
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   /**
@@ -27,14 +37,7 @@ public class hammer_subsystem extends Subsystem {
     hamMotor = new WPI_TalonSRX(RobotMap.MOTOR_HAMMER_1);
   }
 
-  @Override
-  public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new hammer_command());
-  }
-
-  public void hammerActivate(double spd) {
+  public void hammerSet(double spd) {
     hamMotor.set(spd);
   }
 }
