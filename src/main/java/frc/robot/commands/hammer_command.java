@@ -33,7 +33,6 @@ public class hammer_command extends Command {
   private boolean astat;                             // is set to status (on/off) of A-Button
   private int hammerMode = 0;                        // configures what will happen when A-Button is pressed
   private Timer bTimer;                              // timer to time how far apart the A-Button is pressed
-  private PIDController hpid;
   private double ang = 0;
 
   private double rcw = 0;                            // the motor input value
@@ -58,65 +57,42 @@ public class hammer_command extends Command {
     bTimer = new Timer();
     bTimer.start();
     SmartDashboard.putString("Hammer Position", "starting position");
-    hpid = new PIDController(1, 1, 1, 0);
     //hpid.setIntegratorRange(-1, 1);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //PID();// run the pid repeatedly to adjust to the setpoint
+    //ang = Robot.hammerEncoder.getRaw() * 0.0125 * 360;
+    // ^^ ??
 
-    hpid.enableContinuousInput(0, 90);
-    hpid.setIntegratorRange(-1, 1);
     if (Robot.m_oi.buttonA.get() && !astat) {// NOTE: the hammer setting remains at 0 the first time A-Button is pushed
       bTimer.stop();
       if (bTimer.get() > 0.1) {
         if (hammerMode == 0) {
-          //activeSetpoint = true;
-          //setSetpoint(90);
-          hpid.setSetpoint(90);
+          
+          rcw = 0.3;
           hammerMode = 1;
-          SmartDashboard.putString("Hammer Position", "up");
+          SmartDashboard.putString("Hammer Position", "up (powered)");
         } else if (hammerMode == 1) {
-          //activeSetpoint = true;
-          //setSetpoint(0);
-          hpid.setSetpoint(0);
+          
+          rcw = -1;
           hammerMode = 2;
-          SmartDashboard.putString("Hammer Position", "power down");
-          //Robot.hammer_subsystem.hammerActivate(false);
+          SmartDashboard.putString("Hammer Position", "down (powered)");
         } else {
-          //activeSetpoint = false;
-          //setSetpoint(0);
-          hpid.setSetpoint(0);
+          
+          rcw = 0;
           hammerMode = 0;
-          SmartDashboard.putString("Hammer Position", "down");
+          SmartDashboard.putString("Hammer Position", "resting (off)");
         }
       }
       bTimer.reset();
       bTimer.start();
     } else {
-      // TODO: add timer listening feature here
       //bTimer.start();
     }
-    ang = Robot.hammerEncoder.getRaw() * 0.0125 * 360;
-    System.out.println(hpid.calculate(ang));
     SmartDashboard.putNumber("ANG", ang);
-    switch (hammerMode) {
-      case 0:
-        rcw = hpid.calculate(ang);
-        break;
-      case 1:
-        hpid.setSetpoint(0);
-        rcw = -1;
-        break;
-      case 2:
-        rcw = hpid.calculate(ang);
-        break;
-      default:
-        rcw = hpid.calculate(ang);
-        break;
-    }
+
     Robot.hammer_subsystem.hammerSet(rcw);
     //Robot.hammer_subsystem.hammerActivate();// other idea would be to make it take a boolean that instructs it whether to be active
 
@@ -124,32 +100,6 @@ public class hammer_command extends Command {
     SmartDashboard.putBoolean("Hammer Button", astat);
     //System.out.println("A stat:" + astat);
   }
-
-  /*public void setSetpoint(int stpnt) {
-    setpoint = stpnt;
-  }
-
-  public void PID() {
-    if (activeSetpoint) {
-      double ang = Robot.hammerEncoder.getRaw() * 0.0125 * 360;
-      //System.out.println(Robot.hammerEncoder.getRaw());
-      double error = setpoint - ang; // Error = Target - Actual
-      integral += (error*.02); // Integral is increased by the error*time (which is .02 seconds using normal IterativeRobot)
-      double derivative = (error - previous_error) / .02;
-      
-      SmartDashboard.putNumber("ANG", ang);
-      SmartDashboard.putNumber("ERROR", error);
-      SmartDashboard.putNumber("INTEGRAL", integral);
-      SmartDashboard.putNumber("DERIVATIVE", derivative);
-      SmartDashboard.putNumber("PREV", previous_error);
-      
-      //rcw = P*error + I*this.integral + D*derivative;
-      rcw = P*error + I*this.integral;
-      previous_error = setpoint - ang;
-    } else {
-      rcw = 0;
-    }
-  }*/
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
