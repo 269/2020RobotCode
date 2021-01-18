@@ -11,6 +11,9 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.drive_command;
 
@@ -25,7 +28,8 @@ public class drive_subsystem extends Subsystem {
   WPI_TalonSRX frontLeftMotor = null;
   WPI_TalonSRX backRightMotor = null;
   WPI_TalonSRX frontRightMotor = null;
-  DifferentialDrive difDrive = null;
+  //DifferentialDrive difDrive = null;
+  MecanumDrive mecDrive = null;
 
   @Override
   public void initDefaultCommand() {
@@ -39,21 +43,31 @@ public class drive_subsystem extends Subsystem {
     frontLeftMotor = new WPI_TalonSRX(RobotMap.MOTOR_LEFT_1);
     backRightMotor = new WPI_TalonSRX(RobotMap.MOTOR_RIGHT_2);
     backLeftMotor = new WPI_TalonSRX(RobotMap.MOTOR_LEFT_2);
-    SpeedControllerGroup leftMotors = new SpeedControllerGroup(frontLeftMotor, backLeftMotor);
-    SpeedControllerGroup rightMotors = new SpeedControllerGroup(frontRightMotor, backRightMotor);
+    
+    //SpeedControllerGroup leftMotors = new SpeedControllerGroup(frontLeftMotor, backLeftMotor);
+    //SpeedControllerGroup rightMotors = new SpeedControllerGroup(frontRightMotor, backRightMotor);
+    
     //rightMotors.setInverted(true);
     //leftMotors.setInverted(true);
-    difDrive = new DifferentialDrive(leftMotors, rightMotors);
-    System.out.println(difDrive.isSafetyEnabled());
+    
+    mecDrive = new MecanumDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
+    //difDrive = new DifferentialDrive(leftMotors, rightMotors);
+    //System.out.println(difDrive.isSafetyEnabled());
   }
   /** Sets the speed of the main drive
    * @param leftSpeed speed of combined left motors from -1.0 to 1.0
    * @param rightSpeed speed of combined right motors from -1.0 to 1.0
    */
-  public void drive(double leftSpeed, double rightSpeed){
+  /*public void drive(double leftSpeed, double rightSpeed){
     difDrive.tankDrive(leftSpeed, rightSpeed);
+  }*/
+  public void drive(double y, double x, double z) {
+    mecDrive.driveCartesian(y, -x, -z, -Robot.navx.getFusedHeading());
+    SmartDashboard.putNumber("X Speed", x);
+    SmartDashboard.putNumber("Y Speed", y);
+    SmartDashboard.putNumber("Z Speed", z);
   }
-  public void drive(double stopSpeed){
+  /*public void drive(double stopSpeed){
     difDrive.tankDrive(stopSpeed, stopSpeed);
-  }
+  }*/
 }

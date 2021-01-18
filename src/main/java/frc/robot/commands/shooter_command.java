@@ -33,8 +33,8 @@ public class shooter_command extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    SmartDashboard.putNumber("Bottom RPM: ", Robot.shooter_subsystem.bottomEncoder.getVelocity());
-    SmartDashboard.putNumber("Top RPM: ", Robot.shooter_subsystem.topEncoder.getVelocity());
+    SmartDashboard.putNumber("Bottom RPM", Robot.shooter_subsystem.bottomEncoder.getVelocity());
+    SmartDashboard.putNumber("Top RPM", Robot.shooter_subsystem.topEncoder.getVelocity());
     if(Robot.m_oi.Intake_RB.get()){
       Robot.shooter_subsystem.shooterSet(0, 0.4);
     }

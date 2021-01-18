@@ -60,7 +60,7 @@ public class driveStraight_command extends Command {
     //System.out.println("Yaw: "+ currentYaw);
     //System.out.println("Encoder Avg: " + (Math.abs(Robot.rightEncoder.getRaw()) + Math.abs(Robot.leftEncoder.getRaw()))/2);
     rightDist = Math.abs(Robot.rightEncoder.getDistance());
-    leftDist = Math.abs(Robot.rightEncoder.getDistance());
+    leftDist = Math.abs(Robot.leftEncoder.getDistance());
     averageDist = (leftDist+rightDist)/2;
     if(360 - tol > currentYaw && currentYaw > 180){ //If the degrees off of straight (a.k.a 0 degrees) is greater than 180 but less than 355
       leftSpeed = speed; 
@@ -94,7 +94,10 @@ public class driveStraight_command extends Command {
     }
     */
 
-    Robot.drive_subsystem.drive(leftSpeed, rightSpeed);
+    // EXECUTE DRIVE SUBSYSTEM INSTRUCTIONS HERE
+    //Robot.drive_subsystem.drive(leftSpeed, rightSpeed);
+    Robot.drive_subsystem.drive(0, 0, 0);
+    
     /*System.out.println("Left distance: " + leftDist);
     System.out.println("Right distance: " + rightDist);
     System.out.println("Left Spd: " + leftSpeed);
@@ -115,7 +118,8 @@ public class driveStraight_command extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.drive_subsystem.drive(0);
+    //Robot.drive_subsystem.drive(0);
+    Robot.drive_subsystem.drive(0, 0, 0);
   }
 
   // Called when another command which requires one or more of the same

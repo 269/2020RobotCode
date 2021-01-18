@@ -18,6 +18,9 @@ public class turnGyro_command extends Command {
   double speed;             //desired robot speed
   double leftSpeed;         //calculated left speed
   double rightSpeed;        //calulcated right speed
+  //double xSpeed;
+  //double ySpeed;// USELESS SPEED SUFF FOR MECANUM, ABANDONING THIS FILE
+  //double zSpeed;
   double tol = 5;               //The amount of degrees in each direction the robot is considered to be within the target angle. (tolernce)
   double rightDist;         //right drive encoder value in inches travled since start of command
   double leftDist;          //left drive encoder value in inches travled since start of command
@@ -87,7 +90,9 @@ public class turnGyro_command extends Command {
       }
     }
 
-    Robot.drive_subsystem.drive(leftSpeed, rightSpeed);
+    // EXECUTE DRIVE INSTRUCTIONS HERE
+    //Robot.drive_subsystem.drive(leftSpeed, rightSpeed);
+    Robot.drive_subsystem.drive(0, 0, 0);
   }
  
 
@@ -100,7 +105,8 @@ public class turnGyro_command extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.drive_subsystem.drive(0);
+    //Robot.drive_subsystem.drive(0);
+    Robot.drive_subsystem.drive(0, 0, 0);
   }
 
   // Called when another command which requires one or more of the same

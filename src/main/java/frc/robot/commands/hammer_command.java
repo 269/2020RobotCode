@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.controller.PIDController;
+//import edu.wpi.first.wpilibj.controller.PIDController;
 
 /**
  * The aim of this class is to manage a "hammer" that the design team is building to practice pre-season.

@@ -69,7 +69,7 @@ public class Robot extends TimedRobot {
     //colorWheel_subsystem = new colorWheel_subsystem();
     drive_subsystem = new drive_subsystem();
     //intake_subsystem = new intake_subsystem();
-    hammer_subsystem = new hammer_subsystem();
+    //hammer_subsystem = new hammer_subsystem();
     //lift_subsystem = new lift_subsystem();
     m_oi = new OI();
     m_oi.bind(); //bind the buttons to commands

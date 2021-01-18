@@ -27,10 +27,10 @@ public class RobotMap {
      */
 
     // Drive Motors
-    public static final int MOTOR_LEFT_1 = 2; //Front left motor
-    public static final int MOTOR_LEFT_2 = 2; //Back left motor
-    public static final int MOTOR_RIGHT_1 = 1; //Front right motor
-    public static final int MOTOR_RIGHT_2 = 1; //Back right motor
+    public static final int MOTOR_LEFT_1 = 3; //Front left motor
+    public static final int MOTOR_LEFT_2 = 1; //Back left motor
+    public static final int MOTOR_RIGHT_1 = 4; //Front right motor
+    public static final int MOTOR_RIGHT_2 = 2; //Back right motor
 
     // Hammer Motors (? still not sure what the hammer is)
     public static final int MOTOR_HAMMER_1 = 3;

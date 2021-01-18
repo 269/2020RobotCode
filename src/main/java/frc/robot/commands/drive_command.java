@@ -39,18 +39,30 @@ public class drive_command extends Command {
   protected void execute() {
 
     //directly map the speed from the joystick to the robot motor controllers. 
-    double leftSpeed = Robot.m_oi.leftJoystickY(Robot.m_oi.driverController);
-    double rightSpeed = Robot.m_oi.rightJoystickY(Robot.m_oi.driverController);
+    //double leftSpeed = Robot.m_oi.leftJoystickY(Robot.m_oi.driverController);
+    //double rightSpeed = Robot.m_oi.rightJoystickY(Robot.m_oi.driverController);
+    double ySpeed = Robot.m_oi.leftJoystickY(Robot.m_oi.driverController);
+    double xSpeed = Robot.m_oi.leftJoystickX(Robot.m_oi.driverController);
+    double zSpeed = Robot.m_oi.rightJoystickX(Robot.m_oi.driverController);
 
     //provide a tolernce from the joystick input. 
     //Some times if your not touching it it may read a very small value. We dont want the robot to think we are trying to drive it.
     double tolerance = 0.05;
-    if(leftSpeed < tolerance && leftSpeed > -tolerance ){
+    if (xSpeed < tolerance && xSpeed > -tolerance) {
+      xSpeed = 0;
+    }
+    if (ySpeed < tolerance && ySpeed > -tolerance) {
+      ySpeed = 0;
+    }
+    if (zSpeed < tolerance && zSpeed > -tolerance) {
+      zSpeed = 0;
+    }
+    /*if(leftSpeed < tolerance && leftSpeed > -tolerance ){
       leftSpeed = 0.0;
     }
     if(rightSpeed < tolerance && rightSpeed > -tolerance){
       rightSpeed = 0.0;
-    }
+    }*/
 
     //speed reduction
     if (Robot.m_oi.RB.get()) {
@@ -76,23 +88,33 @@ public class drive_command extends Command {
       }
     }
     if (gear == 1){
-      leftSpeed*=0.75;
-      rightSpeed*=0.75;
+      //leftSpeed*=0.75;
+      //rightSpeed*=0.75;
+      xSpeed *= 0.75;
+      ySpeed *= 0.75;
+      zSpeed *= 0.75;
     }
     if(gear == 2){
-      leftSpeed*=0.6;
-      rightSpeed*=0.6;
+      //leftSpeed*=0.6;
+      //rightSpeed*=0.6;
+      xSpeed *= 0.6;
+      ySpeed *= 0.6;
+      zSpeed *= 0.6;
     }
     if(gear == 3){
-      leftSpeed*=0.4;
-      rightSpeed*=0.4;
+      //leftSpeed*=0.4;
+      //rightSpeed*=0.4;
+      xSpeed *= 0.4;
+      ySpeed *= 0.4;
+      zSpeed *= 0.4;
     }
     Robot.WriteOut("Gear #: " + gear);
     SmartDashboard.putNumber("gear", gear );
 
 
     //pass the desired speed to the drive substem and make robot go!
-    Robot.drive_subsystem.drive(-leftSpeed, -rightSpeed);
+    //Robot.drive_subsystem.drive(-leftSpeed, -rightSpeed);
+    Robot.drive_subsystem.drive(ySpeed, xSpeed, zSpeed);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -104,7 +126,8 @@ public class drive_command extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.drive_subsystem.drive(0);
+    //Robot.drive_subsystem.drive(0);
+    Robot.drive_subsystem.drive(0, 0, 0);
   }
 
   // Called when another command which requires one or more of the same
