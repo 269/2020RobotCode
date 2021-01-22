@@ -43,11 +43,11 @@ public class shooter_subsystem extends Subsystem {
   public shooter_subsystem(){
     // START PREV MERGE CONFLICT
 
-    //topMotor = new CANSparkMax(RobotMap.MOTOR_SHOOT_TOP, MotorType.kBrushless);
+    topMotor = new CANSparkMax(RobotMap.MOTOR_SHOOT_TOP, MotorType.kBrushless);
 
     //bottomMotor = new CANSparkMax(RobotMap.MOTOR_SHOOT_BOTTOM, MotorType.kBrushless);
 
-    //topEncoder = new CANEncoder(topMotor);
+    topEncoder = new CANEncoder(topMotor);
 
     //bottomEncoder = new CANEncoder(bottomMotor);
     //topMotor.setInverted(true);
@@ -58,7 +58,7 @@ public class shooter_subsystem extends Subsystem {
   */
   //public void shooterSet(double topMotorSpeed, double bottomMotorSpeed){
   public void shooterSet(double topMotorSpeed){
-    //topMotor.set(topMotorSpeed);
+    topMotor.set(topMotorSpeed);
     //bottomMotor.set(bottomMotorSpeed);
     
     // VVV ALL BELOW IN MERGE CONFLICT
