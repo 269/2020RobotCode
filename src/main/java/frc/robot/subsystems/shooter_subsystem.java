@@ -20,12 +20,12 @@ import frc.robot.commands.shooter_command;
 public class shooter_subsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  CANPIDController bottomPID;
   CANPIDController topPID;
+  //CANPIDController bottomPID;
   public CANEncoder topEncoder;
-  public CANEncoder bottomEncoder;
-  CANSparkMax bottomMotor;
-  CANSparkMax topMotor;
+  //public CANEncoder bottomEncoder;
+  public CANSparkMax topMotor;
+  //CANSparkMax bottomMotor;
   // VVV IN MERGE CONFLICT, NOT SURE WHAT IT IS, APPLIES TO FUNCTION IN MERGE CONFLICT BELOW
   // CANSparkMax topMotor;
   //double kP = 0;
@@ -42,19 +42,24 @@ public class shooter_subsystem extends Subsystem {
   //Declaring PID and motors for shooter
   public shooter_subsystem(){
     // START PREV MERGE CONFLICT
-    topMotor = new CANSparkMax(RobotMap.MOTOR_SHOOT_TOP, MotorType.kBrushless);
-    bottomMotor = new CANSparkMax(RobotMap.MOTOR_SHOOT_BOTTOM, MotorType.kBrushless);
-    topEncoder = new CANEncoder(topMotor);
-    bottomEncoder = new CANEncoder(bottomMotor);
-    topMotor.setInverted(true);
+
+    //topMotor = new CANSparkMax(RobotMap.MOTOR_SHOOT_TOP, MotorType.kBrushless);
+
+    //bottomMotor = new CANSparkMax(RobotMap.MOTOR_SHOOT_BOTTOM, MotorType.kBrushless);
+
+    //topEncoder = new CANEncoder(topMotor);
+
+    //bottomEncoder = new CANEncoder(bottomMotor);
+    //topMotor.setInverted(true);
   }
   /** Sets the shooters speeds (in RPM)
   *@param topMotorSpeed the speed for the top of the shooter (-1 to 1)
   *@param bottomMotorSpeed the speed for the bottom of the shooter (-1 to 1)
   */
-  public void shooterSet(double topMotorSpeed, double bottomMotorSpeed){
-    topMotor.set(topMotorSpeed);
-    bottomMotor.set(bottomMotorSpeed);
+  //public void shooterSet(double topMotorSpeed, double bottomMotorSpeed){
+  public void shooterSet(double topMotorSpeed){
+    //topMotor.set(topMotorSpeed);
+    //bottomMotor.set(bottomMotorSpeed);
     
     // VVV ALL BELOW IN MERGE CONFLICT
     

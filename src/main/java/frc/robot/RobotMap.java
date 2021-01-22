@@ -39,8 +39,8 @@ public class RobotMap {
     public static final int MOTOR_INTAKE = 6;
 
     // Shooter Motors
-    public static final int MOTOR_SHOOT_TOP = 9;
-    public static final int MOTOR_SHOOT_BOTTOM = 8;
+    public static final int MOTOR_SHOOT_TOP = 8;
+    //public static final int MOTOR_SHOOT_BOTTOM = 8;
 
     // Color Wheel Motors
     public static final int MOTOR_COLOR_WHEEL = 7;
@@ -68,7 +68,7 @@ public class RobotMap {
 
     // Controllers
     public static final int DRIVER_CONTROLLER = 0;
-    public static final int INTAKE_CONTROLLER = 0;// TODO: switch back to port 1, currently configured for one controller
+    public static final int INTAKE_CONTROLLER = 1;
 
     // Joysticks (two-axis thumbsticks on the controllers)
     public static final int LEFT_JOYSTICK_X = 0;
