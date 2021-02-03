@@ -7,10 +7,10 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+//import edu.wpi.first.wpilibj.SpeedControllerGroup;
+//import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
@@ -24,10 +24,10 @@ public class drive_subsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  WPI_TalonSRX backLeftMotor = null;
-  WPI_TalonSRX frontLeftMotor = null;
-  WPI_TalonSRX backRightMotor = null;
-  WPI_TalonSRX frontRightMotor = null;
+  WPI_TalonFX frontRightMotor = null;
+  WPI_TalonFX frontLeftMotor = null;
+  WPI_TalonFX backLeftMotor = null;
+  WPI_TalonFX backRightMotor = null;
   //DifferentialDrive difDrive = null;
   MecanumDrive mecDrive = null;
 
@@ -39,11 +39,13 @@ public class drive_subsystem extends Subsystem {
   }
 
   public drive_subsystem() {
-    frontRightMotor = new WPI_TalonSRX(RobotMap.MOTOR_RIGHT_1);
-    frontLeftMotor = new WPI_TalonSRX(RobotMap.MOTOR_LEFT_1);
-    backRightMotor = new WPI_TalonSRX(RobotMap.MOTOR_RIGHT_2);
-    backLeftMotor = new WPI_TalonSRX(RobotMap.MOTOR_LEFT_2);
-    
+    frontRightMotor = new WPI_TalonFX(RobotMap.MOTOR_RIGHT_1);//new WPI_TalonSRX(RobotMap.MOTOR_RIGHT_1);
+    frontRightMotor.setInverted(true);
+    frontLeftMotor = new WPI_TalonFX(RobotMap.MOTOR_LEFT_1);//new WPI_TalonSRX(RobotMap.MOTOR_LEFT_1);
+    backRightMotor = new WPI_TalonFX(RobotMap.MOTOR_RIGHT_2);//new WPI_TalonSRX(RobotMap.MOTOR_RIGHT_2);
+    backLeftMotor = new WPI_TalonFX(RobotMap.MOTOR_LEFT_2);//new WPI_TalonSRX(RobotMap.MOTOR_LEFT_2);
+    backLeftMotor.setInverted(true);
+
     //SpeedControllerGroup leftMotors = new SpeedControllerGroup(frontLeftMotor, backLeftMotor);
     //SpeedControllerGroup rightMotors = new SpeedControllerGroup(frontRightMotor, backRightMotor);
     
