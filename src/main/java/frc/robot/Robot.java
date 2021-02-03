@@ -25,6 +25,7 @@ import frc.robot.subsystems.intake_subsystem;
 import frc.robot.subsystems.lift_subsystem;
 import frc.robot.subsystems.shooter_subsystem;
 import frc.robot.subsystems.hammer_subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -36,12 +37,8 @@ import frc.robot.subsystems.hammer_subsystem;
 public class Robot extends TimedRobot {
   public static OI m_oi;
   public static AHRS navx;
-  //private String m_autoSelected;
-  //private final SendableChooser<String> m_chooser = new SendableChooser<>();
   private static DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
   private static Date date = new Date();
-  //private static boolean indexInitalized;
-  //private static boolean colorwheelInitalized;
   public static Encoder rightEncoder = new Encoder(RobotMap.leftEncoderPort1, RobotMap.leftEncoderPort2, false, EncodingType.k4X);
   public static Encoder leftEncoder = new Encoder(RobotMap.rightEncoderPort1, RobotMap.rightEncoderPort2, false, EncodingType.k4X);
   public static Encoder hammerEncoder = new Encoder(RobotMap.hammerEncoderP1, RobotMap.hammerEncoderP2, false, EncodingType.k4X);
@@ -53,8 +50,11 @@ public class Robot extends TimedRobot {
   public static shooter_subsystem shooter_subsystem = null;
   public static lift_subsystem lift_subsystem = null;
   public static hammer_subsystem hammer_subsystem = null;
-
   
+  private static final String kDefaultAuto = "Default";
+  private static final String kCustomAuto = "My Auto";
+  private String m_autoSelected;
+  private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
   public Robot(){
     navx = new AHRS(SPI.Port.kMXP);
@@ -75,10 +75,11 @@ public class Robot extends TimedRobot {
     //lift_subsystem = new lift_subsystem();
     m_oi = new OI();
     m_oi.bind(); //bind the buttons to commands
-  //  m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
-  //  m_chooser.addOption("My Auto", kCustomAuto);
-   // SmartDashboard.putData("Auto choices", m_chooser);
     SmartDashboard.putNumber("Shooter Power", 0);
+
+    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
+    m_chooser.addOption("My Auto", kCustomAuto);
+    SmartDashboard.putData("Auto choices", m_chooser);
   }
 
   /**
@@ -158,9 +159,9 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     leftEncoder.setDistancePerPulse(0.0125);
     rightEncoder.setDistancePerPulse(0.0125);
-    //m_autoSelected = m_chooser.getSelected();
-    // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
-    //System.out.println("Auto selected: " + m_autoSelected);
+
+    m_autoSelected = m_chooser.getSelected();
+    System.out.println("Auto selected: " + m_autoSelected);
   }
 
   /**
@@ -169,16 +170,17 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
-   /* switch (m_autoSelected) 
-      //case kCustomAuto:
+    switch (m_autoSelected) {
+      case kCustomAuto: {
         // Put custom auto code here
         break;
+      }
       case kDefaultAuto:
-      default:
+      default: {
         // Put default auto code here
         break;
+      }
     }
-    */
   }
 
   /**

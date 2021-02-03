@@ -18,7 +18,8 @@ public class shooter_command extends Command {
   //double maxRPM = 5700;
   //double topSpeedSet = 0.8;
   //private double maxRPM = 5700;
-  private boolean shooting = false;
+  private int shootingMode = 0;
+  private String shootingMessage = "No";
   private double shooterDefault = 0.5;// WASN'T HERE BEFORE MERGE
   private double shooterSpeed = 0;
 
@@ -36,18 +37,30 @@ public class shooter_command extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    SmartDashboard.putNumber("Top RPM", Robot.shooter_subsystem.topEncoder.getVelocity() / 30);
-    SmartDashboard.putBoolean("Shooting", shooting);
+    SmartDashboard.putNumber("Top RPM", Robot.shooter_subsystem.topEncoder.getVelocity());
+    SmartDashboard.putNumber("Top RPM x.01", Robot.shooter_subsystem.topEncoder.getVelocity() * 0.01);
+    SmartDashboard.putString("Shooting", shootingMessage);
     shooterSpeed = SmartDashboard.getNumber("Shooter Power", shooterDefault);
     //SmartDashboard.putNumber("Bottom RPM", Robot.shooter_subsystem.bottomEncoder.getVelocity());
-    if(Robot.m_oi.Intake_RB.get() && !shooting){
-      //Robot.shooter_subsystem.shooterSet(0, 0.4);
-      shooting = true;
-    } else if (Robot.m_oi.Intake_LB.get() && shooting) {
-      shooting = false;
+
+    if (shootingMode > 2 || shootingMode < 0) {
+      shootingMode = 0;
     }
-    if (shooting) {
+    if(Robot.m_oi.Intake_buttonA.get() && shootingMode != 1){
+      //Robot.shooter_subsystem.shooterSet(0, 0.4);
+      shootingMode = 1;
+      shootingMessage = "Active";
+    } else if (Robot.m_oi.Intake_buttonB.get() && shootingMode != 2) {
+      shootingMode = 2;
+      shootingMessage = "Reverse";
+    } else if (Robot.m_oi.Intake_buttonX.get() && shootingMode != 0) {
+      shootingMode = 0;
+      shootingMessage = "No";
+    }
+    if (shootingMode == 1) {
       Robot.shooter_subsystem.shooterSet(shooterSpeed);
+    } else if (shootingMode == 2) {
+      Robot.shooter_subsystem.shooterSet(-.1);
     } else {
       Robot.shooter_subsystem.shooterSet(0);
     }
