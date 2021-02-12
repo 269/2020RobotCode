@@ -52,7 +52,7 @@ public class hammer_command extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.hammerEncoder.reset();
+    //Robot.hammerEncoder.reset();
     //Robot.hammerEncoder.setDistancePerPulse(0.0125);// TODO: I HAVE NO IDEA WHAT THIS VALUE SHOULD BE
     bTimer = new Timer();
     bTimer.start();

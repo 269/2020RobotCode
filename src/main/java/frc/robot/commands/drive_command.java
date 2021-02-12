@@ -90,23 +90,25 @@ public class drive_command extends Command {
     if (gear == 1){
       //leftSpeed*=0.75;
       //rightSpeed*=0.75;
-      xSpeed *= 0.75;
-      ySpeed *= 0.75;
-      zSpeed *= 0.75;
-    }
-    if(gear == 2){
+      xSpeed *= 0.7;
+      ySpeed *= 0.7;
+      zSpeed *= 0.7;
+    } else if(gear == 2){
       //leftSpeed*=0.6;
       //rightSpeed*=0.6;
-      xSpeed *= 0.6;
-      ySpeed *= 0.6;
-      zSpeed *= 0.6;
-    }
-    if(gear == 3){
+      xSpeed *= 0.45;
+      ySpeed *= 0.45;
+      zSpeed *= 0.45;
+    } else if(gear == 3){
       //leftSpeed*=0.4;
       //rightSpeed*=0.4;
-      xSpeed *= 0.4;
-      ySpeed *= 0.4;
-      zSpeed *= 0.4;
+      xSpeed *= 0.2;
+      ySpeed *= 0.2;
+      zSpeed *= 0.2;
+    } else {
+      xSpeed *= 0.2;
+      ySpeed *= 0.2;
+      zSpeed *= 0.2;
     }
     Robot.WriteOut("Gear #: " + gear);
     SmartDashboard.putNumber("gear", gear );

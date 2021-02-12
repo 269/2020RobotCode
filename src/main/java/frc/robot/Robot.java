@@ -6,11 +6,11 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
-import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.SPI;
+//import com.kauailabs.navx.frc.AHRS;
+//import edu.wpi.first.wpilibj.Encoder;
+//import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.CounterBase.EncodingType;
+//import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -36,12 +36,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
  */
 public class Robot extends TimedRobot {
   public static OI m_oi;
-  public static AHRS navx;
+  //public static AHRS navx;
   private static DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
   private static Date date = new Date();
-  public static Encoder rightEncoder = new Encoder(RobotMap.leftEncoderPort1, RobotMap.leftEncoderPort2, false, EncodingType.k4X);
-  public static Encoder leftEncoder = new Encoder(RobotMap.rightEncoderPort1, RobotMap.rightEncoderPort2, false, EncodingType.k4X);
-  public static Encoder hammerEncoder = new Encoder(RobotMap.hammerEncoderP1, RobotMap.hammerEncoderP2, false, EncodingType.k4X);
+  //public static Encoder rightEncoder = new Encoder(RobotMap.leftEncoderPort1, RobotMap.leftEncoderPort2, false, EncodingType.k4X);
+  //public static Encoder leftEncoder = new Encoder(RobotMap.rightEncoderPort1, RobotMap.rightEncoderPort2, false, EncodingType.k4X);
+  //public static Encoder hammerEncoder = new Encoder(RobotMap.hammerEncoderP1, RobotMap.hammerEncoderP2, false, EncodingType.k4X);
   //declare subsystems
   public static colorWheel_subsystem colorWheel_subsystem = null;
   public static drive_subsystem drive_subsystem = null;
@@ -52,12 +52,12 @@ public class Robot extends TimedRobot {
   public static hammer_subsystem hammer_subsystem = null;
   
   private static final String kDefaultAuto = "Default";
-  private static final String kCustomAuto = "My Auto";
+  private static final String kCustomAuto = "Straight 1";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
   public Robot(){
-    navx = new AHRS(SPI.Port.kMXP);
+    //navx = new AHRS(SPI.Port.kMXP);
   }
   /**
    * This function is run when the robot is first started up and should be
@@ -66,6 +66,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     System.out.println("Made it");
+
+    /* MASTER SUBSYSTEM CONTROL */
     //index_subsystem = new index_subsystem();
     //shooter_subsystem = new shooter_subsystem();
     //colorWheel_subsystem = new colorWheel_subsystem();
@@ -73,6 +75,7 @@ public class Robot extends TimedRobot {
     //intake_subsystem = new intake_subsystem();
     //hammer_subsystem = new hammer_subsystem();
     //lift_subsystem = new lift_subsystem();
+
     m_oi = new OI();
     m_oi.bind(); //bind the buttons to commands
     SmartDashboard.putNumber("Shooter Power", 0);
@@ -133,12 +136,13 @@ public class Robot extends TimedRobot {
    */
   public static double getFullYaw() {
     double currentYaw;
-      currentYaw = Robot.navx.getFusedHeading();
+    /*currentYaw = Robot.navx.getFusedHeading();
     if(Robot.navx.getFusedHeading() < 0){
       currentYaw = 360-(Robot.navx.getFusedHeading());
     }
     //System.out.println("yaw: "+ currentYaw);
-    WriteOut("Current Yaw: "+ currentYaw, 5);
+    WriteOut("Current Yaw: "+ currentYaw, 5);*/
+    currentYaw = 0;
     return currentYaw;
   }
 
@@ -157,8 +161,8 @@ public class Robot extends TimedRobot {
   */
   @Override
   public void autonomousInit() {
-    leftEncoder.setDistancePerPulse(0.0125);
-    rightEncoder.setDistancePerPulse(0.0125);
+    //leftEncoder.setDistancePerPulse(0.0125);
+    //rightEncoder.setDistancePerPulse(0.0125);
 
     m_autoSelected = m_chooser.getSelected();
     System.out.println("Auto selected: " + m_autoSelected);
@@ -172,11 +176,13 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     switch (m_autoSelected) {
       case kCustomAuto: {
+        drive_subsystem.drive(0.2, 0, 0);
         // Put custom auto code here
         break;
       }
       case kDefaultAuto:
       default: {
+        drive_subsystem.drive(0, 0, 0);
         // Put default auto code here
         break;
       }

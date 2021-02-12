@@ -39,19 +39,17 @@ public class drive_subsystem extends Subsystem {
   }
 
   public drive_subsystem() {
-    frontRightMotor = new WPI_TalonFX(RobotMap.MOTOR_RIGHT_1);//new WPI_TalonSRX(RobotMap.MOTOR_RIGHT_1);
-    frontRightMotor.setInverted(true);
-    frontLeftMotor = new WPI_TalonFX(RobotMap.MOTOR_LEFT_1);//new WPI_TalonSRX(RobotMap.MOTOR_LEFT_1);
-    backRightMotor = new WPI_TalonFX(RobotMap.MOTOR_RIGHT_2);//new WPI_TalonSRX(RobotMap.MOTOR_RIGHT_2);
-    backLeftMotor = new WPI_TalonFX(RobotMap.MOTOR_LEFT_2);//new WPI_TalonSRX(RobotMap.MOTOR_LEFT_2);
-    backLeftMotor.setInverted(true);
+    frontRightMotor = new WPI_TalonFX(RobotMap.MOTOR_LEFT_1);//new WPI_TalonSRX(RobotMap.MOTOR_RIGHT_1);
+    frontLeftMotor = new WPI_TalonFX(RobotMap.MOTOR_LEFT_2);//new WPI_TalonSRX(RobotMap.MOTOR_LEFT_1);
+    backRightMotor = new WPI_TalonFX(RobotMap.MOTOR_RIGHT_1);//new WPI_TalonSRX(RobotMap.MOTOR_RIGHT_2);
+    backLeftMotor = new WPI_TalonFX(RobotMap.MOTOR_RIGHT_2);//new WPI_TalonSRX(RobotMap.MOTOR_LEFT_2);
 
     //SpeedControllerGroup leftMotors = new SpeedControllerGroup(frontLeftMotor, backLeftMotor);
     //SpeedControllerGroup rightMotors = new SpeedControllerGroup(frontRightMotor, backRightMotor);
-    
+
     //rightMotors.setInverted(true);
     //leftMotors.setInverted(true);
-    
+
     mecDrive = new MecanumDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
     //difDrive = new DifferentialDrive(leftMotors, rightMotors);
     //System.out.println(difDrive.isSafetyEnabled());
@@ -60,15 +58,20 @@ public class drive_subsystem extends Subsystem {
    * @param leftSpeed speed of combined left motors from -1.0 to 1.0
    * @param rightSpeed speed of combined right motors from -1.0 to 1.0
    */
-  /*public void drive(double leftSpeed, double rightSpeed){
-    difDrive.tankDrive(leftSpeed, rightSpeed);
-  }*/
   public void drive(double y, double x, double z) {
-    mecDrive.driveCartesian(y, -x, -z, -Robot.navx.getFusedHeading());
+    mecDrive.driveCartesian(-y, -x, -z);
     SmartDashboard.putNumber("X Speed", x);
     SmartDashboard.putNumber("Y Speed", y);
     SmartDashboard.putNumber("Z Speed", z);
+    SmartDashboard.putNumber("FRE", frontRightMotor.getSelectedSensorVelocity());
+    SmartDashboard.putNumber("FRD", frontRightMotor.getSelectedSensorPosition(0));
+    SmartDashboard.putNumber("FLE", frontLeftMotor.getSelectedSensorVelocity());
+    SmartDashboard.putNumber("BRE", backRightMotor.getSelectedSensorVelocity());
+    SmartDashboard.putNumber("BLE", backLeftMotor.getSelectedSensorVelocity());
   }
+  /*public void drive(double leftSpeed, double rightSpeed){
+    difDrive.tankDrive(leftSpeed, rightSpeed);
+  }*/
   /*public void drive(double stopSpeed){
     difDrive.tankDrive(stopSpeed, stopSpeed);
   }*/
