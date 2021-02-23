@@ -6,10 +6,14 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
-//import com.kauailabs.navx.frc.AHRS;
+
+import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.SPI;
 //import edu.wpi.first.wpilibj.Encoder;
-//import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 //import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -36,7 +40,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
  */
 public class Robot extends TimedRobot {
   public static OI m_oi;
-  //public static AHRS navx;
+  public static AHRS navx;
   private static DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
   private static Date date = new Date();
   //public static Encoder rightEncoder = new Encoder(RobotMap.leftEncoderPort1, RobotMap.leftEncoderPort2, false, EncodingType.k4X);
@@ -57,7 +61,7 @@ public class Robot extends TimedRobot {
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
   public Robot(){
-    //navx = new AHRS(SPI.Port.kMXP);
+    navx = new AHRS(SPI.Port.kMXP);
   }
   /**
    * This function is run when the robot is first started up and should be
@@ -136,13 +140,13 @@ public class Robot extends TimedRobot {
    */
   public static double getFullYaw() {
     double currentYaw;
-    /*currentYaw = Robot.navx.getFusedHeading();
+    currentYaw = Robot.navx.getFusedHeading();
     if(Robot.navx.getFusedHeading() < 0){
       currentYaw = 360-(Robot.navx.getFusedHeading());
     }
     //System.out.println("yaw: "+ currentYaw);
-    WriteOut("Current Yaw: "+ currentYaw, 5);*/
-    currentYaw = 0;
+    WriteOut("Current Yaw: "+ currentYaw, 5);
+    //currentYaw = 0;
     return currentYaw;
   }
 
