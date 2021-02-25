@@ -33,13 +33,9 @@ public class index_command extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.m_oi.buttonB.get()){
-      Robot.index_subsystem.indexActivate(kReverse);
+    if (Robot.drive_subsystem.isDriving()) {
+      Robot.index_subsystem.rollerSpeed(0.2);
     }
-    else{
-      Robot.index_subsystem.indexActivate(kForward);   
-    }// If the a button is pressed the boolean value is true which activates the pnuematics of the indexing system
-      Robot.index_subsystem.checkCompressor();
   }
 
 
@@ -52,7 +48,7 @@ public class index_command extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.index_subsystem.indexActivate(kOff);
+    Robot.index_subsystem.rollerSpeed(0);
   }
 
   // Called when another command which requires one or more of the same

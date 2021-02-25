@@ -72,4 +72,11 @@ public class drive_subsystem extends Subsystem {
   /*public void drive(double stopSpeed){
     difDrive.tankDrive(stopSpeed, stopSpeed);
   }*/
+
+  public boolean isDriving() {
+    if (frontRightMotor.get() != 0 || frontLeftMotor.get() != 0 || backLeftMotor.get() != 0 || backRightMotor.get() != 0) {
+      return true;
+    }
+    return false;
+  }
 }

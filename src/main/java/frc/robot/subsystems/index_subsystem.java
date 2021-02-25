@@ -10,57 +10,31 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.index_command;
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX; 
 
 
 /**
  * Add your docs here.
  */
 public class index_subsystem extends Subsystem {
+  private WPI_TalonSRX spinIntake;
+
+  /** Sets intake roller speed
+   * @param motorSpeed sets the speed of the intake roller
+   */
+  public index_subsystem(){
+    spinIntake = new WPI_TalonSRX(RobotMap.MOTOR_INTAKE);
+  }
+  public void rollerSpeed(double motorSpeed){
+    spinIntake.set(motorSpeed);
+  }
+
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-
-  DoubleSolenoid solenoid; 
-  public static Compressor airComp;
-
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new index_command());
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
-  public index_subsystem(){
-    airComp = new Compressor(1);
-    //airComp.clearAllPCMStickyFaults();
-    solenoid = new DoubleSolenoid(1, RobotMap.SOLENOID_IN, RobotMap.SOLENOID_OUT);
-  }
-
-  /** Turns on or off the compressor
-   */
-  public void checkCompressor(){
-    System.out.println("Switch "+ airComp.getPressureSwitchValue());
-    if(!airComp.getPressureSwitchValue()){ // remember to fix this so take away the !
-    //airComp = new Compressor(10);
-    //airComp.clearAllPCMStickyFaults();
-    //airComp.stop();
-    //solenoid = new DoubleSolenoid(RobotMap.SOLENOID_IN, RobotMap.SOLENOID_OUT);
-    //if(airComp.getPressureSwitchValue()){
-      airComp.start();
-    }
-    else{
-      airComp.stop();
-    }
-  }
-
-
-  /** Extends or retracts both pneumatic pistons based on 'active'
-   * @param active if true pistons are extended if false they are retracted
-   */
-  public void indexActivate(Value status){
-    System.out.println("Status " + status);// CONFLICT, CHECK VAR status
-    solenoid.set(status);
-  }
-
 }
