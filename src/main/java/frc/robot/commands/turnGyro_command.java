@@ -51,7 +51,7 @@ public class turnGyro_command extends Command {
   protected void execute() {
 
     //get the corrected current yaw. (zeroed out from initial start yaw)
-    currentYaw = Robot.navx.getFusedHeading();
+    /*currentYaw = Robot.navx.getFusedHeading();
     if (startingYaw - currentYaw < 0) {                   // current yaw - starting yaw should be 0 + any diffrence the next iteration. 
       correctedCurYaw = 360 + (startingYaw - currentYaw); //if the corrected yaw passes 0 then we need to correct it to be > 360 instead of negative.
     } else {
@@ -92,7 +92,7 @@ public class turnGyro_command extends Command {
 
     // EXECUTE DRIVE INSTRUCTIONS HERE
     //Robot.drive_subsystem.drive(leftSpeed, rightSpeed);
-    Robot.drive_subsystem.drive(0, 0, 0);
+    Robot.drive_subsystem.drive(0, 0, 0);*/
   }
  
 
